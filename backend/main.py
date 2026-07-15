@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import routing
+from app.routers import consumption, routing
 
 app = FastAPI(title="Cafetalino API")
 
@@ -13,3 +13,4 @@ app.add_middleware(
 )
 
 app.include_router(routing.router)
+app.include_router(consumption.router)

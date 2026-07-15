@@ -4,6 +4,8 @@ __pycache__/
 *.pyc
 backend/data/eda_output/
 backend/data/*.db
+backend/data/models/
+backend/data/metrics/
 
 # Node / Vite
 frontend/node_modules/
