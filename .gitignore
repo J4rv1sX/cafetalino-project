@@ -2,6 +2,8 @@
 backend/.venv/
 __pycache__/
 *.pyc
+backend/data/eda_output/
+backend/data/*.db
 
 # Node / Vite
 frontend/node_modules/

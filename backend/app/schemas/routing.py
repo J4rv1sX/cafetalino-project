@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class Location(BaseModel):
-    nombre: str
+    name: str
     lat: float
     lng: float
 
@@ -12,8 +12,8 @@ class RouteOptimizeRequest(BaseModel):
 
 
 class RouteStop(BaseModel):
-    orden: int
-    nombre: str
+    order: int
+    name: str
     lat: float
     lng: float
 

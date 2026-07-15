@@ -20,8 +20,8 @@ def optimize_route(request: RouteOptimizeRequest) -> RouteOptimizeResponse:
     return RouteOptimizeResponse(
         route=[
             RouteStop(
-                orden=order,
-                nombre=locations[idx].nombre,
+                order=order,
+                name=locations[idx].name,
                 lat=locations[idx].lat,
                 lng=locations[idx].lng,
             )
