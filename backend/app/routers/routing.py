@@ -6,10 +6,10 @@ from app.schemas.routing import RouteOptimizeRequest, RouteOptimizeResponse, Rou
 from app.services.distance_matrix import get_distance_matrix
 from app.services.tsp_solver import solve_tsp, total_route_duration
 
-router = APIRouter(prefix="/routing", tags=["routing"])
+router = APIRouter(tags=["routing"])
 
 
-@router.post("/optimize", response_model=RouteOptimizeResponse)
+@router.post("/reload-route", response_model=RouteOptimizeResponse)
 def optimize_route(request: RouteOptimizeRequest) -> RouteOptimizeResponse:
     locations = [request.current_location, *MACHINE_LOCATIONS]
 
