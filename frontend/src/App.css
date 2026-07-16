@@ -5,9 +5,10 @@
   width: 100%;
 }
 
-.app-layout-sidebar {
-  flex: 1 1 300px;
-  min-width: 280px;
+.app-layout-sidebar,
+.app-layout-reload {
+  flex: 1 1 280px;
+  min-width: 260px;
 }
 
 .app-layout-main {

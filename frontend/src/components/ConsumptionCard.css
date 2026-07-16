@@ -1,0 +1,52 @@
+.consumption-card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 13px;
+  cursor: grab;
+}
+
+.consumption-card:active {
+  cursor: grabbing;
+}
+
+.consumption-card h2 {
+  margin: 0 0 2px;
+  font-size: 14px;
+}
+
+.consumption-card-meta {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 11px;
+}
+
+.consumption-card-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.2;
+}
+
+.consumption-card-items li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.consumption-card-label {
+  color: var(--text);
+}
+
+.consumption-card-value {
+  color: var(--text-h);
+  text-align: right;
+}
+
+.consumption-card-range {
+  color: var(--text);
+  font-size: 10px;
+}

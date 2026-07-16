@@ -4,16 +4,12 @@ import { ConsumptionCard } from './ConsumptionCard'
 import type { LocationConsumptionPrediction } from '../types/consumption'
 import './ConsumptionList.css'
 
-interface ConsumptionListProps {
-  loading: boolean
-  error: string | null
-  hasFetched: boolean
+interface ReloadListProps {
   items: LocationConsumptionPrediction[]
-  onFetch: () => void
   onDropItem: (locationId: number) => void
 }
 
-export function ConsumptionList({ loading, error, hasFetched, items, onFetch, onDropItem }: ConsumptionListProps) {
+export function ReloadList({ items, onDropItem }: ReloadListProps) {
   const [isDragOver, setIsDragOver] = useState(false)
 
   const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
@@ -31,15 +27,13 @@ export function ConsumptionList({ loading, error, hasFetched, items, onFetch, on
   return (
     <section className="prediction-column prediction-column--fill">
       <header className="prediction-column-header">
-        <h1>Consumo de máquinas</h1>
-        <p>Consulta el consumo estimado de cada máquina para hoy.</p>
+        <h1>Máquinas a recargar</h1>
+        <p>
+          {items.length === 0
+            ? 'Arrastra aquí las máquinas que quieres recargar.'
+            : `${items.length} máquina${items.length === 1 ? '' : 's'} seleccionada${items.length === 1 ? '' : 's'}.`}
+        </p>
       </header>
-
-      <button type="button" onClick={onFetch} disabled={loading}>
-        {loading ? 'Cargando…' : 'Ver consumos'}
-      </button>
-
-      {error && <p className="prediction-column-error">{error}</p>}
 
       <div
         className={`prediction-cards-scroll prediction-cards-scroll--fill${isDragOver ? ' is-drag-over' : ''}`}
@@ -47,8 +41,8 @@ export function ConsumptionList({ loading, error, hasFetched, items, onFetch, on
         onDragLeave={() => setIsDragOver(false)}
         onDrop={handleDrop}
       >
-        {!hasFetched ? null : items.length === 0 ? (
-          <p className="prediction-cards-empty">Todas las máquinas están en la lista de recarga.</p>
+        {items.length === 0 ? (
+          <p className="prediction-cards-empty">Suelta aquí las máquinas que quieres recargar.</p>
         ) : (
           <div className="prediction-cards">
             {items.map((prediction) => (
