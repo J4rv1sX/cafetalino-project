@@ -1,4 +1,11 @@
-# React + TypeScript + Vite
+# Frontend
+
+Vite + React + TypeScript.
+
+```bash
+cd frontend
+npm run dev
+```
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
