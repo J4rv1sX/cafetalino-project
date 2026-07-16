@@ -6,7 +6,7 @@ from pathlib import Path
 import joblib
 import pandas as pd
 
-from app.schemas.consumption import ConsumptionPredictionResponse
+from app.schemas.consumption import ConsumptionPredictionResponse, PredictionInterval
 
 BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
 MODELS_DIR = BACKEND_DIR / "data" / "models"
@@ -35,17 +35,25 @@ def _load_artifacts() -> dict[str, dict]:
 
 
 @lru_cache
-def _load_location_history_means() -> dict[int, dict[str, float]]:
+def _load_location_features() -> dict[int, dict[str, float]]:
     conn = sqlite3.connect(DB_PATH)
     try:
-        query = (
-            f"SELECT location_id, {', '.join(f'AVG({t}) AS {t}' for t in TARGETS)} "
-            "FROM readings GROUP BY location_id"
-        )
-        df = pd.read_sql(query, conn)
+        df = pd.read_sql(f"SELECT location_id, date, {', '.join(TARGETS)} FROM readings", conn)
     finally:
         conn.close()
-    return {int(row.location_id): {t: float(getattr(row, t)) for t in TARGETS} for row in df.itertuples()}
+
+    df = df.sort_values(["location_id", "date"])
+    grouped = df.groupby("location_id")
+    historical = grouped[TARGETS].mean()
+    recent = grouped[TARGETS].apply(lambda g: g.tail(3).mean())
+
+    return {
+        int(loc_id): {
+            **{f"historical_mean_{t}": float(historical.loc[loc_id, t]) for t in TARGETS},
+            **{f"recent_mean_{t}": float(recent.loc[loc_id, t]) for t in TARGETS},
+        }
+        for loc_id in historical.index
+    }
 
 
 def predict_consumption(
@@ -56,7 +64,7 @@ def predict_consumption(
     if location_id not in valid_location_ids:
         raise ValueError(f"Unknown location_id: {location_id}")
 
-    history_means = _load_location_history_means()[location_id]
+    location_features = _load_location_features()[location_id]
 
     features = pd.DataFrame(
         [
@@ -65,15 +73,20 @@ def predict_consumption(
                 "days_since_previous_refill": days_since_previous_refill,
                 "day_of_week": target_date.weekday(),
                 "month": target_date.month,
-                **{f"historical_mean_{t}": history_means[t] for t in TARGETS},
+                **location_features,
             }
         ]
     )
 
-    predictions = {
-        target: max(0.0, float(artifact["pipeline"].predict(features)[0]))
-        for target, artifact in artifacts.items()
-    }
+    predictions = {}
+    for target, artifact in artifacts.items():
+        estimate = max(0.0, float(artifact["pipeline"].predict(features)[0]))
+        low = max(0.0, float(artifact["lower_pipeline"].predict(features)[0]))
+        high = max(0.0, float(artifact["upper_pipeline"].predict(features)[0]))
+        # Independently-fit quantile models have no monotonicity guarantee
+        # between each other or the point estimate -- clamp so low <= estimate <= high.
+        low, high = min(low, high, estimate), max(low, high, estimate)
+        predictions[target] = PredictionInterval(estimate=estimate, low=low, high=high)
 
     return ConsumptionPredictionResponse(
         location_id=location_id,
