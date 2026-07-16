@@ -6,7 +6,11 @@ from pathlib import Path
 import joblib
 import pandas as pd
 
-from app.schemas.consumption import ConsumptionPredictionResponse, PredictionInterval
+from app.schemas.consumption import (
+    ConsumptionPredictionResponse,
+    LocationConsumptionPrediction,
+    PredictionInterval,
+)
 
 BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
 MODELS_DIR = BACKEND_DIR / "data" / "models"
@@ -56,41 +60,63 @@ def _load_location_features() -> dict[int, dict[str, float]]:
     }
 
 
-def predict_consumption(
-    location_id: int, days_since_previous_refill: int, target_date: date
-) -> ConsumptionPredictionResponse:
+@lru_cache
+def _load_location_metadata() -> dict[int, dict]:
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        locations_df = pd.read_sql("SELECT id, name FROM locations", conn)
+        readings_df = pd.read_sql("SELECT location_id, date FROM readings", conn, parse_dates=["date"])
+    finally:
+        conn.close()
+
+    last_reading_date = readings_df.groupby("location_id")["date"].max().dt.date
+    names = locations_df.set_index("id")["name"]
+
+    return {
+        int(loc_id): {"name": names.loc[loc_id], "last_reading_date": last_reading_date.loc[loc_id]}
+        for loc_id in last_reading_date.index
+    }
+
+
+def predict_all_consumption(target_date: date) -> ConsumptionPredictionResponse:
     artifacts = _load_artifacts()
-    valid_location_ids = set(next(iter(artifacts.values()))["valid_location_ids"])
-    if location_id not in valid_location_ids:
-        raise ValueError(f"Unknown location_id: {location_id}")
+    valid_location_ids = sorted(next(iter(artifacts.values()))["valid_location_ids"])
+    location_metadata = _load_location_metadata()
+    all_location_features = _load_location_features()
 
-    location_features = _load_location_features()[location_id]
+    predictions = []
+    for location_id in valid_location_ids:
+        days_since_previous_refill = (target_date - location_metadata[location_id]["last_reading_date"]).days
 
-    features = pd.DataFrame(
-        [
-            {
-                "location_id": location_id,
-                "days_since_previous_refill": days_since_previous_refill,
-                "day_of_week": target_date.weekday(),
-                "month": target_date.month,
-                **location_features,
-            }
-        ]
-    )
+        features = pd.DataFrame(
+            [
+                {
+                    "location_id": location_id,
+                    "days_since_previous_refill": days_since_previous_refill,
+                    "day_of_week": target_date.weekday(),
+                    "month": target_date.month,
+                    **all_location_features[location_id],
+                }
+            ]
+        )
 
-    predictions = {}
-    for target, artifact in artifacts.items():
-        estimate = max(0.0, float(artifact["pipeline"].predict(features)[0]))
-        low = max(0.0, float(artifact["lower_pipeline"].predict(features)[0]))
-        high = max(0.0, float(artifact["upper_pipeline"].predict(features)[0]))
-        # Independently-fit quantile models have no monotonicity guarantee
-        # between each other or the point estimate -- clamp so low <= estimate <= high.
-        low, high = min(low, high, estimate), max(low, high, estimate)
-        predictions[target] = PredictionInterval(estimate=estimate, low=low, high=high)
+        target_predictions = {}
+        for target, artifact in artifacts.items():
+            estimate = max(0.0, float(artifact["pipeline"].predict(features)[0]))
+            low = max(0.0, float(artifact["lower_pipeline"].predict(features)[0]))
+            high = max(0.0, float(artifact["upper_pipeline"].predict(features)[0]))
+            # Independently-fit quantile models have no monotonicity guarantee
+            # between each other or the point estimate -- clamp so low <= estimate <= high.
+            low, high = min(low, high, estimate), max(low, high, estimate)
+            target_predictions[target] = PredictionInterval(estimate=estimate, low=low, high=high)
 
-    return ConsumptionPredictionResponse(
-        location_id=location_id,
-        days_since_previous_refill=days_since_previous_refill,
-        target_date=target_date,
-        **predictions,
-    )
+        predictions.append(
+            LocationConsumptionPrediction(
+                location_id=location_id,
+                location_name=location_metadata[location_id]["name"],
+                days_since_previous_refill=days_since_previous_refill,
+                **target_predictions,
+            )
+        )
+
+    return ConsumptionPredictionResponse(target_date=target_date, predictions=predictions)

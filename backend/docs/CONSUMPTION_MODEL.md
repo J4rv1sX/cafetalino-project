@@ -201,34 +201,47 @@ fully reproducible from the committed CSV by running
 
 ## API
 
-`POST /predict-consumption` (`backend/app/routers/consumption.py`):
+`POST /predict-consumption` (`backend/app/routers/consumption.py`) — returns
+predictions for **every known location at once**, not a single machine.
+`location_id` and `days_since_previous_refill` are not caller inputs: the
+endpoint iterates all 19 locations internally, and for each one derives
+`days_since_previous_refill` from `target_date` minus that location's most
+recent reading date in `cafetalino.db` (`_load_location_metadata()`).
 
 **Request** (`ConsumptionPredictionRequest`):
 
 ```json
-{"location_id": 1, "days_since_previous_refill": 3, "target_date": "2026-07-20"}
+{"target_date": "2026-07-20"}
 ```
 
-**Response** (`ConsumptionPredictionResponse`) — each target as a
+**Response** (`ConsumptionPredictionResponse`) — `target_date` plus a list
+of one `LocationConsumptionPrediction` per location, each target still a
 `PredictionInterval`, not a bare number:
 
 ```json
 {
-  "location_id": 1,
-  "days_since_previous_refill": 3,
   "target_date": "2026-07-20",
-  "bottled_water_ml": {"estimate": 7412.5, "low": 3973.7, "high": 10755.6},
-  "cup_units": {"estimate": 41.2, "low": 22.1, "high": 59.8},
-  "coffee_mix_g": {"estimate": 64.7, "low": 38.9, "high": 124.0},
-  "chocolate_mix_g": {"estimate": 241.6, "low": 78.9, "high": 437.9},
-  "cappuccino_mix_g": {"estimate": 294.5, "low": 125.5, "high": 517.7}
+  "predictions": [
+    {
+      "location_id": 1,
+      "location_name": "Aeropuerto Alcantari",
+      "days_since_previous_refill": 12,
+      "bottled_water_ml": {"estimate": 7412.5, "low": 3973.7, "high": 10755.6},
+      "cup_units": {"estimate": 41.2, "low": 22.1, "high": 59.8},
+      "coffee_mix_g": {"estimate": 64.7, "low": 38.9, "high": 124.0},
+      "chocolate_mix_g": {"estimate": 241.6, "low": 78.9, "high": 437.9},
+      "cappuccino_mix_g": {"estimate": 294.5, "low": 125.5, "high": 517.7}
+    },
+    { "location_id": 2, "location_name": "Planeta Kids", "...": "..." }
+  ]
 }
 ```
 
-Unknown `location_id` → HTTP 422. `day_of_week`/`month` are derived
-server-side from `target_date`; `historical_mean_*`/`recent_mean_*` are
-computed server-side from the current contents of `cafetalino.db` for the
-given `location_id` (not user-supplied — see `_load_location_features()`).
+`day_of_week`/`month` are derived server-side from `target_date`;
+`historical_mean_*`/`recent_mean_*` are computed server-side from the
+current contents of `cafetalino.db` per location (see
+`_load_location_features()`). No location-level 422 path exists anymore —
+there's no `location_id` in the request for the caller to get wrong.
 
 ## How to retrain
 
