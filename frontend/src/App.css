@@ -1,0 +1,16 @@
+.app-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.app-layout-sidebar {
+  flex: 1 1 300px;
+  min-width: 280px;
+}
+
+.app-layout-main {
+  flex: 3 1 640px;
+  min-width: 0;
+}
