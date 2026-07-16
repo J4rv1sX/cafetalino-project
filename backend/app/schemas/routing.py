@@ -8,7 +8,7 @@ class Location(BaseModel):
 
 
 class RouteOptimizeRequest(BaseModel):
-    current_location: Location
+    locations: list[Location]
 
 
 class RouteStop(BaseModel):

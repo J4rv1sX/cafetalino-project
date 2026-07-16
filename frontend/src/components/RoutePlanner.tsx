@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { DirectionsRenderer, GoogleMap, MarkerF, useJsApiLoader } from '@react-google-maps/api'
 import { optimizeRoute } from '../api/routing'
+import type { LocationConsumptionPrediction } from '../types/consumption'
 import type { RouteOptimizeResponse } from '../types/routing'
 import './RoutePlanner.css'
 
@@ -13,7 +14,11 @@ function formatDuration(seconds: number): string {
   return `${Math.floor(minutes / 60)} h ${minutes % 60} min`
 }
 
-export function RoutePlanner() {
+interface RoutePlannerProps {
+  locations: LocationConsumptionPrediction[]
+}
+
+export function RoutePlanner({ locations }: RoutePlannerProps) {
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
@@ -52,11 +57,10 @@ export function RoutePlanner() {
     setDirections(null)
 
     try {
-      const result = await optimizeRoute({
-        name: 'Mi ubicación',
-        lat: markerPos.lat,
-        lng: markerPos.lng,
-      })
+      const result = await optimizeRoute([
+        { name: 'Mi ubicación', lat: markerPos.lat, lng: markerPos.lng },
+        ...locations.map((item) => ({ name: item.location_name, lat: item.lat, lng: item.lng })),
+      ])
       setRouteResult(result)
 
       if (result.route.length > 1) {
@@ -90,7 +94,7 @@ export function RoutePlanner() {
     } finally {
       setLoadingRoute(false)
     }
-  }, [markerPos])
+  }, [markerPos, locations])
 
   if (!import.meta.env.VITE_GOOGLE_MAPS_API_KEY) {
     return (
@@ -134,9 +138,17 @@ export function RoutePlanner() {
         </div>
 
         <aside className="route-planner-sidebar">
-          <button type="button" onClick={handleOptimize} disabled={loadingRoute || !isLoaded}>
+          <button
+            type="button"
+            onClick={handleOptimize}
+            disabled={loadingRoute || !isLoaded || locations.length === 0}
+          >
             {loadingRoute ? 'Calculando…' : 'Calcular ruta de recarga'}
           </button>
+
+          {locations.length === 0 && (
+            <p className="route-planner-hint">Agrega máquinas a la lista de recarga antes de calcular la ruta.</p>
+          )}
 
           {error && <p className="route-planner-error">{error}</p>}
 

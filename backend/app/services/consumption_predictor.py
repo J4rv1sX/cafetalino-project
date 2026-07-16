@@ -64,16 +64,21 @@ def _load_location_features() -> dict[int, dict[str, float]]:
 def _load_location_metadata() -> dict[int, dict]:
     conn = sqlite3.connect(DB_PATH)
     try:
-        locations_df = pd.read_sql("SELECT id, name FROM locations", conn)
+        locations_df = pd.read_sql("SELECT id, name, lat, lng FROM locations", conn)
         readings_df = pd.read_sql("SELECT location_id, date FROM readings", conn, parse_dates=["date"])
     finally:
         conn.close()
 
     last_reading_date = readings_df.groupby("location_id")["date"].max().dt.date
-    names = locations_df.set_index("id")["name"]
+    locations_df = locations_df.set_index("id")
 
     return {
-        int(loc_id): {"name": names.loc[loc_id], "last_reading_date": last_reading_date.loc[loc_id]}
+        int(loc_id): {
+            "name": locations_df.loc[loc_id, "name"],
+            "lat": float(locations_df.loc[loc_id, "lat"]),
+            "lng": float(locations_df.loc[loc_id, "lng"]),
+            "last_reading_date": last_reading_date.loc[loc_id],
+        }
         for loc_id in last_reading_date.index
     }
 
@@ -114,6 +119,8 @@ def predict_all_consumption(target_date: date) -> ConsumptionPredictionResponse:
             LocationConsumptionPrediction(
                 location_id=location_id,
                 location_name=location_metadata[location_id]["name"],
+                lat=location_metadata[location_id]["lat"],
+                lng=location_metadata[location_id]["lng"],
                 days_since_previous_refill=days_since_previous_refill,
                 **target_predictions,
             )

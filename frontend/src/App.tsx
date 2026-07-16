@@ -23,7 +23,7 @@ function App() {
         <ReloadList items={consumptions.toReload} onDropItem={consumptions.markForReload} />
       </aside>
       <main className="app-layout-main">
-        <RoutePlanner />
+        <RoutePlanner locations={consumptions.toReload} />
       </main>
     </div>
   )

@@ -16,6 +16,8 @@ class PredictionInterval(BaseModel):
 class LocationConsumptionPrediction(BaseModel):
     location_id: int
     location_name: str
+    lat: float
+    lng: float
     days_since_previous_refill: int
     bottled_water_ml: PredictionInterval
     cup_units: PredictionInterval
