@@ -142,6 +142,59 @@ Net: no production code changed as a result of this round — both are
 honest negative results, recorded here so the same alternatives aren't
 re-tried from scratch later without knowing they were already checked.
 
+### Post-deployment ablation: short-term trend feature
+
+`recent_mean_{target}` captures a location's recent *level* (a 3-reading
+rolling average) but not *direction* — whether consumption at that machine
+is trending up or down. Tested `trend_rate_{target}`, the per-day rate of
+change between the two most recent *prior* readings:
+
+```
+trend_rate_{target} = (shift(1)[target] - shift(2)[target])
+                       / (shift(1)[days_since_previous_refill] + EPS)
+```
+
+normalized by elapsed time the same way the already-validated rate
+features are (per-day, not per-refill-cycle), for consistency with that
+precedent rather than a raw un-normalized diff.
+
+**A real bug surfaced during construction, not just at evaluation**: the
+denominator is a single prior *gap* (not a mean over many gaps like
+`historical_mean_days`/`recent_mean_days`), and it can be exactly 0 — the
+same 5 locations with same-day duplicate readings that already show up
+elsewhere in this doc. Guarding that division with the usual small `EPS`
+(as the historical/recent rate features do, safely, since *their*
+denominators are means and therefore practically never near 0) instead
+blew the ratio up to the billions for those rows (observed range: -8.28e9
+to 5.4e9). Fixed by marking the rate `NaN` when the prior gap is `<= 0`
+(a same-day duplicate has no meaningful per-day rate, so it should be
+excluded, not divided-by-near-zero) rather than papering over it with
+`EPS`. This drops 58 rows total (vs. 28 for the production feature set),
+since it also requires a *second* prior reading per location, not just one.
+
+Evaluated with the identical CV/search setup as production, on the
+resulting 2,409-row set (baseline re-measured on that same reduced set,
+so this is apples-to-apples — note the baseline MAE/model below therefore
+differs slightly from the production numbers elsewhere in this doc, which
+are measured on the full 2,439-row set):
+
+| target | baseline MAE | +trend MAE | delta |
+|---|---|---|---|
+| bottled_water_ml | 1680.85±192.94 | 1692.10±200.07 | +11.25 |
+| cup_units | 9.34±1.08 | 9.40±1.11 | +0.06 |
+| coffee_mix_g | 22.17±2.17 | 22.22±2.12 | +0.05 |
+| chocolate_mix_g | 86.93±5.52 | 87.29±5.22 | +0.35 |
+| cappuccino_mix_g | 89.20±8.64 | 89.76±8.72 | +0.56 |
+
+**Finding: made every target worse**, not just a wash like the
+`day_of_week`/`month` alternatives above — 5/5 targets moved the same
+(bad) direction, which is as statistically meaningful here as the 5/5
+*improvements* that justified keeping the historical/recent rate features.
+Likely explanation: a 2-point difference is a much noisier estimator than
+the 3-point rolling means the existing rate features are built from, and
+it costs real training data too (58 dropped rows vs. 28) for a signal that
+turned out not to exist at this data size. **Not implemented.**
+
 ## Evaluation methodology — also iterated on, with an important correction
 
 1. **Started with a single 80/20 `train_test_split`.** Reported R² of
