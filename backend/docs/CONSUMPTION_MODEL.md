@@ -28,14 +28,18 @@ the trained models are saved and reloaded.
 `backend/data/cafetalino.db` (SQLite), built from `consumo_insumos.csv` by
 `backend/scripts/load_consumption.py`. Two tables:
 
-- `locations(id, name, lat, lng)` — 19 canonical machine locations.
+- `locations(id, name, lat, lng)` — 17 canonical machine locations.
 - `readings(id, location_id, date, raw_location_name, cups,
   water_remaining_pct, previous_refill_date, days_since_previous_refill,
   bottled_water_ml, cup_units, coffee_mix_g, chocolate_mix_g,
-  cappuccino_mix_g, notes)` — 2,576 rows, one per machine visit.
+  cappuccino_mix_g, notes)` — 2,467 rows, one per machine visit (as of the
+  `consumo_insumos.csv` refresh in the "Update consumption CSV" commit;
+  earlier revisions of this doc were written against a 2,576-row snapshot,
+  so metrics below aren't strictly comparable to any numbers recorded prior
+  to that refresh).
 
-`days_since_previous_refill` is nullable (13 rows are a machine's very
-first-ever reading, no prior refill to measure from).
+`days_since_previous_refill` is nullable (rows that are a machine's very
+first-ever reading have no prior refill to measure from).
 
 ## Feature engineering — what was tried, in order, and why
 
@@ -45,6 +49,7 @@ first-ever reading, no prior refill to measure from).
 | `day_of_week`, `month` (from `date`) | 0.096–0.123 — small, marginal gain | Yes |
 | `historical_mean_{target}` (expanding mean of that location's *prior* readings) | **Large**: 0.096–0.123 → 0.428–0.602 | Yes |
 | `recent_mean_{target}` (rolling mean of the last 3 prior readings) | Small — see Evaluation methodology below, where the switch to cross-validation in the same round revealed the single-split numbers above had been overly optimistic all along | Yes |
+| `historical_rate_{target}`, `recent_rate_{target}` (the two features above, each divided by the matching `historical_mean_days`/`recent_mean_days` -- i.e. a per-day-since-refill consumption rate) | Measured via 5-fold CV **MAE** (not R², to sidestep R²'s instability at this data size) on a fixed before/after comparison: all 5 targets improved, by 1.9-3.3% each (e.g. `bottled_water_ml` 1757.13±147.30 -> 1699.03±150.37). Every individual delta sits within 1 fold-to-fold std, so no single target clears significance alone, but 5/5 moving the same direction is unlikely by chance (~3%) and matches the mechanistic story: the rate feature hands the model a ratio it would otherwise have to re-derive from `days_since_previous_refill` interactions on a small dataset | Yes |
 
 Other columns considered and explicitly **rejected**:
 
@@ -67,11 +72,14 @@ Other columns considered and explicitly **rejected**:
 computed with `.shift(1)` before `.expanding()`/`.rolling()`, so a row never
 sees its own target value baked into its own feature. Confirmed this isn't
 trivially satisfied by the existing null-`days_since_previous_refill` drop:
-checked directly against the DB that only 7 of 19 locations' earliest
-dataset row coincides with a null `days_since_previous_refill` — the other
-12 already had refill history before this CSV's data window started. So the
-row-drop for missing lag features is a separate, explicit
-`dropna(subset=FEATURE_COLUMNS)` (drops ~25 rows), not implied by the
+checked directly against the DB that 0 of 17 locations' earliest dataset row
+coincides with a null `days_since_previous_refill` — every location already
+had refill history before this CSV's data window started. So the row-drop
+for missing lag features is a separate, explicit
+`dropna(subset=FEATURE_COLUMNS)` (drops 28 rows as of the current CSV: 17
+first-per-location rows whose `historical_mean`/`recent_mean` are undefined,
+plus 11 rows elsewhere in the sequence with a null `days_since_previous_refill`
+from a mid-history gap in that machine's refill records), not implied by the
 `days_since_previous_refill` null check alone.
 
 ## Evaluation methodology — also iterated on, with an important correction
@@ -144,22 +152,34 @@ measured systematic bias, not by hitting the nominal number directly.
 `historical_mean_coffee_mix_g`, `historical_mean_chocolate_mix_g`,
 `historical_mean_cappuccino_mix_g`, `recent_mean_bottled_water_ml`,
 `recent_mean_cup_units`, `recent_mean_coffee_mix_g`,
-`recent_mean_chocolate_mix_g`, `recent_mean_cappuccino_mix_g` (14 total).
+`recent_mean_chocolate_mix_g`, `recent_mean_cappuccino_mix_g`,
+`historical_rate_bottled_water_ml`, `historical_rate_cup_units`,
+`historical_rate_coffee_mix_g`, `historical_rate_chocolate_mix_g`,
+`historical_rate_cappuccino_mix_g`, `recent_rate_bottled_water_ml`,
+`recent_rate_cup_units`, `recent_rate_coffee_mix_g`,
+`recent_rate_chocolate_mix_g`, `recent_rate_cappuccino_mix_g` (24 total).
 
 ### Latest metrics (5-fold CV, mean±std; see `backend/data/metrics/` for the full timestamped history)
 
 | target | model | MAE | RMSE | R² | interval coverage |
 |---|---|---|---|---|---|
-| bottled_water_ml | hist_gradient_boosting | 1666.35±128.39 | 3233.12±2316.46 | 0.432±0.167 | 81.1% |
-| cup_units | hist_gradient_boosting | 9.26±0.71 | 17.96±12.87 | 0.432±0.167 | 81.1% |
-| coffee_mix_g | hist_gradient_boosting | 21.47±1.35 | 37.99±21.71 | 0.397±0.141 | 80.6% |
-| chocolate_mix_g | hist_gradient_boosting | 83.70±6.23 | 141.43±70.92 | 0.341±0.122 | 81.5% |
-| cappuccino_mix_g | hist_gradient_boosting | 88.21±4.59 | 158.03±93.73 | 0.345±0.126 | 80.9% |
+| bottled_water_ml | hist_gradient_boosting | 1702.78±155.47 | 3273.61±2370.77 | 0.371±0.142 | 84.2% |
+| cup_units | hist_gradient_boosting | 9.46±0.86 | 18.19±13.17 | 0.371±0.142 | 84.2% |
+| coffee_mix_g | hist_gradient_boosting | 22.33±1.05 | 39.20±21.56 | 0.354±0.115 | 83.5% |
+| chocolate_mix_g | hist_gradient_boosting | 86.40±5.16 | 145.01±72.28 | 0.274±0.094 | 83.8% |
+| cappuccino_mix_g | hist_gradient_boosting | 90.41±7.82 | 158.48±97.15 | 0.308±0.110 | 83.2% |
 
-R² of 0.34–0.43 means a substantial share of variance is still unexplained
-by these features — genuine, not a bug. `historical_mean`/`recent_mean` are
-strong but not complete predictors; consumption also depends on things not
-in this dataset (foot traffic swings, weather, local events).
+This table is **not** directly comparable to the R² values previously
+recorded here (0.34–0.43): those were measured against the pre-refresh
+2,576-row CSV, on a feature set without the rate features. The controlled
+before/after comparison that justified adding the rate features (same CSV,
+same CV setup, feature set as the only variable) is the MAE delta in the
+Feature engineering table above, not this table's R² against the old
+numbers. R² of 0.27–0.37 means a substantial share of variance is still
+unexplained by these features — genuine, not a bug. `historical_mean`/
+`recent_mean`/the rate features are strong but not complete predictors;
+consumption also depends on things not in this dataset (foot traffic
+swings, weather, local events).
 
 ## Model persistence (save & reload)
 
@@ -204,7 +224,7 @@ fully reproducible from the committed CSV by running
 `POST /predict-consumption` (`backend/app/routers/consumption.py`) — returns
 predictions for **every known location at once**, not a single machine.
 `location_id` and `days_since_previous_refill` are not caller inputs: the
-endpoint iterates all 19 locations internally, and for each one derives
+endpoint iterates all 17 locations internally, and for each one derives
 `days_since_previous_refill` from `target_date` minus that location's most
 recent reading date in `cafetalino.db` (`_load_location_metadata()`).
 

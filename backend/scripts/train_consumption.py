@@ -2,8 +2,12 @@
 
 Reads readings from cafetalino.db, trains 5 independent regressors (one
 per ingredient/stock target) on [location_id, days_since_previous_refill,
-day_of_week, month, historical_mean_<target>, recent_mean_<target> for
-each target]. For each target, searches each candidate model's
+day_of_week, month, historical_mean_<target>, recent_mean_<target>,
+historical_rate_<target>, recent_rate_<target> for each target]. The rate
+features (mean-per-day-since-refill) let the model use that ratio directly
+rather than re-deriving it from days_since_previous_refill interactions --
+see docs/CONSUMPTION_MODEL.md for the CV MAE comparison that justified
+adding them. For each target, searches each candidate model's
 hyperparameter space via RandomizedSearchCV (5-fold CV), picks the
 best-performing model type as the point estimate, and additionally fits
 a HistGradientBoostingRegressor quantile-loss pair (5th/95th percentile)
@@ -42,6 +46,8 @@ TARGETS = [
 ]
 HISTORICAL_MEAN_COLUMNS = [f"historical_mean_{target}" for target in TARGETS]
 RECENT_MEAN_COLUMNS = [f"recent_mean_{target}" for target in TARGETS]
+HISTORICAL_RATE_COLUMNS = [f"historical_rate_{target}" for target in TARGETS]
+RECENT_RATE_COLUMNS = [f"recent_rate_{target}" for target in TARGETS]
 FEATURE_COLUMNS = [
     "location_id",
     "days_since_previous_refill",
@@ -49,7 +55,13 @@ FEATURE_COLUMNS = [
     "month",
     *HISTORICAL_MEAN_COLUMNS,
     *RECENT_MEAN_COLUMNS,
+    *HISTORICAL_RATE_COLUMNS,
+    *RECENT_RATE_COLUMNS,
 ]
+# Guards historical_rate_/recent_rate_ divisions -- days-between-refills is
+# never 0 in this dataset, but this keeps a same-day double-reading from
+# ever producing a division by zero.
+RATE_EPS = 1e-6
 
 CANDIDATE_MODELS = {
     "random_forest": lambda: RandomForestRegressor(random_state=42),
@@ -92,6 +104,13 @@ def load_training_data(conn: sqlite3.Connection) -> tuple[pd.DataFrame, int]:
         grouped = df.groupby("location_id")[target]
         df[f"historical_mean_{target}"] = grouped.transform(lambda s: s.shift(1).expanding().mean())
         df[f"recent_mean_{target}"] = grouped.transform(lambda s: s.shift(1).rolling(window=3, min_periods=1).mean())
+
+    grouped_days = df.groupby("location_id")["days_since_previous_refill"]
+    df["historical_mean_days"] = grouped_days.transform(lambda s: s.shift(1).expanding().mean())
+    df["recent_mean_days"] = grouped_days.transform(lambda s: s.shift(1).rolling(window=3, min_periods=1).mean())
+    for target in TARGETS:
+        df[f"historical_rate_{target}"] = df[f"historical_mean_{target}"] / (df["historical_mean_days"] + RATE_EPS)
+        df[f"recent_rate_{target}"] = df[f"recent_mean_{target}"] / (df["recent_mean_days"] + RATE_EPS)
 
     before = len(df)
     df = df.dropna(subset=FEATURE_COLUMNS).reset_index(drop=True)

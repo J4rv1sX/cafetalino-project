@@ -23,6 +23,9 @@ TARGETS = [
     "chocolate_mix_g",
     "cappuccino_mix_g",
 ]
+# Matches RATE_EPS in scripts/train_consumption.py -- must stay in sync so
+# inference-time rate features are computed the same way as training-time ones.
+RATE_EPS = 1e-6
 
 
 @lru_cache
@@ -42,7 +45,9 @@ def _load_artifacts() -> dict[str, dict]:
 def _load_location_features() -> dict[int, dict[str, float]]:
     conn = sqlite3.connect(DB_PATH)
     try:
-        df = pd.read_sql(f"SELECT location_id, date, {', '.join(TARGETS)} FROM readings", conn)
+        df = pd.read_sql(
+            f"SELECT location_id, date, days_since_previous_refill, {', '.join(TARGETS)} FROM readings", conn
+        )
     finally:
         conn.close()
 
@@ -50,11 +55,21 @@ def _load_location_features() -> dict[int, dict[str, float]]:
     grouped = df.groupby("location_id")
     historical = grouped[TARGETS].mean()
     recent = grouped[TARGETS].apply(lambda g: g.tail(3).mean())
+    historical_days = grouped["days_since_previous_refill"].mean()
+    recent_days = grouped["days_since_previous_refill"].apply(lambda g: g.tail(3).mean())
 
     return {
         int(loc_id): {
             **{f"historical_mean_{t}": float(historical.loc[loc_id, t]) for t in TARGETS},
             **{f"recent_mean_{t}": float(recent.loc[loc_id, t]) for t in TARGETS},
+            **{
+                f"historical_rate_{t}": float(historical.loc[loc_id, t] / (historical_days.loc[loc_id] + RATE_EPS))
+                for t in TARGETS
+            },
+            **{
+                f"recent_rate_{t}": float(recent.loc[loc_id, t] / (recent_days.loc[loc_id] + RATE_EPS))
+                for t in TARGETS
+            },
         }
         for loc_id in historical.index
     }
