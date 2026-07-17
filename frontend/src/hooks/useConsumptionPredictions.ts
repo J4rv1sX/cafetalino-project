@@ -11,12 +11,13 @@ export function useConsumptionPredictions() {
   const [error, setError] = useState<string | null>(null)
   const [predictions, setPredictions] = useState<LocationConsumptionPrediction[] | null>(null)
   const [reloadIds, setReloadIds] = useState<number[]>([])
+  const [targetDate, setTargetDate] = useState(todayIsoDate())
 
   const fetchPredictions = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
-      const result = await fetchConsumptions(todayIsoDate())
+      const result = await fetchConsumptions(targetDate)
       setPredictions(result.predictions)
       setReloadIds([])
     } catch (err) {
@@ -24,7 +25,7 @@ export function useConsumptionPredictions() {
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [targetDate])
 
   const markForReload = useCallback((locationId: number) => {
     setReloadIds((prev) => (prev.includes(locationId) ? prev : [...prev, locationId]))
@@ -55,6 +56,8 @@ export function useConsumptionPredictions() {
     hasFetched: predictions !== null,
     available,
     toReload,
+    targetDate,
+    setTargetDate,
     fetchPredictions,
     markForReload,
     unmarkForReload,

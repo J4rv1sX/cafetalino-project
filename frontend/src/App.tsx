@@ -15,6 +15,8 @@ function App() {
           error={consumptions.error}
           hasFetched={consumptions.hasFetched}
           items={consumptions.available}
+          targetDate={consumptions.targetDate}
+          onTargetDateChange={consumptions.setTargetDate}
           onFetch={consumptions.fetchPredictions}
           onDropItem={consumptions.unmarkForReload}
         />

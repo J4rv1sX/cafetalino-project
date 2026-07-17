@@ -16,3 +16,19 @@ uv run --env-file .env uvicorn main:app --reload   # run the FastAPI app
 Re-run `./regen_cuda_env.sh` any time `uv sync`/`uv add` recreates `.venv` and the nvidia package versions change.
 
 `main:app` also needs a Google Maps API key for the routing endpoint. This lives separately in `backend/.env.local` (not `.env` — that file is fully overwritten by `regen_cuda_env.sh`) as `GOOGLE_MAPS_API_KEY=...`; it's gitignored and not committed.
+
+## Consumption model
+
+Whenever `data/consumo_insumos.csv` is updated with new machine readings, reload the database and retrain the models:
+
+```bash
+cd backend
+uv run --env-file .env scripts/load_consumption.py    # rebuild data/cafetalino.db from the CSV
+uv run --env-file .env scripts/train_consumption.py    # retrain the 5 target models
+```
+
+`load_consumption.py` filters to active readings, groups them into canonical locations by lat/lng, and rewrites the `locations`/`readings` tables in `data/cafetalino.db`. `train_consumption.py` reads from that database, retrains one regressor per target, and writes the updated artifacts to `data/models/` plus a timestamped metrics report to `data/metrics/`. Run `load_consumption.py` first — training reads from the database, not the CSV.
+
+The FastAPI app loads models from `data/models/` at startup, so restart/reload `uvicorn` after retraining for it to pick up the new artifacts.
+
+See `docs/CONSUMPTION_MODEL.md` for the modeling details and `scripts/eda_consumption.py` for the exploratory analysis this pipeline grew out of.

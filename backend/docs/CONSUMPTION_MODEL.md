@@ -25,7 +25,7 @@ the trained models are saved and reloaded.
 
 ## Data
 
-`backend/data/cafetalino.db` (SQLite), built from `consumo_insumos2.csv` by
+`backend/data/cafetalino.db` (SQLite), built from `consumo_insumos.csv` by
 `backend/scripts/load_consumption.py`. Two tables:
 
 - `locations(id, name, lat, lng)` — 19 canonical machine locations.

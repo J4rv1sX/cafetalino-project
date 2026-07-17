@@ -11,7 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 BACKEND_DIR = Path(__file__).resolve().parent.parent
-CSV_PATH = BACKEND_DIR / "data" / "consumo_insumos2.csv"
+CSV_PATH = BACKEND_DIR / "data" / "consumo_insumos.csv"
 
 COLUMN_RENAME = {
     "fecha": "date",

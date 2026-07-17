@@ -9,11 +9,22 @@ interface ConsumptionListProps {
   error: string | null
   hasFetched: boolean
   items: LocationConsumptionPrediction[]
+  targetDate: string
+  onTargetDateChange: (targetDate: string) => void
   onFetch: () => void
   onDropItem: (locationId: number) => void
 }
 
-export function ConsumptionList({ loading, error, hasFetched, items, onFetch, onDropItem }: ConsumptionListProps) {
+export function ConsumptionList({
+  loading,
+  error,
+  hasFetched,
+  items,
+  targetDate,
+  onTargetDateChange,
+  onFetch,
+  onDropItem,
+}: ConsumptionListProps) {
   const [isDragOver, setIsDragOver] = useState(false)
 
   const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
@@ -32,12 +43,20 @@ export function ConsumptionList({ loading, error, hasFetched, items, onFetch, on
     <section className="prediction-column prediction-column--fill">
       <header className="prediction-column-header">
         <h1>Consumo de máquinas</h1>
-        <p>Consulta el consumo estimado de cada máquina para hoy.</p>
+        <p>Consulta el consumo estimado de cada máquina para la fecha seleccionada.</p>
       </header>
 
-      <button type="button" onClick={onFetch} disabled={loading}>
-        {loading ? 'Cargando…' : 'Ver consumos'}
-      </button>
+      <div className="prediction-column-controls">
+        <input
+          type="date"
+          value={targetDate}
+          onChange={(event) => onTargetDateChange(event.target.value)}
+          disabled={loading}
+        />
+        <button type="button" onClick={onFetch} disabled={loading}>
+          {loading ? 'Cargando…' : 'Ver consumos'}
+        </button>
+      </div>
 
       {error && <p className="prediction-column-error">{error}</p>}
 
