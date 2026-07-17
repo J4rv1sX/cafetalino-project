@@ -82,6 +82,66 @@ plus 11 rows elsewhere in the sequence with a null `days_since_previous_refill`
 from a mid-history gap in that machine's refill records), not implied by the
 `days_since_previous_refill` null check alone.
 
+### Post-deployment ablations: is `day_of_week`/`month` pulling its weight?
+
+Raised after the rate-feature deployment above, as two separate hypotheses
+about whether the two calendar features are well-chosen, not just present:
+
+1. **`day_of_week` records the day the technician visited, not the
+   composition of the elapsed interval.** The visit day is an artifact of
+   the route schedule, not something that should mechanically drive
+   consumption — what plausibly matters is how much of the
+   `days_since_previous_refill` interval was weekday (office/campus
+   traffic) vs. weekend. Tested a replacement, `weekday_fraction`: the
+   fraction of that interval's days that were weekdays, computed as
+   `np.busday_count(previous_refill_date, date) / days_since_previous_refill`
+   (both dates already in the DB).
+2. **Is `month` actually capturing a seasonal effect, or is it too
+   fine-grained to learn reliably from ~145 rows/location spread across 12
+   months?** Tested two alternatives: dropping `month` entirely, and
+   replacing it with `quarter` (a coarser 4-bucket season proxy, pooling
+   ~3x more rows per bucket).
+
+All three alternatives were evaluated with the identical CV/search setup as
+production (`RandomizedSearchCV`, 30 iterations, 5-fold CV, same
+hyperparameter grids), on the same 2,439-row set as the current deployed
+model, varying only the feature(s) under test:
+
+| target | `day_of_week`→`weekday_fraction` | `month` dropped | `month`→`quarter` |
+|---|---|---|---|
+| bottled_water_ml | +1.46 | **+11.10** | +10.62 |
+| cup_units | +0.01 | +0.06 | +0.06 |
+| coffee_mix_g | +0.02 | +0.05 | +0.05 |
+| chocolate_mix_g | +0.20 | +0.91 | +0.85 |
+| cappuccino_mix_g | +0.03 | +0.01 | −0.10 |
+
+(MAE delta vs. the production baseline; positive = worse. `hist_gradient_boosting`
+won every cell.)
+
+**Findings:**
+
+- **`weekday_fraction` did not beat `day_of_week`** — deltas are all
+  essentially zero (≤0.09% of MAE, far inside 1 fold-to-fold std
+  everywhere). The hypothesis was reasonable, but the data doesn't support
+  it: `day_of_week` already captures whatever signal exists there just as
+  well. **Kept `day_of_week` unchanged.**
+- **`month` is genuinely pulling weight** — dropping it made every single
+  target worse, most notably `bottled_water_ml` (+11.10, the largest delta
+  of any ablation tested here). 5/5 targets moving the same direction is
+  unlikely by chance, so this isn't noise.
+- **Bucketing into `quarter` recovers almost none of that loss** — its
+  deltas nearly match `month`-dropped's, target for target. That's the
+  interesting negative result: it rules out "any coarse seasonal signal
+  would do" — the informative part of `month` is at (or near) its native
+  12-category granularity, not a broad 4-season cycle. That's consistent
+  with the `month` proxy partly standing in for something more specific
+  than climate season, e.g. the academic/holiday calendar idea flagged
+  above as unimplemented. **Kept `month` unchanged, at full granularity.**
+
+Net: no production code changed as a result of this round — both are
+honest negative results, recorded here so the same alternatives aren't
+re-tried from scratch later without knowing they were already checked.
+
 ## Evaluation methodology — also iterated on, with an important correction
 
 1. **Started with a single 80/20 `train_test_split`.** Reported R² of
