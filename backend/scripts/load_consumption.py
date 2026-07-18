@@ -22,10 +22,12 @@ DROP TABLE IF EXISTS readings;
 DROP TABLE IF EXISTS locations;
 
 CREATE TABLE locations (
-    id   INTEGER PRIMARY KEY,
-    name TEXT NOT NULL,
-    lat  REAL NOT NULL,
-    lng  REAL NOT NULL,
+    id             INTEGER PRIMARY KEY,
+    name           TEXT NOT NULL,
+    lat            REAL NOT NULL,
+    lng            REAL NOT NULL,
+    water_capacity REAL NOT NULL,
+    mix_capacity   REAL NOT NULL,
     UNIQUE (lat, lng)
 );
 
@@ -48,6 +50,14 @@ CREATE TABLE readings (
 
 CREATE INDEX idx_readings_location_date ON readings (location_id, date);
 """
+
+WATER_CAPACITY_L = 20
+MIX_CAPACITY_G = 1600
+REDUCED_MIX_CAPACITY_G = 900
+REDUCED_MIX_CAPACITY_LOCATIONS = {
+    "Colegio Simón Rodríguez",
+    "Paseo La Plata Junin",
+}
 
 READING_COLUMNS = [
     "location_id",
@@ -72,7 +82,12 @@ def create_schema(conn: sqlite3.Connection) -> None:
 
 
 def prepare_locations(roster: pd.DataFrame) -> pd.DataFrame:
-    return roster[["name", "lat", "lng"]].copy()
+    locations = roster[["name", "lat", "lng"]].copy()
+    locations["water_capacity"] = WATER_CAPACITY_L
+    locations["mix_capacity"] = locations["name"].apply(
+        lambda name: REDUCED_MIX_CAPACITY_G if name in REDUCED_MIX_CAPACITY_LOCATIONS else MIX_CAPACITY_G
+    )
+    return locations
 
 
 def prepare_readings(active: pd.DataFrame, location_map: pd.DataFrame) -> pd.DataFrame:
