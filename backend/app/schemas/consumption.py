@@ -13,17 +13,23 @@ class PredictionInterval(BaseModel):
     high: float
 
 
+class RemainingStock(BaseModel):
+    capacity: float
+    remaining: PredictionInterval
+    remaining_pct: PredictionInterval
+
+
 class LocationConsumptionPrediction(BaseModel):
     location_id: int
     location_name: str
     lat: float
     lng: float
     days_since_previous_refill: int
-    bottled_water_ml: PredictionInterval
     cup_units: PredictionInterval
-    coffee_mix_g: PredictionInterval
-    chocolate_mix_g: PredictionInterval
-    cappuccino_mix_g: PredictionInterval
+    bottled_water: RemainingStock
+    coffee_mix: RemainingStock
+    chocolate_mix: RemainingStock
+    cappuccino_mix: RemainingStock
 
 
 class ConsumptionPredictionResponse(BaseModel):

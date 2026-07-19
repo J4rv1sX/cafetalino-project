@@ -2,23 +2,24 @@ import type { DragEvent } from 'react'
 import type { LocationConsumptionPrediction } from '../types/consumption'
 import './ConsumptionCard.css'
 
-const TARGET_CONFIG: Array<{
-  key: keyof Pick<
-    LocationConsumptionPrediction,
-    'bottled_water_ml' | 'cup_units' | 'coffee_mix_g' | 'chocolate_mix_g' | 'cappuccino_mix_g'
-  >
+const STOCK_CONFIG: Array<{
+  key: keyof Pick<LocationConsumptionPrediction, 'bottled_water' | 'coffee_mix' | 'chocolate_mix' | 'cappuccino_mix'>
   label: string
   unit: string
+  decimals: number
 }> = [
-  { key: 'bottled_water_ml', label: 'Agua embotellada', unit: 'ml' },
-  { key: 'cup_units', label: 'Vasos', unit: 'u' },
-  { key: 'coffee_mix_g', label: 'Mezcla de café', unit: 'g' },
-  { key: 'chocolate_mix_g', label: 'Mezcla de chocolate', unit: 'g' },
-  { key: 'cappuccino_mix_g', label: 'Mezcla de capuchino', unit: 'g' },
+  { key: 'bottled_water', label: 'Agua embotellada', unit: 'l', decimals: 1 },
+  { key: 'coffee_mix', label: 'Mezcla de café', unit: 'g', decimals: 0 },
+  { key: 'chocolate_mix', label: 'Mezcla de chocolate', unit: 'g', decimals: 0 },
+  { key: 'cappuccino_mix', label: 'Mezcla de capuchino', unit: 'g', decimals: 0 },
 ]
 
-function formatAmount(value: number): string {
-  return Math.round(value).toLocaleString('es-BO')
+function formatAmount(value: number, decimals = 0): string {
+  return value.toLocaleString('es-BO', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
+}
+
+function formatPct(value: number): string {
+  return `${Math.round(value)}%`
 }
 
 interface ConsumptionCardProps {
@@ -36,16 +37,26 @@ export function ConsumptionCard({ prediction }: ConsumptionCardProps) {
       <h2>{prediction.location_name}</h2>
       <p className="consumption-card-meta">Última recarga hace {prediction.days_since_previous_refill} días</p>
       <ul className="consumption-card-items">
-        {TARGET_CONFIG.map(({ key, label, unit }) => {
-          const { estimate, low, high } = prediction[key]
+        <li>
+          <span className="consumption-card-label">Vasos</span>
+          <span className="consumption-card-value">
+            {formatAmount(prediction.cup_units.estimate)} u
+            <span className="consumption-card-range">
+              {' '}
+              ({formatAmount(prediction.cup_units.low)}–{formatAmount(prediction.cup_units.high)} u)
+            </span>
+          </span>
+        </li>
+        {STOCK_CONFIG.map(({ key, label, unit, decimals }) => {
+          const { remaining, remaining_pct } = prediction[key]
           return (
             <li key={key}>
               <span className="consumption-card-label">{label}</span>
               <span className="consumption-card-value">
-                {formatAmount(estimate)} {unit}
+                {formatAmount(remaining.estimate, decimals)} {unit} ({formatPct(remaining_pct.estimate)})
                 <span className="consumption-card-range">
                   {' '}
-                  ({formatAmount(low)}–{formatAmount(high)} {unit})
+                  ({formatAmount(remaining.low, decimals)}–{formatAmount(remaining.high, decimals)} {unit})
                 </span>
               </span>
             </li>

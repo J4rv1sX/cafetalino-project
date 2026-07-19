@@ -10,6 +10,7 @@ from app.schemas.consumption import (
     ConsumptionPredictionResponse,
     LocationConsumptionPrediction,
     PredictionInterval,
+    RemainingStock,
 )
 
 BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
@@ -23,6 +24,16 @@ TARGETS = [
     "chocolate_mix_g",
     "cappuccino_mix_g",
 ]
+# Maps each capacity-bound target to its response field name, the location
+# metadata key holding its capacity, and the factor to scale the target's
+# consumption unit into the capacity's unit (water is predicted in ml but
+# reported in liters; mix targets and capacity are both already in grams).
+CAPACITY_TARGETS = {
+    "bottled_water_ml": ("bottled_water", "water_capacity_l", 0.001),
+    "coffee_mix_g": ("coffee_mix", "mix_capacity_g", 1.0),
+    "chocolate_mix_g": ("chocolate_mix", "mix_capacity_g", 1.0),
+    "cappuccino_mix_g": ("cappuccino_mix", "mix_capacity_g", 1.0),
+}
 # Matches RATE_EPS in scripts/train_consumption.py -- must stay in sync so
 # inference-time rate features are computed the same way as training-time ones.
 RATE_EPS = 1e-6
@@ -79,7 +90,9 @@ def _load_location_features() -> dict[int, dict[str, float]]:
 def _load_location_metadata() -> dict[int, dict]:
     conn = sqlite3.connect(DB_PATH)
     try:
-        locations_df = pd.read_sql("SELECT id, name, lat, lng FROM locations", conn)
+        locations_df = pd.read_sql(
+            "SELECT id, name, lat, lng, water_capacity, mix_capacity FROM locations", conn
+        )
         readings_df = pd.read_sql("SELECT location_id, date FROM readings", conn, parse_dates=["date"])
     finally:
         conn.close()
@@ -92,10 +105,33 @@ def _load_location_metadata() -> dict[int, dict]:
             "name": locations_df.loc[loc_id, "name"],
             "lat": float(locations_df.loc[loc_id, "lat"]),
             "lng": float(locations_df.loc[loc_id, "lng"]),
+            "water_capacity_l": float(locations_df.loc[loc_id, "water_capacity"]),
+            "mix_capacity_g": float(locations_df.loc[loc_id, "mix_capacity"]),
             "last_reading_date": last_reading_date.loc[loc_id],
         }
         for loc_id in last_reading_date.index
     }
+
+
+def _remaining_stock(consumption: PredictionInterval, capacity: float, unit_scale: float = 1.0) -> RemainingStock:
+    def clamp(value: float) -> float:
+        return min(capacity, max(0.0, value))
+
+    # Consumption low <= estimate <= high, so capacity - consumption keeps
+    # that ordering reversed: remaining_low pairs with consumption_high.
+    remaining_low = clamp(capacity - consumption.high * unit_scale)
+    remaining_estimate = clamp(capacity - consumption.estimate * unit_scale)
+    remaining_high = clamp(capacity - consumption.low * unit_scale)
+
+    return RemainingStock(
+        capacity=capacity,
+        remaining=PredictionInterval(estimate=remaining_estimate, low=remaining_low, high=remaining_high),
+        remaining_pct=PredictionInterval(
+            estimate=remaining_estimate / capacity * 100,
+            low=remaining_low / capacity * 100,
+            high=remaining_high / capacity * 100,
+        ),
+    )
 
 
 def predict_all_consumption(target_date: date) -> ConsumptionPredictionResponse:
@@ -130,6 +166,13 @@ def predict_all_consumption(target_date: date) -> ConsumptionPredictionResponse:
             low, high = min(low, high, estimate), max(low, high, estimate)
             target_predictions[target] = PredictionInterval(estimate=estimate, low=low, high=high)
 
+        remaining_stocks = {
+            field_name: _remaining_stock(
+                target_predictions[target], location_metadata[location_id][capacity_key], unit_scale
+            )
+            for target, (field_name, capacity_key, unit_scale) in CAPACITY_TARGETS.items()
+        }
+
         predictions.append(
             LocationConsumptionPrediction(
                 location_id=location_id,
@@ -137,7 +180,8 @@ def predict_all_consumption(target_date: date) -> ConsumptionPredictionResponse:
                 lat=location_metadata[location_id]["lat"],
                 lng=location_metadata[location_id]["lng"],
                 days_since_previous_refill=days_since_previous_refill,
-                **target_predictions,
+                cup_units=target_predictions["cup_units"],
+                **remaining_stocks,
             )
         )
 
