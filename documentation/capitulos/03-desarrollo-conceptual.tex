@@ -1,0 +1,515 @@
+\section{Desarrollo conceptual}\label{desarrollo-conceptual}
+
+El desarrollo conceptual para este proyecto de innovación se desarrolló aplicando sistemáticamente la metodología Design Thinking, que permite enfocar la innovación tecnológica en las necesidades de los usuarios: los clientes y trabajadores de Cafetalino, y la empresa como tal.
+
+\subsection{Empatizar}\label{empatizar}
+
+Esta fase está orientada a comprender las necesidades, dificultades y expectativas de todos los involucrados en el proceso de abastecimiento de la red de máquinas dispensadoras de Cafetalino. De acuerdo con los principios de Design Thinking, esta etapa busca construir una comprensión profunda del contexto operativo y de los problemas que experimentan los usuarios antes de plantear posibles soluciones tecnológicas.
+
+Para la recopilación de información se empleó una estrategia de investigación cualitativa basada en entrevistas semiestructuradas y encuestas. Para las entrevistas se utilizaron guías previamente definidas que se incluyen en los anexos del presente documento y se seleccionaron dos participantes clave mediante un criterio de relevancia operativa y conocimiento del proceso analizado: el gerente propietario de Cafetalino, responsable de la toma de decisiones estratégicas y de la supervisión general del negocio (Anexo A), y el operador de reabastecimiento con mayor experiencia dentro de la empresa, responsable directo de la ejecución de las rutas de abastecimiento (Anexo B); en tanto que las encuestas se aplicaron a los clientes de Cafetalino (Anexo C), que son la razón de ser de las operaciones de la empresa y los receptores directos de los resultados de dichas operaciones.
+
+Tanto las entrevistas como las encuestas se realizaron entre junio y julio de 2026. Para la aplicación de las encuestas se realizó un muestreo aleatorio estratificado de las maquinas en función al tipo de ubicación: Hospitales, centros de salud, centros educativos, centros comerciales, espacios abiertos hacia la acera, y un muestreo no probabilístico consecutivo a los clientes de Cafetalino que acudieron las ubicaciones seleccionadas en el periodo definido para la encuesta; sin embargo, la participación fue voluntaria y anónima, habiéndose encuestado a un total de 254 clientes que acudieron a 15 máquinas dispensadoras (Anexo C).
+
+Un resumen de la entrevista realizada al gerente de Cafetalino se detalla a continuación: A la consulta de problemas o procesos que le gustaría solucionar u optimizar, mencionó varias ideas, una que llamo la atención por las posibilidades de implementación con inteligencia artificial es la relacionada a un sistema de gestión de inventarios que permita controlar la cantidad de insumos en las máquinas y pronosticar sus requerimientos de recarga (Anexo A).
+
+Indicó que su empresa posee un registro de datos de sus operaciones desde el año 2018 a la fecha, que ve con buenos ojos el uso de IA para modernizar sus operaciones, y está dispuesto a compartir esta información bajo un acuerdo de confidencialidad estricto para protegerse de la competencia. Entre sus experiencias tecnológicas previas, señaló que intentó usar sensores para monitorear la cantidad de vasos en sus máquinas, pero el proyecto piloto fracasó debido a problemas de conectividad, altos costos y limitaciones técnicas para medir otros insumos principalmente sólidos y líquidos (Anexo A).
+
+Comentó algunos conflictos con sus clientes, que se presentaron cuando una máquina quedó sin insumos, ellos experimentaron frustración, decepción, impotencia, sensación de pérdida o robo y pérdida de confianza, que alguna vez escaló en agresiones físicas a las máquinas, insultos al personal, difamaciones en redes e incluso un caso de sabotaje intencional introduciendo objetos extraños. La empresa mitiga esto reembolsando el dinero, actualmente esto se facilitó mediante el empleo de transferencias QR, y otorgando bebidas de cortesía (Anexo A).
+
+En relación a la recarga de insumos el personal cubre dos rutas al día, pero el proceso tiene fallas: en ocasiones visitan máquinas que no necesitan recarga, o se ven obligados a alterar las rutas y priorizar emergencias cuando una máquina se queda fuera de servicio por falta de insumos, lo que exige llevar insumos extra a sus recorridos rutinarios y a veces hacer viajes exclusivos para la recarga de un solo equipo (Anexo A).
+
+Un resumen de la entrevista al operador de recarga más antiguo de la empresa, cuyo resumen es el siguiente: El operador recorre dos rutas diarias, una por la mañana y otra por la tarde, que incluyen de 4 a 6 máquinas cada una. Antes de salir, prepara los paquetes de insumos necesarios más dos adicionales en previsión. En cada visita, el operador apaga la máquina, la limpia, le hace mantenimiento, la recarga y la enciende para verificar que no haya fugas o ruidos extraños, estas rutas están pre-definidas por zonas; sin embargo, alguna vez el operador se vio en la necesidad de modificar su ruta o cambiar la secuencia de visitas para priorizar las máquinas que son reportadas como fuera de servicio (Anexo B).
+
+El operador señala que el procedimiento actual no es eficiente, obligándolo muchas veces a trabajar horas extra debido a los desvíos imprevistos, además reporta que se pierde mucho tiempo al visitar máquinas cuyo consumo no es el esperado y no requieren reposición de insumos ya que el mantenimiento se dificulta con los depósitos llenos. También considera que un sistema que prediga la demanda sería sumamente útil y evitaría la pérdida de tiempo al programar rutas exclusivas para máquinas reportadas fuera de servicio, minimizando los cambios de ruta a último momento (Anexo B).
+
+Posteriormente, las respuestas obtenidas fueron revisadas y clasificadas en categorías temáticas relacionadas con la operación logística, la gestión de inventarios, la experiencia del cliente y las oportunidades de mejora mediante Inteligencia Artificial. El análisis permitió identificar patrones recurrentes coincidentes entre ambos participantes, los cuales se consideraron hallazgos relevantes para la definición del problema y el diseño de la propuesta de innovación, estas conclusiones se resumen en la siguiente tabla.
+
+\captionof{table}{Conclusiones de las entrevistas}\label{tab:conclusiones-de-las-entrevistas}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Hallazgo identificado}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Evidencia obtenida}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Impacto observado}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Existen visitas de reabastecimiento que no generan valor} & Aproximadamente una de cada diez visitas se realiza a máquinas que no requieren reposición. & Incremento de tiempo operativo y costos logísticos. \\
+\textbf{Se producen modificaciones extraordinarias de ruta} & Se reportan aproximadamente diez eventos de modificación de recorridos por año. & Ineficiencia en la planificación logística. \\
+\textbf{El desabastecimiento afecta la experiencia del cliente} & Se registran quejas, reclamos y pérdida de confianza cuando la máquina no puede prestar el servicio esperado. & Impacto negativo en la percepción del servicio. \\
+\textbf{Existen registros históricos disponibles desde 2018} & Información proporcionada por la dirección de la empresa. & Viabilidad para desarrollar modelos predictivos. \\
+\textbf{Intentos previos basados en sensores no fueron exitosos} & Problemas de conectividad y costos de implementación. & Necesidad de una solución basada en datos históricos. \\
+\end{longtable}
+
+\fuente{Fuente: Elaboración propia}
+
+Como resultado de las encuestas (Anexo C) se observa que el 60.6 \% de los clientes consume utiliza los servicios de la empresa dos o más veces a la semana, el 28.7 \% una vez por semana, luego el 89.4 \% son clientes asiduos, el 8.3 \% usa el servicio una vez al mes y el 2.0 \% son clientes esporádicos, el 0.4 \% no respondió la pregunta.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Hábitos de consumo de los clientes de Cafetalino}\label{fig:habitos-de-consumo-de-los}
+\includegraphics[width=0.85\textwidth]{grafico1.png}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+En relación al grado de satisfacción, el 82.7 \% de los clientes encuestados califica el servicio como bueno o muy bueno, el 6.3 \% como regular y el 9.5 \% como malo o muy malo, el 1.6 \% no respondió esta pregunta.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Grado de satisfacción de los clientes de Cafetalino}\label{fig:grado-de-satisfaccion-de-los}
+\includegraphics[width=0.85\textwidth]{grafico2.png}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+Consultados sobre la ocurrencia de fallos al usar las máquinas de Cafetalino, el 90.2 \% indico que nunca se les presento ningún problema, el 2.8 \% que recibió un producto que no tenía la calidad esperada y el 6.3 \% que no recibió el servicio, el 0.8 \% no respondió la pregunta. El 82.6 \% indico que le ocurrió una sola vez, y el 17.4 \% que le ocurrió en dos ocasiones.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Ocurrencia de fallos en el servicio de Cafetalino}\label{fig:ocurrencia-de-fallos-en-el}
+\includegraphics[width=0.85\textwidth]{grafico3.png}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+Respecto a sus sentimientos por el percance ocurrido el 91.3 \% de los afectados indicó que se sintió decepcionado, el 78.3 \% sintió frustración, un 26.1 \% impotencia, el 4.4 \% sintió que se le había robado y que perdió su dinero, al 43.5 \% le genero desconfianza y el 56.5 \% indica que a pesar del inconveniente no perdió la confianza.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Sentimientos del cliente de Cafetalino ante ocurrencia de fallos del servicio}\label{fig:sentimientos-del-cliente-de-cafetalino}
+\includegraphics[width=0.85\textwidth]{grafico4.png}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+El 82.6 \% de los afectados reportó el incidente a Cafetalino, el 13.0 \% no lo reporto y el 4.4 \% no respondió a esta consulta. El 89.5 \%, de los que reportaron el suceso, lo hizo llamando al número de contacto y el 10.5 \% en forma personal, el 100 \% de ellos indica que recibió una disculpa y el reembolso de su dinero, y el 64.7 \% que recibió una compensación por el inconveniente.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Respuesta de Cafetalino al Cliente ante fallos del servicio}\label{fig:respuesta-de-cafetalino-al-cliente}
+\includegraphics[width=0.85\textwidth]{grafico5.png}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+El 27.3 \% de los afectados volvió a utilizar el servicio de Cafetalino el mismo día o un día después, el 9.1 \% dos días después, el 36.4 \% una semana después del evento, el 18.2 \% dos semanas después, y el 9.1 \% tardo más de 2 semanas en volver a usar los servicios de la empresa.
+
+\subsection{Definir}\label{definir}
+
+El objetivo de esta fase consiste en sintetizar la información obtenida durante la etapa de empatizar para transformar los hallazgos identificados en un problema claramente delimitado y susceptible de ser abordado mediante una solución basada en Inteligencia Artificial.
+
+A partir de las entrevistas realizadas al gerente de Cafetalino y al operador responsable del reabastecimiento, así como de las encuestas realizadas a los clientes de la empresa, se identificaron tres problemas principales: la existencia de recorridos que no generan valor al visitar máquinas que no requieren reposición de insumos, la necesidad de modificar rutas por eventos de desabastecimiento no previstos y el impacto negativo que la falta de productos genera en la experiencia de los usuarios. Con base en estos hallazgos se formularon los siguientes retos de diseño:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  ¿Cómo se podría predecir los requerimientos futuros de reposición de insumos de cada máquina dispensadora para reducir los eventos de desabastecimiento y mejorar la continuidad del servicio?
+\item
+  ¿Cómo se podría utilizar la demanda proyectada para priorizar únicamente las máquinas que realmente requieren recarga y reducir desplazamientos innecesarios del personal operativo?
+\item
+  ¿Cómo podríamos optimizar la planificación de recorridos de abastecimiento para disminuir modificaciones extraordinarias de ruta y mejorar la eficiencia logística de la empresa?
+\end{enumerate}
+
+Para evaluar el desempeño de la propuesta se establecen los siguientes criterios cuantificables de éxito, que se presentan en la siguiente tabla:
+
+\captionof{table}{Criterios de éxito}\label{tab:criterios-de-exito}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3247}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3506}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3247}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Indicador}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Línea base}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Meta del proyecto}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Visitas de reabastecimiento innecesarias.} & Aproximadamente 10\% de las visitas realizadas (1 de cada 10 visitas). & Reducirlas a un máximo de 5\%. \\
+\textbf{Modificaciones extraordinarias de rutas.} & Aproximadamente 10 eventos por año. & Reducirlas al menos en 50\%. \\
+\textbf{Precisión del modelo predictivo.} & Método actual basado en experiencia operativa. & Alcanzar una precisión mínima de 85\%. \\
+\textbf{Incidencias relacionadas con desabastecimiento.} & Registro histórico de la empresa. & Reducirlas en al menos 30\%. \\
+\end{longtable}
+
+\fuente{Fuente: Elaboración propia}
+
+La línea base utilizada corresponde al procedimiento actual de reabastecimiento empleado por Cafetalino, el cual se fundamenta en rutas predefinidas y decisiones operativas apoyadas principalmente en la experiencia del personal. La validación del proyecto consistirá en comparar los resultados obtenidos por el sistema propuesto contra este escenario de referencia.
+
+\subsection{Investigación de Antecedentes}\label{investigaciuxf3n-de-antecedentes}
+
+En esta fase se debe realizar una revisión documental para construir el fundamento teórico y determinar el estado del arte relacionados al proyecto
+
+\subsubsection{Fundamento Teórico}\label{fundamento-teuxf3rico}
+
+El marco conceptual que incluye el conocimiento teórico que sustenta el proyecto, se desarrolló a partir de una revisión bibliográfica relacionada al campo de estudio y se detalla a continuación.
+
+\textbf{Aprendizaje automático (Machine learning)} \citep{bergmann2026,universidadeuropea2025,mayorga2019}.
+
+El aprendizaje automático es un área de la inteligencia artificial (IA), que se enfoca en algoritmos capaces de aprender patrones de un conjunto de datos de entrenamiento y, posteriormente, realizar inferencias precisas sobre nuevos datos. Esta capacidad de reconocer patrones permite a los modelos de aprendizaje automático tomar decisiones o hacer predicciones sin instrucciones explícitas predefinidas. Su principal premisa es que si se optimiza el rendimiento de un modelo con un conjunto de datos de tareas semejantes a los problemas del mundo real para los que se utilizará (entrenamiento), el modelo puede predicciones precisas con datos nuevos relacionados a su caso de uso final, donde el entrenamiento es sólo el medio para lograr un fin: la generalización, traducir un buen rendimiento en los datos de entrenamiento a resultados útiles en escenarios del mundo real. En esencia, un modelo entrenado aplica los patrones aprendidos a partir de los datos de entrenamiento para inferir el resultado correcto para una tarea del mundo real, la inferencia.
+
+El aprendizaje automático funciona mediante lógica matemática, por tanto, las características relevantes o rasgos de cada dato se deben expresar numéricamente, para que un dato, un vector de características, se pueda introducir a un algoritmo matemático que aprenda a relacionar cada entrada con una salida.
+
+Los métodos de aprendizaje automático se clasifican, según sus objetivos de entrenamiento y el tipo de datos de entrenamiento que implican, en tres paradigmas de aprendizaje: El aprendizaje supervisado, el aprendizaje no supervisado o el aprendizaje por refuerzo.
+
+\begin{itemize}
+\item
+  \textbf{El aprendizaje supervisado} entrena un modelo para predecir el resultado correcto a partir de una entrada dada y se aplica a tareas que requieren cierto grado de precisión respecto a una verdad fundamental externa, como la clasificación o la regresión.
+\item
+  \textbf{El aprendizaje no supervisado} entrena un modelo para descifrar patrones intrínsecos, dependencias y correlaciones en los datos no requiere una referencia externa para comparar sus resultados.
+\item
+  \textbf{El aprendizaje por refuerzo (RL)} entrena un modelo para evaluar su entorno y tomar la acción que le reporte una recompensa mayor. Los escenarios de RL no implican la existencia de una única verdad fundamental, pero sí la existencia de acciones buenas y malas, o en ocasiones acciones neutrales.
+\end{itemize}
+
+El entrenamiento de extremo a extremo para un modelo dado puede, y a menudo lo hace, involucrar enfoques híbridos que aprovechan más de un paradigma. Por ejemplo, el aprendizaje no supervisado se usa frecuentemente para preprocesar datos que serán usados en el aprendizaje supervisado o por refuerzo. Los modelos de lenguaje a gran escala (LLM) suelen someterse a un entrenamiento inicial (pre-entrenamiento) y luego ser ajustados ajuste, afinar su entrenamiento a través de variantes de aprendizaje supervisado, seguido de un ajuste más fino a través de técnicas de aprendizaje por refuerzo (RL) a partir de retroalimentación humana (RLHF).
+
+\textbf{Regresión} \citep{lee2026,opit2023}
+
+La regresión destaca como una de las técnicas de aprendizaje automático supervisado, que sirve de puente entre el pasado, el presente y el futuro, que identifica diferentes eventos del pasado y los desglosa para su análisis, a partir de este análisis, extrae conclusiones sobre el futuro y ayuda a planificar los siguientes pasos. Se basa en aprender las relaciones entre las variables de entrada y las variables de salida, los objetivos, de manera que sus modelos predicen valores continuos.
+
+Además del rendimiento predictivo, los métodos de aprendizaje supervisado tienen dos ventajas: La explicabilidad, que permite comprender por qué el modelo realiza una determinada predicción, algo que es muy útil en ámbitos regulados; y la eficiencia, pues los algoritmos clásicos suelen requerir menos recursos y datos, lo que los hace ideales para aplicaciones a pequeña o mediana escala y para sistemas de decisión integrados.
+
+Existen diversos tipos de regresiones, entre ellos:
+
+\begin{itemize}
+\item
+  \textbf{Regresión lineal simple}, una de las técnicas más comunes en el aprendizaje automático, algoritmo que recibe su nombre por su funcionamiento: analiza en profundidad la relación entre variables independientes y dependientes, para a partir de estos resultados, realizar predicciones sobre el futuro, demostrando su utilidad en diversas aplicaciones.
+\item
+  \textbf{Regresión polinómica}, una técnica en la que la salida se modela como una función polinómica de la entrada, que permite obtener curvas en lugar de líneas rectas.
+\item
+  \textbf{Regresión múltiple o regresión lineal múltiple}, donde el resultado depende de varias variables de entrada, que permite al modelo capturar el efecto combinado de varios predictores sobre el resultado.
+\item
+  \textbf{Regresión de cresta o regresión L2}, una versión de regresión lineal regularizada, que desalienta los coeficientes grandes penalizando sus valores al cuadrado, lo que reduce el sobreajuste cuando las características están correlacionadas.
+\item
+  \textbf{Regresión Lasso o regresión L1}, una técnica que no solo penaliza los coeficientes grandes, sino que puede reducir algunos a cero, útil para seleccionar solo las características más importantes.
+\item
+  \textbf{Regresión de red elástica}, un método híbrido que combina la regularización L1 y L2 para equilibrar la selección de características y la reducción de coeficientes, especialmente útil cuando las características están altamente correlacionadas o cuando hay más predictores que observaciones.
+\item
+  \textbf{Regresión logística}, un algoritmo de clasificación que utiliza una función logística para modelar la probabilidad de un resultado binario en función de las características de entrada.
+\item
+  \textbf{Modelos autorregresivos (AR)}, son modelos de series temporales en los que el valor actual se predice como una combinación lineal de sus valores anteriores.
+\end{itemize}
+
+La regresión comparte una familia de potentes algoritmos de aprendizaje supervisado con la y clasificación, se pueden adaptarse a ambos contextos; sin embargo, la elección del modelo y su configuración, dependen del tipo de resultado: Continuo para regresión o categórico para clasificación. Algunos de estos algoritmos son:
+
+\begin{itemize}
+\item
+  \textbf{Árboles de decisión}, son modelos que realizan predicciones mediante una serie de preguntas sencillas, donde cada pregunta divide los datos en grupos más pequeños y similares, llamados hojas, de manera que el valor promedio de cada grupo se aproxime a los valores reales, reduciendo así el error de predicción. El árbol se divide continuamente hasta que alcanza un punto de parada: Un número máximo de preguntas o la falta de ejemplos para dividir, finalmente se realizan predicciones basadas en el valor promedio del grupo final, hoja. Los árboles de regresión tienen como objetivo minimizar la suma de cuadrados residuales (RSS) dentro de cada hoja.
+\item
+  \textbf{Bosques aleatorios}, consisten de un conjunto de árboles de decisión, cada uno entrenado con un subconjunto de datos obtenido mediante re-muestreo (bootstrap) y con selección aleatoria de características en cada división, las predicciones finales se realizan promediando entre los árboles. Los bosques aleatorios reducen la varianza al promediar diversos modelos, cada árbol es un experto ruidoso, y su agregación da como resultado un predictor robusto, donde la selección aleatoria de características garantiza la diversidad entre los árboles.
+\item
+  \textbf{K vecinos muy cercanos (KNN - K-nearest neighbors)}, es un método no paramétrico basado en instancias que almacena todo el conjunto de entrenamiento; es decir que, a diferencia de la regresión lineal, no presupone ninguna distribución subyacente de los datos y no requiere la estimación de parámetros, no presupone nada sobre la función subyacente, lo que lo hace flexible pero computacionalmente costoso. Para realizar una predicción a partir de una nueva entrada, encuentra los k ejemplos de entrenamiento más cercanos, calcula el promedio de sus valores y predice basándose en la similitud local, bajo la premisa: ``eres como tus vecinos más cercanas''.
+\item
+  \textbf{Máquinas de vectores de soporte (SVM - Support vector machines)}, son modelos que encuentran el hiperplano, un límite de decisión que ajusta un margen alrededor de los datos, con margen máximo o desviación mínima, se enfocan en los puntos de datos más difíciles de clasificar, aquellos cercanos al límite de decisión, ignoran los puntos más sencillos e intentan encontrar el separador más robusto.
+\end{itemize}
+
+\textbf{Planificación automática} \citep{navarro2026,zafra2021}
+
+La planificación automática calcula un plan o secuencia de acciones que se debe aplicar al estado de un problema para alcanzar otro estado que satisfaga unas determinadas condiciones. Un planificador necesita tres entradas: Una descripción del estado actual, una descripción de las acciones que se pueden realizar, para cada acción, se deben indicar qué condiciones deben cumplirse para ejecutarla y sus efectos, y una descripción del objetivo que se quiere alcanzar. Se dispone de planificadores capaces de modelar problemas que requieren un alto nivel de expresividad e incluyen parámetros de control en las acciones, de este modo, puede decidir ciertos valores numéricos para cada acción.
+
+\subsubsection{Estado del Arte}\label{estado-del-arte}
+
+Para recopilar los trabajos previos realizados en el campo de estudio del proyecto y que permiten conocer los avances y sus limitaciones, se realizó una revisión documental, la misma que permitió plantear la innovación de esta propuesta. Un resumen de estos avances y sus alcances se detalla a continuación.
+
+Varios autores, que han realizado diversas experiencias y desarrollado diferentes modelos de aplicación, destacan el uso de la telemetría y la inteligencia artificial para optimizar la gestión de inventarios en máquinas expendedoras de alimentos y bebidas, evidenciando su precisión y sus ventajas que incluyen: la reducción de costos, la mejora de las experiencias de los usuarios de sus equipos y la disponibilidad de información \citep{rosello2023,ping2024,vendingsoftware2026}.
+
+José Puma y sus colaboradores analizaron como la gestión, de la cadena de suministro, se ha transformado con la integración de las redes neuronales y la inteligencia artificial (IA), para optimizar operaciones logísticas mediante análisis de grandes volúmenes de datos en tiempo real, herramientas que permiten crear sistemas que se adaptan, aprenden de los errores, responden eficazmente a fluctuaciones en la demanda y optimizan el flujo logístico mediante simulaciones avanzadas \citep{puma2025}.
+
+Hanna Grzybowska y colaboradores destacan que la optimización de los sistemas logísticos de las máquinas expendedoras es sumamente compleja, pues incluye varios aspectos: La asignación de productos, los puntos de reabastecimiento, los límites de productos y las rutas de reabastecimiento; por lo que para abordar todas las facetas del problema, se requerirían varias técnicas como la previsión, el aprendizaje automático, la minería de datos, la optimización combinatoria y el enrutamiento de vehículos, entre otras, que se habían abordado de manera aislada \citep{grzybowska2020}.
+
+Su propuesta se basa en un modelo de optimización-simulación, aplicado a la solución de problemas estocásticos, aunque no a los sistemas logísticos de máquinas expendedoras, llegando a la conclusión de que ofrece claros beneficios para la gestión de operaciones en este ámbito. Los resultados del caso de estudio mostraron que los ingresos netos de la red mejoraron en aproximadamente el 3,4 \%, la eficacia variaba con la popularidad de la máquina y comprobaron que el método de optimización tenía mucha más eficacia con máquinas de mayor rendimiento, con las cuales lograron mejoras de hasta el 6 \%. \citep{grzybowska2020}.
+
+HOSTELVENDING reporta que Sensify, una startup argentina, implementó una plataforma tecnológica para optimizar la gestión de activos refrigerados en el sector de alimentos y bebidas: máquinas expendedoras, heladeras, entre otros. Su sistema recopila y analiza en tiempo real miles de datos de los puntos de venta, combinando sensores IoT, conectividad 24/7 y software de análisis predictivo para detectar patrones de consumo, optimizar rutas de mantenimiento y ofrecer alertas tempranas que evitan pérdidas de producto; además, la IA permite predecir la demanda por ubicación y momento del día, de manera que ofrece, a sus marcas asociadas, información en relación al consumo, temperatura, rotación de stock y estado de los equipos, a fin de reducir costos, evitar desperdicios y mejorar la eficiencia logística \citep{hostelvending2025}.
+
+HOSTELVENDING menciona también que Azkoyen, empresa navarra fabricante de maquinaria, incorporó la Inteligencia Artificial (IA) en el mantenimiento de sus máquinas de café y sistemas de pago con la creación de una tecnología de aprendizaje continuo de los procesos y eventos en las máquinas, así como la interacción con las personas, para desarrollar modelos predictivos que estiman variables y generan modelos más precisos y eficientes para optimizar la calidad del servicio en las máquinas, cuyo objetivo final es mejorar la experiencia de sus usuarios en el manejo cotidiano de las mismas \citep{hostelvending2024}.
+
+Aguas y Echeverria analizaron las causas de los quiebres de stock, a partir de un enfoque analítico para identificar patrones y predecir posibles desabastecimientos, aplicando un modelo predictivo supervisado basado en redes neuronales y el algoritmo Random Forest para anticipar las necesidades de inventario y mejorar los procesos de reposición de productos \citep{aguas2025}.
+
+Umair Mehmood y colaboradores implementaron diversos algoritmos de aprendizaje automático, para predecir la demanda futura a partir de datos históricos de ventas de productos en máquinas expendedoras, concluyendo que el modelo XGBoost resultó ser el modelo con mejor rendimiento, además el estudio demostró la eficacia de utilizar técnicas de aprendizaje automático y características adicionales para la predicción precisa de la demanda futura de productos, para máquinas expendedoras, permitiendo una planificación estratégica del inventario, minimizar el desperdicio de existencias, mejorar la eficiencia operativa y aumentar los ingresos para la industria de las máquinas expendedoras \citep{mehmood2023}.
+
+Como síntesis de la investigación de antecedentes realizada podemos indicar que si bien se han propuesto soluciones que utilizan inteligencia artificial para optimizar la gestión de inventarios y algunas mencionan que se puede aplicar a la optimización de rutas, la mayoría de las soluciones enfrenta estos dos aspectos de forma separada; además, las mismas dependen de sensores que mandan datos en tiempo real para predecir las necesidades de abastecimiento. En este último aspecto, es importante tomar en cuenta que Cafetalino ha explorado alternativas de solución basadas en la instalación de sensores que puedan transmitir datos en tiempo real; sin embargo, ha tropezado con limitaciones técnicas y económicas, especialmente con los insumos sólidos y líquidos, que no han permitido su implementación.
+
+\captionof{table}{Matriz comparativa de trabajos previos realizados y la propuesta.}\label{tab:matriz-comparativa-de-trabajos-previos}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1919}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2366}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2133}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1790}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1792}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Trabajo Previo / Propuesta}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{¿Qué hace?}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Fortalezas}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Debilidades}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Oportunidades de mejora}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{\citep{puma2025}} & Integra IA y redes neuronales para optimizar la cadena de suministro.
+
+Analiza grandes volúmenes de datos en tiempo real.
+
+Realiza simulaciones avanzadas. & El sistema se adapta, aprende de los errores, responde eficazmente a fluctuaciones de demanda y optimiza el flujo logístico. & Requiere análisis de datos en tiempo real, que implica dependencia de conectividad constante. & Adaptar a entornos asíncronos donde la conectividad en tiempo real no es viable. \\
+\textbf{\citep{grzybowska2020}} & Usa un modelo de optimización-simulación.
+
+Resuelve problemas estocásticos de asignación de productos y rutas de reabastecimiento. & Aborda problemas complejos, integra previsión, ML, minería de datos y optimización combinatoria & El modelo no se aplicó a logística de máquinas expendedoras. & Aplicar este modelo específicamente a las máquinas expendedoras. \\
+\textbf{Sensify \citep{hostelvending2025}} & Recopila datos en puntos de venta.
+
+Combina sensores IoT, conectividad 24/7 y software predictivo para activos refrigerados. & Predice la demanda por ubicación y momento.
+
+Ofrece alertas tempranas para evitar pérdidas de producto.
+
+Optimiza rutas de mantenimiento. & Depende de sensores físicos (IoT).
+
+Requiere conectividad ininterrumpida (24/7). & Desarrollar modelos independientes de hardware costoso y/o de conectividad física. \\
+\textbf{Azkoyen \citep{hostelvending2024}} & Incorpora IA para el aprendizaje continuo de procesos y eventos en máquinas de café.
+
+Genera modelos predictivos de mantenimiento. & Optimiza la calidad del servicio en las máquinas.
+
+Mejora la experiencia de los usuarios en su manejo cotidiano. & Enfoque centrado en el mantenimiento y eventos de la maquinaria, en lugar de la cadena de suministro. & Vincular los datos de calidad y eventos de las máquinas con un sistema logístico integral de recarga de insumos. \\
+\textbf{\citep{aguas2025}} & Aplica un modelo predictivo supervisado basado en redes neuronales y Random Forest para analizar causas de quiebres de stock. & Anticipa carencias de inventario.
+
+Identifica patrones.
+
+Mejora procesos de reposición de productos. & Enfocado sólo al análisis de stock.
+
+Aborda el inventario separado del enrutamiento de vehículos. & Integrar la predicción de quiebres de stock con la planificación y optimización de rutas. \\
+\textbf{\citep{mehmood2023}} & Implementa algoritmos de ML, destacando XGBoost para predecir la demanda futura.
+
+Usando datos históricos de ventas. & Predicciones precisas que permiten una planificación estratégica, minimizan el desperdicio y mejoran la eficiencia operativa. & Limitado a predecir la demanda de productos.
+
+No se acopla al despacho logístico. & Conectar las predicciones de demanda basadas en datos históricos con algoritmo de enrutamiento dinámico. \\
+\textbf{Sistema de reabastecimiento predictivo y enrutamiento dinámico para Cafetalino} & Desarrollar un sistema predictivo bidireccional para procesar historial de recargas (2018-2026) y predecir el desabastecimiento y planificar rutas dinámicas óptimas. & No requiere hardware o telemetría adicional.
+
+Integra predicción de la demanda y planificación de rutas en un ecosistema automatizado. & Depende sólo de datos históricos asíncronos.
+
+No usa sensores en tiempo real, debido a limitaciones previas de conectividad y costos. & Entrenamiento continuo para mejorar el rendimiento. \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia}
+
+En términos generales, el estado del arte muestra que la Inteligencia Artificial y el aprendizaje automático, mediante modelos como Redes Neuronales, Random Forest, XGBoost y algoritmos genéticos, se utilizan con éxito para predecir la demanda y optimizar la cadena de suministro en máquinas expendedoras, además expone cómo diversas investigaciones y startups comerciales han implementado sistemas que analizan patrones de consumo para anticipar el desabastecimiento de insumos, mejorar el mantenimiento de los equipos y elevar la experiencia del usuario final.
+
+Sin embargo, a pesar de su eficacia, estas soluciones presentan dos grandes debilidades: En primer lugar, suelen abordar la gestión predictiva de inventarios y la planificación de rutas de transporte como problemas totalmente aislados, en segundo lugar, la mayoría depende de la instalación de telemetría, sensores físicos (IoT) y conectividad 24/7 para enviar datos en tiempo real, dependencia que se constituye en un obstáculo para las soluciones demandadas por Cafetalino, empresa que ya exploró este tipo de soluciones sin éxito.
+
+En este contexto, la brecha identificada y que constituye la novedad del sistema propuesto radica en que la predicción de los requerimientos de la red de máquinas expendedoras se fundamenta en el procesamiento de datos históricos asíncronos, el registro de recargas de Cafetalino, sin la instalación de hardware, telemetría o sensores adicionales en los equipos de expendio de bebidas y encara de manera integral la planificación dinámica de rutas de reabastecimiento, eliminando la incertidumbre operativa, los problemas de conectividad y reduciendo los gastos logísticos innecesarios.
+
+\subsection{Idear}\label{idear}
+
+La finalidad de esta fase es generar varias opciones de solución al problema. Para ello el equipo de trabajo ha presentado las siguientes ideas de solución al problema planteado:
+
+El equipo de trabajo ha presentado las siguientes ideas de solución al problema planteado:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  \textbf{Asistente IA para Resolución Inmediata:} Integra un código QR en la máquina que conecta al usuario con un asistente de IA virtual capaz de gestionar reportes, pedir disculpas y emitir micro-reembolsos al instante.
+\item
+  \textbf{Visión Artificial de Bajo Costo:} Desarrollar una aplicación que mediante cámaras económicas dentro de los equipos tome imágenes de los contenedores, las cuales analice con algoritmos de inteligencia artificial y calcule el nivel de insumos sin necesidad de sensores complejos.
+\item
+  \textbf{Sistema de reabastecimiento predictivo y enrutamiento dinámico:} Entrenar un algoritmo utilizando los datos de ventas disponibles desde el 2018 a la fecha, para predecir los requerimientos de insumos de las máquinas dispensadoras de la empresa y sobre esta base planificar dinámicamente las rutas de reabastecimiento.
+\item
+  \textbf{Mantenimiento Predictivo por Patrones de Venta:} Desarrollar una App para monitorear el ritmo de las transacciones en tiempo real, detectar anomalías y alertar sobre posibles fallos mecánicos.
+\end{enumerate}
+
+La siguiente tabla muestra un análisis comparativo de las ideas generadas, incluyendo sus ventajas y desventajas para realizar una pre-selección de las ideas más prometedoras.
+
+\captionof{table}{Análisis Comparativo de las Ideas Generadas}\label{tab:analisis-comparativo-de-las-ideas}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2361}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2737}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2673}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2228}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Idea}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Ventajas}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Desventajas}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Evaluación}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\begin{minipage}[t]{\linewidth}\raggedright
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  \textbf{Asistente IA para Resolución Inmediata}
+\end{enumerate}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Mitiga sentimientos negativos del cliente.
+\item
+  Previene daños a las máquinas.
+\item
+  Automatiza reembolso a través de QR.
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Solución reactiva.
+\item
+  Trata el síntoma, pero no la causa.
+\item
+  Requiere desarrollo de pasarelas de pago.
+\end{itemize}
+\end{minipage} & Atiende el pilar de la experiencia de cliente y mitigación de daños a la marca, pero se aleja del alcance logístico principal.
+
+\textbf{3/10} \\
+\begin{minipage}[t]{\linewidth}\raggedright
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{1}
+\item
+  \textbf{Visión Artificial de Bajo Costo}
+\end{enumerate}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Supera limitaciones de medir insumos sólidos y líquidos con sensores convencionales.
+\item
+  Ofrece datos precisos sobre el estado físico del inventario.
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Requiere instalar hardware adicional (cámaras).
+\item
+  Depende de conectividad constante.
+\end{itemize}
+\end{minipage} & Costos elevados y riesgos de conexión.
+
+\textbf{5.5/10} \\
+\begin{minipage}[t]{\linewidth}\raggedright
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{2}
+\item
+  \textbf{Sistema de reabastecimiento predictivo y enrutamiento dinámico}
+\end{enumerate}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Aprovecha el registro histórico de datos.
+\item
+  No requiere instalar hardware adicional.
+\item
+  Supera problemas de conectividad.
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Depende de la calidad y limpieza de los datos históricos.
+\item
+  No reacciona en tiempo real ante eventos anómalos repentinos
+\end{itemize}
+\end{minipage} & La solución más factible, aprovecha un activo existente y elimina barreras tecnológicas que hicieron fracasar intentos previos.
+
+\textbf{8/10} \\
+\begin{minipage}[t]{\linewidth}\raggedright
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\setcounter{enumi}{3}
+\item
+  \textbf{Mantenimiento Predictivo por Patrones}
+\end{enumerate}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Predice un posible servicio defectuoso.
+\item
+  Evita mala experiencia del cliente
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Requiere transmitir transacciones en tiempo real.
+\item
+  Requiere instalar hardware adicional.
+\item
+  Choca con la conectividad deficiente.
+\end{itemize}
+\end{minipage} & Depende de telemetría instantánea y es inviable en el diseño actual que dispone de datos históricos asíncronos.
+
+\textbf{2/10} \\
+\end{longtable}
+
+\fuente{Fuente: Elaboración propia}
+
+La tabla muestra que las ideas más prometedoras son la segunda y la tercera, la primera y la cuarta no atacan el problema principal, lo que lleva a descartarlas.
+
+\subsection{Prototipado}\label{prototipado}
+
+En esta fase se deben construir representaciones de las ideas más prometedoras para visualizarlas y entender su funcionamiento, para así evaluar cómo resuelven el problema. Por tanto, se presentan los prototipos de la segunda idea y la tercera, que de acuerdo a la comparación realizada resultaron ser las más prometedoras.
+
+\subsubsection{Prototipo de la Segunda Idea: Visión Artificial de Bajo Costo}\label{prototipo-de-la-segunda-idea-visiuxf3n-artificial-de-bajo-costo}
+
+La siguiente figura muestra la estructura de funcionamiento de la aplicación Visión Artificial de Bajo Costo, para la detección de los niveles de insumos en los depósitos de las máquinas dispensadoras de Cafetalino, donde se puede ver que la aplicación se ejecutará en tres capas.
+
+La primera en cada máquina expendedora, donde una cámara toma una imagen de los contenedores de insumos del equipo, un microcontrolador gestiona el envío de la imagen, de forma asíncrona, que se transmite a través de un módulo de comunicación usando la Red Celular o WiFi
+
+La segunda capa se ejecuta en un servidor, en la nube, donde se recibe la información y se ejecuta la inteligencia artificial, esta capa recibe la imagen enviada desde la máquina expendedora y realiza dos acciones simultaneas: Por un lado, almacena la imagen original en un repositorio de almacenamiento de Imágenes para mantener un historial visual, y por otro activa un disparador (Trigger) de análisis que envía la imagen al motor de inteligencia artificial, donde la imagen se alimenta al Servicio de Inferencia, que realiza una segmentación y estimación del nivel físico de los insumos, el modelo evalúa la imagen procesada y devuelve como resultado el \% de volumen restante en el contenedor, que guarda y actualiza automáticamente en la Base de Datos de Inventario.
+
+La tercera capa es la interfaz con el usuario final, que toma los datos actualizados de la Base de Datos de Inventario y alimenta dos herramientas: Un panel de monitoreo o control visual (Dashboard) donde el personal puede ver el estado general y los niveles de insumos de las máquinas en tiempo real y un sistema de alertas y enrutamiento, un módulo logístico que, al detectar que el \% de volumen de una máquina baja de un umbral crítico, emite notificaciones y ayuda a programar el reabastecimiento únicamente de los equipos que lo necesitan.
+
+\begin{figure}[p]
+\centering
+\caption{Estructura de la Aplicación Visión Artificial de Bajo Costo}\label{fig:estructura-de-la-aplicacion-vision}
+\includegraphics[height=0.82\textheight,keepaspectratio]{image2.png}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+\subsubsection{Prototipo de la Tercera Idea: Sistema de reabastecimiento predictivo y enrutamiento dinámico}\label{prototipo-de-la-tercera-idea-sistema-de-reabastecimiento-predictivo-y-enrutamiento-dinuxe1mico}
+
+A continuación, se presenta la estructura del Sistema de reabastecimiento predictivo y enrutamiento dinámico, que muestra que el sistema se ejecutara en cuatro capas consecutivas.
+
+\begin{figure}[p]
+\centering
+\caption{Estructura del Sistema de Reabastecimiento Predictivo y Enrutamiento Dinámico}\label{fig:estructura-del-sistema-de-reabastecimiento}
+\includegraphics[height=0.82\textheight,keepaspectratio]{image3.png}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+La primera capa, que corresponde a las fuentes de datos, almacena la información base sin procesar, que se alimenta de dos orígenes de información: El historial de Ventas, una base de datos que contiene los registros históricos de las operaciones de la empresa desde el año 2018 hasta el presente, y el Stock Actual, un repositorio con el estado del inventario de los insumos en las máquinas dispensadoras.
+
+La segunda capa de análisis, en la cual los datos en crudo se transforman en proyecciones futuras, el sistema extrae, transforma y carga la información de las fuentes de datos, luego los datos ingresados se filtran y estructuran para eliminar inconsistencias o errores, asegurando que sean útiles para el análisis (limpieza y preparación), posteriormente el modelo de predicción de la demanda, recibe estos datos preparados, el algoritmo matemático evalúa la información, predice qué insumos se consumirán y cuándo, además de generar como resultado final la demanda proyectada.
+
+La tercera capa de logística, utiliza las predicciones abstractas de la demanda proyectada se individualiza, calcula el nivel de inventario esperado para cada equipo específico en la red, el sistema descarta los equipos que aún tienen un nivel adecuado de insumos y selecciona únicamente aquellos que requieren reabastecimiento, generando los nodos o destinos requeridos, las paradas estrictamente necesarias, que un algoritmo de optimización de rutas, los cruza con información externa proveniente de APIs de Mapas y Tráfico y calcula el camino más corto y eficiente, emitiendo como salida las rutas sugeridas e informes de los requerimientos de reabastecimiento de cada máquina.
+
+La cuarta capa es la interfaz de usuario, que toma los resultados de la capa anterior y los presenta a través de una aplicación web diseñada específicamente para este cometido, facilitando la ejecución del trabajo logístico sin requerir conocimientos técnicos sobre la inteligencia artificial que opera por detrás.
+
+\subsection{Selección del Prototipo}\label{selecciuxf3n-del-prototipo}
+
+La finalidad de esta fase es escoger la versión de prototipo que se desarrollará y validará, en función a su viabilidad técnica y a la respuesta que da al problema.
+
+Sobre la base de la Tabla 2 que compara las ideas generadas y el análisis de los prototipos de las ideas más prometedoras, la solución más recomendable para desarrollar y validar es el Sistema de reabastecimiento predictivo y enrutamiento dinámico. Adicionalmente, se realizó el siguiente análisis:
+
+\begin{itemize}
+\item
+  La segunda idea es críticamente dependiente de la instalación de hardware adicional: la cámara, el microcontrolador y el transmisor, por lo que se requiere conectividad, la misma que anteriores proyectos fue una limitante.
+\item
+  Los contenedores de insumos no siempre son transparentes, en general son opacos por lo que las imágenes de la cámara no serían de mucha utilidad, ya que en muchos casos no mostrarían el nivel de insumos en los contenedores.
+\end{itemize}

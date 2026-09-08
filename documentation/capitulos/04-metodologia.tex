@@ -1,0 +1,545 @@
+\section{Metodología}\label{metodologuxeda}
+
+El desarrollo del proyecto se gestionará utilizando las metodologías Scrum y LEAN. Scrum, que de hecho está basado en la filosofía LEAN, permitirá organizar y dar seguimiento a las actividades necesarias para construir el producto mínimo viable, además de permitir la mejora continua tanto del proceso de desarrollo como del equipo de trabajo, mientras que LEAN proporcionará un marco de validación orientado a verificar que la solución propuesta genera valor para la organización. La aplicación conjunta de ambas metodologías permitirá gestionar el desarrollo de manera iterativa, medir resultados mediante indicadores cuantificables y reducir el riesgo asociado a la implementación de la propuesta de innovación.
+
+\subsection{Roles, Artefactos y Eventos}\label{roles-artefactos-y-eventos}
+
+Scrum, establece que se debe definir el rol que tendrá cada miembro del equipo, los artefactos y herramientas que se utilizaran y los eventos que permitirán revisar y hacer los cambios que sean necesarios para garantizar la calidad del producto. Estos elementos, en el marco del proyecto, se describen a continuación.
+
+\subsubsection{Roles}\label{roles}
+
+En la metodología Scrum se definen tres roles \citep{schwaber2020}: El propietario del producto (Product Owner) o su representante, que es el responsable de la toma de decisiones que permitirán lograr el máximo valor para el producto; el Scrum Master, un líder y servidor encargado de dirigir las reuniones del equipo y ayudar a sus miembros a mejorar su flujo de trabajo y su organización interna; y finalmente el equipo de desarrollo, que es el responsable, en cada iteración, de implementar incrementos, que implementan de forma progresiva y continua algunas funcionalidades, hasta completar el producto final. En este marco y tomando en cuenta que el equipo de trabajo es pequeño, está formado por cuatro integrantes, se ha definido los siguientes roles:
+
+\begin{itemize}
+\item
+  \textbf{Product Owner}: Francisco Camacho, considerando que la propuesta beneficiará a una empresa de Bolivia y es el miembro del equipo que está más cerca y está en contacto directo y permanente con la empresa, su gerente y sus operadores.
+\item
+  \textbf{Scrum Master}: Mario Diaz, elegido por el equipo por sus habilidades de gestión y dirección.
+\item
+  \textbf{Equipo de Desarrollo}: Los cuatro miembros el equipo: Francisco Camacho, Mario Diaz, Angel Hernández y Guillermo Sais de la Torre. En el caso de Francisco y Mario, que cumplirán un doble rol, dedicarán el 75 \% de su tiempo a las tareas de desarrollo y 25 \% de su tiempo a las tareas de gestión en el rol asignado.
+\end{itemize}
+
+La siguiente tabla resume los roles y responsabilidades del equipo de trabajo:
+
+\captionof{table}{Roles del equipo del trabajo en el proceso de desarrollo}\label{tab:roles-del-equipo-del-trabajo}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3268}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2483}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4248}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Integrante}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Rol}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Responsabilidades}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Francisco J. Camacho Dorado & Product Owner.
+
+Equipo de Desarrollo. & Definir prioridades.
+
+Validar entregables.
+
+Asegurar el alineamiento con las necesidades de Cafetalino.
+
+Desarrollo de modelos analíticos.
+
+Documentación técnica. \\
+Mario Alberto Díaz Zetina & Scrum Master.
+
+Equipo de Desarrollo. & Coordinar las actividades del equipo.
+
+Facilitar reuniones.
+
+Gestionar impedimentos.
+
+Investigación.
+
+Análisis de datos.
+
+Validación de resultados. \\
+Ángel Zait Hernández López & Equipo de Desarrollo. & Desarrollo de modelos analíticos.
+
+Documentación técnica. \\
+Guillermo Sais de la Torre & Equipo de Desarrollo. & Investigación.
+
+Análisis de datos.
+
+Validación de resultados. \\
+\end{longtable}
+
+\fuente{Fuente: Elaboración propia}
+
+\subsubsection{Artefactos}\label{artefactos}
+
+Scrum especifica tres artefactos principales \citep{schwaber2020}: La lista de tareas pendientes (Product Backlog), el registro de tareas que harán en una iteración (Sprint Backlog) y el incremento, una versión previa del producto final, que funciona, el resultado parcial esperado al final de una iteración. Estos artefactos se describen, a continuación, en el marco del proyecto.
+
+\textbf{Lista de tareas pendientes del proyecto (Product Backlog)}
+
+Es una lista ordenada de todo lo que se requiere para desarrollar el producto, expresada como una lista de historias de usuario que se pueden implementar en una iteración, luego de refinarlas y definirlas a través de elementos más pequeños y precisos, describirlas, asignarles un orden de prioridad y estimar su tamaño o nivel de complejidad \citep{schwaber2020}.
+
+La lista de tareas pendientes del proyecto se gestionará a través de Jira y se presenta a detallade, en el apartado 4.2, donde se expondrán las historias de usuario necesarias para desarrollar el sistema de reabastecimiento predictivo y enrutamiento dinámico propuesto para Cafetalino, cuyos componentes son: Realizar un análisis exploratorio de los datos disponibles, desarrollar un modelo predictivo de reabastecimiento, desarrollar un modelo de enrutamiento dinámico, y desarrollar una interfaz de usuario para interactuar con estos modelos.
+
+A continuación, en la figura se muestra la Lista de tareas pendientes del proyecto (Product Backlog) en Jira, donde se ven algunas de las historias de usuario consideradas.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Lista de tareas pendientes del proyecto (Product Backlog)}\label{fig:lista-de-tareas-pendientes-del}
+\includegraphics[width=0.94\textwidth]{image4.jpeg}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+\textbf{Sprint Backlog}
+
+Es el plan de trabajo de una iteración o Sprint, realizado por los desarrolladores para guiar su trabajo, define qué, para qué y cómo hacer, especifica el objetivo de la iteración, un subconjunto de historias de usuario de la lista de tareas pendientes del producto, seleccionadas para desarrollarlas en la iteración; y el plan de acción que permitirá completar el incremento \citep{schwaber2020}.
+
+El registro de tareas (Sprint Backlog) de cada iteración se extraerá de la lista de tareas del Proyecto presentada en el apartado 4.2 y se manejará a través de Jira, que permitirá garantizar que cada historia de usuario se ha refinado, se le asignó un orden de prioridad, se estimó su nivel de complejidad y fundamentalmente que se cumplieron las definiciones de Listo del apartado 4.3. En cada iteración se proyectó desarrollar uno de los componentes del sistema.
+
+\begin{itemize}
+\item
+  Realizar un análisis exploratorio de datos del historial de recarga de insumos de la red de máquinas dispensadoras de Cafetalino.
+\item
+  Desarrollar un modelo predictivo de reabastecimiento predictivo, utilizando datos históricos, sin la instalación de hardware adicional.
+\item
+  Estructurar un modelo enrutamiento dinámico sobre la base de la predicción de la demanda de reposición de insumos de cada equipo.
+\item
+  Desarrollar una interfaz web para interactuar con los modelos desarrollados.
+\end{itemize}
+
+La siguiente figura muestra una iteración en ejecución, donde se puede observar las historias de usuario incluidas en ella, clasificadas según si estado, pendiente, en ejecución, en revisión y terminadas.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Registro de tareas de una iteración en ejecución}\label{fig:registro-de-tareas-de-una}
+\includegraphics[width=0.95\textwidth]{image5.jpeg}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+\textbf{Incremento}
+
+Es una versión previa del producto final, que funciona y tiene algunas de las funcionalidades y características del producto final. En cada iteración se puede plantear uno o varios incrementos, cada Incremento es aditivo a los anteriores y se debe verificar a fondo, para garantizar que todos los Incrementos funcionen juntos \citep{schwaber2020}.
+
+En el sistema de reabastecimiento predictivo y enrutamiento dinámico propuesto, cada uno de sus componentes será un incremento, que deberá funcionar según las definiciones de completado definidas en el apartado 4.3 y será integrado a incrementos previamente desarrollados y verificados, además de ser integrado y probado para funcionar en conjunto con ellos.
+
+\subsubsection{Eventos}\label{eventos}
+
+Scrum en su metodología contempla cinco eventos \citep{schwaber2020}: La Iteración o Sprint que hace de contenedor para los otros cuatro eventos, la reunión de planificación de la iteración (Sprint Planning), la reunión diaria de Scrum (Daily Scrum), la reunión de revisión de la iteración (Sprint Review) y la reunión de retrospectiva de la iteración (Sprint Retrospective).
+
+En el marco del sistema propuesto se has definido realizar reuniones a través de la plataforma Google Meet, en horario nocturno para no interrumpir el trabajo cotidiano de los miembros del equipo, y utilizar WhatsApp para una comunicación permanente, de coordinación y colaboración. A continuación, se describen estos eventos en el marco del sistema propuesto.
+
+\textbf{Iteración o Sprint}
+
+Es un evento de corta duración, un mes o menos, en el cual el equipo desarrolla un subconjunto de historias de usuario de la lista de tareas pendientes del proyecto. Las iteraciones se desarrollan una después de otra, hasta lograr el producto deseado, permiten dividir un proyecto grande en partes pequeñas, más manejables, que se pueden implementar, probar y modificar rápidamente. En una iteración no se debe hacer cambios que pongan en riesgo el objetivo o disminuyan la calidad, el producto se refina según sea necesario y el alcance se puede aclarar y/o renegociar el con Propietario del Producto (Product Owner) conforme se aprende más sobre él \citep{schwaber2020}.
+
+Para desarrollar le sistema de reabastecimiento predictivo y enrutamiento dinámico, se ha establecido que cada iteración tenga una duración de dos semanas, y se han proyectado cuatro iteraciones que se desarrollaron en 8 semanas efectivas de trabajo, entre agosto y septiembre de 2026.
+
+La siguiente figura muestra una captura de pantalla de Jira con las iteraciones del proyecto.
+
+\begin{figure}[!htbp]
+\centering
+\caption{Iteraciones del Proyecto}\label{fig:iteraciones-del-proyecto}
+\includegraphics[width=0.62\textwidth]{image6.jpeg}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+\textbf{Planificación de la Iteración (Sprint Planning)}
+
+Antes de cada iteración, el equipo trabaja un plan que ejecutaran en ella. El Propietario del Producto (Product Owner) comunica qué considera útil para el producto y el equipo, para que los desarrolladores, tomando en cuenta esto, definan que historias de usuario de la lista de tareas pendientes del proyecto desarrollarán en la iteración. Cada historia de usuario se refina para una mejor comprensión y los desarrolladores programan el trabajo requerido que el incremento cumpla la definición de completado, subdividen cada una en piezas más pequeñas que puedan implementarse, como máximo, en un día \citep{schwaber2020}.
+
+Para desarrollar el proyecto se ha establecido reuniones de planificación al inicio de cada iteración, las mismas que serán dirigidas por Mario Diaz (Scrum Master), los lunes de 19:00 a 20:00, a fin de planificar su trabajo y definir su objetivo, atendiendo los lineamientos de Francisco Camacho (Product Owner).
+
+\textbf{Reunión Diaria de Scrum (Daily Scrum)}
+
+Es una reunión corta, a lo sumo de 15 minutos, para revisar el trabajo realizado, identificar dificultades y cuellos de botella, resolver estas dificultades y atascos en el trabajo, tomar decisiones rápidamente y ajustar el plan de trabajo de la iteración, cuando fuese necesario, y proyectar el trabajo del día \citep{schwaber2020}.
+
+Para el desarrollo de este proyecto se ha programado dos reuniones semanales para programar el trabajo y revisar los avances, las mismas se realizarán los lunes y jueves de 18:30 a 18:45 y serán dirigidas por Mario Diaz (Scrum Master). Los lunes que coincidan con el inicio de una iteración llevaran a cabo a cabo de 20:00 a 20:15, luego de la reunión de planificación.
+
+\textbf{Revisión de la Iteración (Sprint Review)}
+
+Esta reunión tiene la finalidad de revisar el resultado de la iteración, en ella se analiza si existen cambios en el entorno, se define si los ajustes requeridos para alcanzar el producto final, incluyendo cambios en la lista de tareas pendientes del producto para su ajuste a nuevas oportunidades y/o los cambios detectados en el entorno \citep{schwaber2020}.
+
+En el marco del proyecto se ha decidido revisar los resultados de la iteración y definir los ajustes necesarios para alcanzar el objetivo final, al final de cada iteración los sabados de 18:30 a 19:00, siempre bajo la dirección de Mario Diaz (Scrum Master) y atendiendo a los lineamientos de Francisco Camacho (Product Owner).
+
+\textbf{Retrospectiva de la Iteración (Sprint Retrospective)}
+
+El objetivo de esta reunión es analizar el trabajo del equipo, qué hizo bien, qué problemas se presentaron, especialmente en el trabajo colaborativo y coordinado, analizar las soluciones adoptadas a estos e identificar qué cambios realizar para mejorar el rendimiento y eficacia del equipo \citep{schwaber2020}.
+
+En este proyecto se definió realizar esta reunión antes de la reunión de planificación de la siguiente iteración, en ese sentido se realizará al final de una iteración los lunes de 18:30 a 19:00 para analizar el desempeño del equipo en la iteración que termina y considerar los ajustes que requeridos a fin de mejorar el desempeño del equipo, siempre dirigidos por Mario Diaz (Scrum Master).
+
+Un resumen de estos eventos se presenta en la siguiente tabla:
+
+\captionof{table}{Eventos de Scrum para el Proyecto}\label{tab:eventos-de-scrum-para-el}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1720}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2420}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1401}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.4459}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Evento}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Frecuencia / Agenda}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Duración estimada}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Objetivo}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Sprint Planning} & Inicio de cada sprint.
+
+Lunes 19:00 - 20:00 & 60 min & Definir las historias de usuario a desarrollar en el sprint, revisar prioridades, estimar esfuerzo y asignar responsabilidades. \\
+\textbf{Daily Scrum} & Dos veces / semana.
+
+Lunes y jueves
+
+18:30 - 18:45 & 15 min & Revisar el avance, dificultades y coordinar el trabajo del equipo. \\
+\textbf{Sprint Review} & Final de cada sprint.
+
+Sabado 18:00 - 18:30 & 30 min & Presentar los resultados, verificar el cumplimiento de las historias de usuario comprometidas, verificar indicadores de éxito del proyecto y validar el alineamiento con los objetivos del proyecto. \\
+\textbf{Sprint Retrospective} & Final de cada sprint.
+
+Lunes 18:30 - 19:00 & 30 min & Identificar oportunidades de mejora y definir acciones correctivas para el desempeño del equipo. \\
+\end{longtable}
+
+\fuente{Fuente: Elaboración propia}
+
+\subsection{Backlog inicial y estimación del nivel de dificultad}\label{backlog-inicial-y-estimaciuxf3n-del-nivel-de-dificultad}
+
+La lista de tareas pendientes del proyecto (Product Backlog) inicial puede observarse en la siguiente tabla, donde se presentan las historias de usuario, sus criterios de aceptación, su prioridad y su estimación del nivel de complejidad, asignandoles puntos de historia (Story Points - SP) utilizando la serie de Fibonacci y en función a la dificultad, incertidumbre y esfuerzo técnico de cada tarea, en consenso con todo el equipo de trabajo.
+
+\captionof{table}{Backlog inicial, prioridad y nivel de dificultad estimado de historias de usuario}\label{tab:backlog-inicial-prioridad-y-nivel}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0571}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3175}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1300}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1300}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{N.º}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Épica / Historia de usuario}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Criterios de Aceptación}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Prioridad}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Nivel de dificultad (SP)}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \textbf{Origen de datos de consumo} & & & \\
+\textbf{1} & Como analista de operaciones, quiero que los registros históricos de recargas, en hoja de cálculo, se carguen en una base de datos estructurada, para que los datos de consumo se puedan consultar y modelar de manera confiable en lugar de procesar un CSV cada vez. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  La BD estructurada almacena los registros históricos correctamente.
+\end{itemize}
+
+\begin{itemize}
+\item
+  Consultas optimizadas sin depender de la lectura de un CSV plano.
+\end{itemize}
+\end{minipage} & \textbf{1} & \textbf{5} \\
+\textbf{2} & Como ingeniero de datos, quiero que la capacidad de los depósitos de mezcla y de agua de cada máquina se almacene junto a su ubicación, para que las predicciones puedan reportar el stock restante como un porcentaje de lo que realmente puede contener cada máquina específica. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  El esquema de BD incluye los campos mix\_capacity y water\_capacity vinculados a la ubicación de cada máquina.
+\item
+  Permite cálcular la capacidad máxima por máquina.
+\end{itemize}
+\end{minipage} & \textbf{1} & \textbf{3} \\
+\textbf{3} & Como analista, quiero scripts exploratorios sobre los datos de consumo, para verificar las lecturas antes de su uso para entrenar un modelo. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Scripts ejecutables para análisis exploratorio de datos (EDA).
+\item
+  Verificación de lecturas y limpieza de anomalías previa al entrenamiento.
+\end{itemize}
+\end{minipage} & \textbf{2} & \textbf{3} \\
+\textbf{4} & Como mantenedor, quiero que el script cargador de datos tolere un CSV actualizado, con nuevas filas y nombres de máquinas corregidos, sin trabajo manual, para que la actualización del conjunto de datos no requiera reescribir el origen de datos. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  El script cargador procesa nuevos CSVs sin requerir reescritura de código.
+\item
+  El script soporta corrección automática de nombres de máquinas e inserción de nuevas filas.
+\end{itemize}
+\end{minipage} & \textbf{2} & \textbf{5} \\
+& \textbf{Modelo de predicción de consumo} & & & \\
+\textbf{5} & Como gerente de operaciones, quiero un modelo que prediga cuánto de agua embotellada, vasos, mezcla de café, mezcla de chocolate y mezcla de capuchino necesitará una máquina en su próxima visita, para saber qué reabastecer antes de que el técnico viaje. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Modelo entrenado para predecir la demanda de los 5 insumos clave.
+\item
+  Entrega las estimaciones para la siguiente visita de recarga.
+\end{itemize}
+\end{minipage} & \textbf{3} & \textbf{8} \\
+\textbf{6} & Como científico de datos, quiero que el modelo use el historial de recargas propio de cada máquina: promedios históricos y tasas de consumo diario, para que las predicciones reflejen el patrón de uso real de esa máquina en lugar de un promedio general de la red. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Incorpora variables de promedios históricos y tasa diaria individual por máquina.
+\item
+  Realiza una predicción personalizada basada en el uso histórico específico.
+\end{itemize}
+\end{minipage} & \textbf{3} & \textbf{5} \\
+\textbf{7} & Como científico de datos, quiero que la evaluación del modelo se realice a través de validación cruzada en lugar de una sola división de entrenamiento/prueba, para que las mejoras reportadas sean reales y no producto de una división afortunada. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Validación cruzada (Cross-Validation) implementada en el flujo de evaluación.
+\item
+  Métricas consolidadas sobre múltiples iteraciones.
+\end{itemize}
+\end{minipage} & \textbf{3} & \textbf{3} \\
+\textbf{8} & Como gerente de operaciones, quiero predicciones para \emph{todas} las máquinas a la vez, no de una en una, para poder comparar qué máquinas son más urgentes en una sola vista. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Módulo que genera y retorna la predicción masiva de toda la red de máquinas en una sola llamada.
+\end{itemize}
+\end{minipage} & \textbf{4} & \textbf{5} \\
+& \textbf{Interfaz de usuario} & & & \\
+\textbf{9} & Como usuario boliviano, quiero que las etiquetas de la aplicación: nombres de máquinas, categorías de stock, unidades, entre otros, se muestren en español, para que la herramienta coincida con el idioma con el que trabaja el equipo. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Código backend y UI con soporte para etiquetas español.
+\end{itemize}
+\end{minipage} & \textbf{1} & \textbf{2} \\
+\textbf{10} & Como usuario de la interfaz, quiero elegir una fecha objetivo y obtener las predicciones de consumo para esa fecha y así poder planificar una ruta para un día específico en lugar de solo "hoy". & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Componente de selección de fecha en la UI conectado al parámetro de fecha de la API.
+\item
+  Respuestas adaptadas a fechas futuras solicitadas.
+\end{itemize}
+\end{minipage} & \textbf{4} & \textbf{5} \\
+\textbf{11} & Como operador de recarga, quiero que el stock predicho de cada máquina se muestre como cantidad \emph{restante} y porcentaje, no como consumo predicho bruto, para poder ver de un vistazo qué tan cerca está una máquina de quedarse sin insumos. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  API y UI calculan y presentan la cantidad absoluta restante y el \% de stock disponible por máquina.
+\end{itemize}
+\end{minipage} & \textbf{4} & \textbf{3} \\
+\textbf{12} & Como operador de recarga, quiero un rango de predicción (bajo/alto), no solo un número único, para entender la incertidumbre del modelo y no confiar ciegamente en una estimación puntual. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  El algoritmo entrega rangos o intervalos de confianza (estimación baja/alta).
+\item
+  Despliegue visual del rango de incertidumbre en la pantalla.
+\end{itemize}
+\end{minipage} & \textbf{4} & \textbf{5} \\
+\textbf{13} & Como miembro del personal de operaciones, quiero ver cuántos días han pasado desde la última recarga de la máquina junto a su predicción, para poder juzgar si la predicción se basa en datos recientes o desactualizados. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Despliegue visible de los días transcurridos desde el último reabastecimiento.
+\item
+  Indicador de frescura de los datos.
+\end{itemize}
+\end{minipage} & \textbf{4} & \textbf{2} \\
+\textbf{14} & Como miembro del personal de operaciones, quiero mover una máquina entre una lista de "disponibles" y una lista de "por recargar" arrastrando su tarjeta, para que la creación de la lista de recarga de hoy sea inmediata en lugar de llenar un formulario. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Funcionalidad Drag-and-Drop entre la lista de máquinas disponibles y pendientes de recarga.
+\item
+  Actualización en tiempo real del estado de la tarjeta.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{5} \\
+& \textbf{Modelo de enrutamiento dinámico} & & & \\
+\textbf{15} & Como usuario de la interfaz, quiero que las máquinas que he marcado para recargar se envíen directamente al modelo de enrutamiento dinámico, para pasar de "qué máquinas necesitan stock" a "en qué orden las visito" sin tener que volver a ingresar datos. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Conexión directa del estado de las máquinas "Por recargar" con el módulo de planificación sin reingreso manual de datos.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{3} \\
+\textbf{16} & Como operador de recarga, quiero que la aplicación calcule la ruta más corta entre las máquinas que he seleccionado para recargar, para no tener que ordenar las paradas manualmente. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Algoritmo de optimización de rutas ejecutado sobre el grupo de máquinas seleccionadas.
+\item
+  Genera automáticamente la secuencia de paradas con menor recorrido.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{8} \\
+\textbf{17} & Como técnico de ruta, quiero que el tiempo estimado de la ruta incluya el tiempo de servicio en cada parada, no solo el tiempo de recorrido, para que la hora estimada de llegada (ETA) sea realista. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Suma una estimación de tiempo de atención/servicio técnico por máquina al cálculo del tiempo total y ETA.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{3} \\
+\textbf{18} & Como técnico de ruta, quiero que mi ubicación actual se trate como el punto de inicio de la ruta en lugar de una parada que necesita servicio, para que el plan no me pida "recargar" mi propia posición inicial. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Detección de ubicación GPS actual como punto de partida u origen.
+\item
+  El origen no computa como parada de servicio ni pide recarga.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{3} \\
+& \textbf{Documentación} & & & \\
+\textbf{19} & Como científico de datos, quiero que la elección de características: día de la semana, mes, tendencia, promedios móviles, sean evaluadas y los resultados negativos documentados, no solo los que funcionaron, para que cambios futuros en el modelo no vuelvan a probar enfoques que ya demostraron no ser útiles. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Documentación detallada de experimentos de ablación de variables y resultados descartados.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{3} \\
+\textbf{20} & Como nuevo colaborador, quiero Manuales de Usuario precisos para el backend/frontend y un proceso de modelado documentado, incluidos los intentos fallidos, para poder poner en marcha el proyecto y entender por qué el modelo está construido de esa forma. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Documentación detallada en Manuales de Usuario de backend y frontend con instrucciones de instalación y decisiones técnicas.
+\end{itemize}
+\end{minipage} & \textbf{6} & \textbf{2} \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia}
+
+\subsection{Definiciones de Listo/Completado (Ready/Done)}\label{definiciones-de-listocompletado-readydone}
+
+En la metodológia Scrum, se debe declarar explícitamente: la Definición de Listo (Definition of Ready - DoR) y la Definición de Completado (Definition of Done - DoD), criterios que establecen cuando desarrollar una historia de usuario y cuando está terminada; y son fundamentales para garantizar la calidad del software y minimizar las historias de usuario incompletas o mal implementadas, que llevan a repetirlas y a un trabajo ineficaz \citep{schwaber2020,plaskonka2023}. En este acápite se formalizan las definiciones de Listo y Completado (Definition of Done - DoD), que se utilizaran en el proyecto.
+
+\subsubsection{Definición de Listo (Definition of Ready - DoR)}\label{definiciuxf3n-de-listo-definition-of-ready---dor}
+
+Es el conjunto de requisitos que una historia de usuario, de la lista de tareas pendientes del proyecto (Product Backlog), debe cumplir para ser incluida en el Sprint Backlog \citep{plaskonka2023}. En el contexto del presente proyecto, una historia de usuario será considerada lista para ser incorporada a una iteración cuando cumpla las siguientes condiciones:
+
+\captionof{table}{Definición de Listo (DoR) para el proyecto}\label{tab:definicion-de-listo-dor-para}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3141}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6859}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Criterio}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Descripción}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Objetivo claramente definido} & La funcionalidad o entregable requerido se encuentra descrito y comprendido por el equipo. \\
+\textbf{Criterios de aceptación establecidos} & Existen condiciones verificables que permitan determinar el éxito de la historia de usuario. \\
+\textbf{Fuente de información identificada} & Los datos, documentos o recursos necesarios se encuentran disponibles. \\
+\textbf{Dependencias identificadas} & Se conocen las actividades o entregables previos necesarios para iniciar el trabajo. \\
+\textbf{Esfuerzo estimado} & La historia cuenta con una estimación acordada por el equipo. \\
+\textbf{Valor para el proyecto} & La actividad contribuye directamente al cumplimiento de los objetivos del MVP. \\
+\end{longtable}
+
+\fuente{Fuente: Elaboración propia}
+
+\subsubsection{Definición de Completado (Definition of Done - DoD)}\label{definiciuxf3n-de-completado-definition-of-done---dod}
+
+Es la descripción formal de cuando se considera que un Incremento cumple los criterios de calidad requeridos para el producto, el conjunto de pruebas que, una historia de usuario o incremento de software, debe pasar obligatoriamente para ser declarado como terminado y listo para su entrega o integración \citep{schwaber2020}. En el contexto de este proyecto, una historia de usuario se considera terminada si cumple las siguientes condiciones:
+
+\captionof{table}{Definición de Completado (DoD) para el proyecto}\label{tab:definicion-de-completado-dod-para}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2903}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7097}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Criterio}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Descripción}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Desarrollo completado} & La funcionalidad o actividad comprometida ha sido implementada.
+
+Una historia relacionada al modelo predictivo implica que el modelo ha sido entrenado, evaluado mediante las métricas definidas en el proyecto, documentado y validado por el equipo.
+
+Una historia asociada a la optimización de rutas deberá generar recorridos válidos y sus resultados deberán ser consistentes con los criterios de éxito establecidos en la fase de Definir. \\
+\textbf{Validación realizada} & Se verificó que los resultados cumplen los criterios de aceptación definidos. \\
+\textbf{Documentación actualizada} & Los cambios realizados se encuentran documentados dentro del proyecto. \\
+\textbf{Evidencia disponible} & Existen pruebas, capturas, resultados o entregables que demuestran la ejecución de la actividad. \\
+\textbf{Revisión del Product Owner} & El Product Owner valida que el resultado satisface la necesidad planteada. \\
+\textbf{Integración exitosa} & El entregable puede utilizarse dentro de la solución sin generar conflictos con otros componentes. \\
+\end{longtable}
+
+\fuente{Fuente: Elaboración propia}
+
+\subsection{Principios LEAN y métricas}\label{principios-lean-y-muxe9tricas}
+
+La metodología LEAN se empleará como complemento de Scrum para validar que el producto mínimo viable (MVP) desarrollado genere valor real para la organización. Bajo este enfoque, la construcción del MVP estará orientada a comprobar hipótesis relacionadas con la mejora de la planificación logística y la reducción de ineficiencias operativas identificadas durante la fase de análisis. El ciclo de trabajo seguirá el principio Construir--Medir--Aprender, permitiendo evaluar continuamente los resultados obtenidos y realizar ajustes cuando sea necesario.
+
+\subsubsection{Las etapas del proceso de desarrollo de software LEAN}\label{las-etapas-del-proceso-de-desarrollo-de-software-lean}
+
+La aplicación eficaz de LEAN en el proceso de desarrollo de software incluye cinco actividades: Identificar valor, que beneficios ofrece el producto al cliente; mapear el flujo de valor, analizar si parte del proceso de desarrollo o una función implementada aporta valor o es inútil para el producto; crear flujo, implica optimizar el proceso de desarrollo de software utilizado, conforme a los principios LEAN, de manera que el trabajo no se acumule entre etapas y no existan cuellos de botella, se debe controlar las colas, eliminar obstáculos y lograr un flujo de trabajo continuo; establecer el sistema de tracción, las actividades del equipo de trabajo deben ser reguladas e impulsadas por lo que el cliente valora y según la importancia que él le otorga, no se debe desarrollar nada por si acaso en el futuro se pueda requerir; sin embargo, el producto deberá ser flexible y fácil de adaptar a cualquier requerimiento nuevo; finalmente buscar la perfección, se debe revisar y optimizar continuamente el proceso de desarrollo, ya que nunca es perfecto, el objetivo no es un proceso perfecto, sino la mejora continua del mismo \citep{paladiy2026}. A continuación, se describe la implementación de estas cinco etapas, en el desarrollo del proyecto:
+
+\begin{itemize}
+\item
+  \textbf{Identificar valor}, las historias de usuario incluidas en la lista de tareas pendientes del proyecto, al igual que el orden de prioridad asignado, se originan en los requerimientos expresados por los beneficiarios o usuarios del sistema propuesto: El gerente propietario de Cafetalino, el operador de recarga de la empresa y los clientes, a partir de las entrevistas sostenidas con ellos y las encuestas aplicada; y que Francisco Camacho (Product Owner) capto y transmitió al equipo
+\item
+  \textbf{Mapear el flujo}, en la aplicación de la metodología Scrum, el análisis del flujo de trabajo y los ajustes que se pudieran requerir, a fin de evitar implementar funciones innecesarias en el desarrollo de los incrementos, se realiza en las reuniones diarias de Scrum, en las reuniones de planificación y de revisión de cada iteración, donde se realiza este análisis y ajuste en el contexto de desarrollo del producto final.
+\item
+  \textbf{Crear flujo}, en la metodología Scrum las reuniones diarias de Scrum, también permiten realizar el análisis y los cambios necesarios para evitar cuellos de botella; y en las reuniones de planificación y revisión de cada iteración, en un contexto más grande como es el desarrollo del sistema propuesto. Sin embargo, el evento más importante es la reunión de retrospectiva de cada iteración, que permite hacer un análisis del desempeño del equipo de trabajo y ajuster el proceso de desarrollo.
+\item
+  \textbf{Establecer el sistema de tracción}, Scrum se basa en la filosofia LEAN, establece el cumplimiento de sus principios y esta etapa, de la metodología LEAN, se manifiesta en las reuniones de planificación de cada iteración, pues la selección y priorización de historias de usuario se realizan en base a los requerimientos de los usuarios del producto, el gerente propietario y el operador de recargas de Cafetalino, los cuales se canalizan a través de las directrices de Francisco (Product Owner).
+\item
+  \textbf{Buscar la perfección}, esta etapa de la metodología de desarrollo de software LEAN, en el marco del proceso de desarrollo Scrum, ocurre en las reuniones de planificación y revisión de cada, pues en ellas se busca optimizar la calidad del sistema propuesto, además en las reuniones de retrospectiva de cada iteración, donde el desempeño del equipo de trabajo y el proceso de desarrollo son objeto de análisis y ajuste para su optimización y mejora continua.
+\end{itemize}
+
+\subsubsection{Hipótesis de valor}\label{hipuxf3tesis-de-valor}
+
+Con base en los hallazgos obtenidos durante las fases de Empatizar y Definir, se establecieron las siguientes hipótesis de validación:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  El uso de modelos predictivos basados en datos históricos permitirá reducir las visitas de reabastecimiento innecesarias realizadas por el personal operativo.
+\item
+  La planificación de rutas basada en la demanda proyectada permitirá disminuir las modificaciones extraordinarias de recorrido ocasionadas por eventos de desabastecimiento.
+\item
+  La aplicación de técnicas de aprendizaje automático proporcionará una capacidad de predicción superior al método actualmente utilizado por la organización, basado principalmente en experiencia operativa y programación periódica de visitas.
+\item
+  La utilización del sistema propuesto contribuirá a reducir incidencias relacionadas con desabastecimiento y mejorará la continuidad del servicio ofrecido a los usuarios finales.
+\end{enumerate}
+
+\subsubsection{Métricas}\label{muxe9tricas}
+
+En el proceso de desarrollo de software LEAN, los indicadores de rendimiento ayudan a medir el valor, el tiempo y la eficiencia de los procesos, lo que permite evitar desperdicios \citep{paladiy2026}. Para este proyecto se aplicaron las siguientes métricas:
+
+\begin{itemize}
+\item
+  Tiempo promedio que se tarda en completar una historia de usuario, desde que inicia su desarrollo hasta que es aprobada por el equipo.
+\item
+  Porcentaje de Historias de Usuario aprobadas en la revisión de la iteración, sin requerir ajustes, ni trabajo adicional.
+\item
+  Porcentaje de incrementos que provocan errores de regresión; es decir cambios que rompen funcionalidades de historias de usuario completadas en anteriores iteraciones.
+\item
+  Para validar las hipótesis planteadas y medir la calidad del sistema desarrollado se utilizarán indicadores cuantificables alineados con los criterios de éxito establecidos en la Tabla 2, en la etapa Definir.
+\end{itemize}
+
+\subsubsection{Estrategia Construir -- Medir -- Aprender.}\label{estrategia-construir-medir-aprender.}
+
+En el desarrollo del sistema propuesto, la aplicación de LEAN se realizará mediante la estrategia cíclica de validación construir-medir-aprender, que es el núcleo de esta metodología y busca transformar una idea en un MVP mediante ciclos rápidos de iteración, evaluando la respuesta del usuario y decidiendo si se deben reorientar la lógica de desarrollo del proyecto o continuar con la línea de trabajo que se está aplicando.
+
+Estas etapas de la estrategia, en el marco del proyecto, se describen a continuación.
+
+\textbf{Construir}
+
+Desarrollar el producto mínimo viable constituido por:
+
+\begin{itemize}
+\item
+  Modelo predictivo de demanda,
+\item
+  Componente de optimización de rutas,
+\item
+  Interfaz de visualización para apoyo a la toma de decisiones.
+\end{itemize}
+
+\textbf{Medir}
+
+Evaluar el desempeño del MVP mediante los indicadores de éxito establecidos en la Tabla 2 de la etapa Definir y comparar los resultados obtenidos contra la línea base actualmente utilizada por Cafetalino.
+
+\textbf{Aprender}
+
+Analizar los resultados obtenidos para identificar oportunidades de mejora, ajustar parámetros de los modelos predictivos y refinar la solución antes de una posible implementación operativa.

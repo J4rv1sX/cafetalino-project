@@ -1,0 +1,69 @@
+% =====================================================================
+%  Trabajo de Innovación — UNIR
+%  Cerebro Predictivo y Optimización Logística para Máquinas
+%  Expendedoras de Bebidas
+%
+%  Compilar: pdflatex -> biber -> pdflatex -> pdflatex
+%  (en Overleaf basta con pulsar Recompile)
+% =====================================================================
+\documentclass[12pt,a4paper]{article}
+
+% ---- Datos del trabajo ------------------------------------------
+\newcommand{\tituloproyecto}{Cerebro Predictivo y Optimización Logística para Máquinas Expendedoras de Bebidas}
+\newcommand{\autorescorto}{Camacho, Diaz, Hernández y Sais}
+\newcommand{\fechaproyecto}{\today}
+
+\input{preambulo.tex}
+
+% Referencias que aparecen en la lista del documento original
+% aunque no se citan en el texto:
+\nocite{kovalyk2022,atlassianlean2026,drumond2026}
+
+\begin{document}
+
+% ---- Portada -----------------------------------------------------
+\input{portada.tex}
+
+% ---- Índices -----------------------------------------------------
+\pagenumbering{roman}
+\begin{singlespace}
+\renewcommand{\contentsname}{Índice de contenidos}
+\tableofcontents
+\newpage
+\renewcommand{\listfigurename}{Índice de figuras}
+\listoffigures
+\newpage
+\renewcommand{\listtablename}{Índice de tablas}
+\listoftables
+\end{singlespace}
+\newpage
+
+% ---- Cuerpo ------------------------------------------------------
+\pagenumbering{arabic}
+
+\input{capitulos/01-introduccion.tex}
+\input{capitulos/02-objetivos.tex}
+\input{capitulos/03-desarrollo-conceptual.tex}
+\input{capitulos/04-metodologia.tex}
+
+% Capítulos aún no redactados en el documento original:
+% \input{capitulos/05-implementacion.tex}
+% \input{capitulos/06-validacion.tex}
+% \input{capitulos/07-conclusiones.tex}
+
+% ---- Bibliografía ------------------------------------------------
+\newpage
+\imprimirbibliografia
+
+% ---- Anexos ------------------------------------------------------
+\newpage
+\appendix
+\renewcommand{\thesection}{Anexo \Alph{section}}
+% los anexos necesitan más hueco para su numeración en el índice
+\addtocontents{toc}{\protect\setlength{\protect\cftsecnumwidth}{5.2em}}
+\titleformat{\section}{\normalfont\Large\bfseries\color{unirazul}}{\thesection.}{0.5em}{}
+\input{anexos/a-entrevista-gerente.tex}
+\input{anexos/b-entrevista-operador.tex}
+\input{anexos/c-encuesta-clientes.tex}
+
+\end{document}

@@ -1,0 +1,99 @@
+% ---------------------------------------------------------------
+%  Preámbulo — configuración general del documento
+% ---------------------------------------------------------------
+
+% ---- Idioma y codificación ------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+\usepackage{csquotes}
+
+% ---- Tipografía -----------------------------------------------
+% El documento original usa Calibri. "carlito" es la fuente libre
+% métricamente compatible; si no está instalada se usa la de por defecto.
+\IfFileExists{carlito.sty}{\usepackage{carlito}\renewcommand{\familydefault}{\sfdefault}}{}
+\usepackage[protrusion=true,expansion=false]{microtype}
+\usepackage{amssymb}      % casillas del cuestionario ($\square$)
+
+% ---- Página y espaciado (idénticos al .docx) -------------------
+% A4, márgenes: sup. 2,5 cm · inf. 2,5 cm · izq. 3 cm · der. 2 cm
+\usepackage[a4paper,top=2.5cm,bottom=2.5cm,left=3cm,right=2cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing                       % interlineado 1,5
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% ---- Color corporativo UNIR ------------------------------------
+\usepackage{xcolor}
+\definecolor{unirazul}{HTML}{0098CD}
+
+% ---- Títulos numerados y en azul --------------------------------
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries\color{unirazul}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalfont\large\bfseries\color{unirazul}}{\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\color{unirazul}}{\thesubsubsection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{18pt}{10pt}
+\titlespacing*{\subsection}{0pt}{14pt}{8pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+
+% ---- Índice ----------------------------------------------------
+\usepackage{tocloft}
+\setlength{\cftsecnumwidth}{2.2em}   % hueco del número de sección
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+% ---- Figuras, tablas y listas ----------------------------------
+\usepackage{graphicx}
+\graphicspath{{imagenes/}}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{calc}          % anchos de columna calculados (tablas de pandoc)
+\usepackage{float}
+\usepackage{multirow}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{enumitem}
+
+% Pie de tabla/figura fuera de flotante y línea de fuente
+\captionsetup{justification=raggedright,singlelinecheck=false}
+\newcommand{\fuente}[1]{{\par\raggedright\footnotesize\itshape #1\par}\medskip}
+\setlist{itemsep=2pt,topsep=4pt}
+
+% ---- Encabezado y pie ------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\footnotesize\color{gray}\autorescorto}
+\fancyfoot[R]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ---------------------------------------------------------------
+%  BIBLIOGRAFÍA
+%  Deja \overleaftrue para compilar en Overleaf con estilo APA 7
+%  (biblatex-apa + biber). Cambia a \overleaffalse solo si tu
+%  instalación local no tiene biblatex (usa natbib + apalike).
+% ---------------------------------------------------------------
+\newif\ifoverleaf
+\overleaftrue
+
+\ifoverleaf
+  \usepackage[style=apa,natbib=true,backend=biber,language=spanish]{biblatex}
+  \DeclareLanguageMapping{spanish}{spanish-apa}
+  \addbibresource{bibliografia/referencias.bib}
+  \newcommand{\imprimirbibliografia}{%
+    \printbibliography[title={Referencias bibliográficas},heading=bibnumbered]}
+\else
+  \usepackage{natbib}
+  \bibliographystyle{apalike}
+  \setcitestyle{authoryear,round}
+  \newcommand{\imprimirbibliografia}{%
+    \renewcommand{\bibname}{Referencias bibliográficas}%
+    \bibliography{bibliografia/referencias}}
+\fi
+
+% ---- Hipervínculos (siempre al final del preámbulo) -------------
+\usepackage[hidelinks,breaklinks=true]{hyperref}
+\usepackage{url}
+\urlstyle{same}
