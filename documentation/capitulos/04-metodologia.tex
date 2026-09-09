@@ -4,11 +4,11 @@ El desarrollo del proyecto se gestionará utilizando las metodologías Scrum y L
 
 \subsection{Roles, Artefactos y Eventos}\label{roles-artefactos-y-eventos}
 
-Scrum, establece que se debe definir el rol que tendrá cada miembro del equipo, los artefactos y herramientas que se utilizaran y los eventos que permitirán revisar y hacer los cambios que sean necesarios para garantizar la calidad del producto. Estos elementos, en el marco del proyecto, se describen a continuación.
+Scrum establece que se debe definir el rol que tendrá cada miembro del equipo, los artefactos y herramientas que se utilizarán y los eventos que permitirán revisar y hacer los cambios necesarios para garantizar la calidad del producto. Estos elementos, en el marco del proyecto, se describen a continuación.
 
 \subsubsection{Roles}\label{roles}
 
-En la metodología Scrum se definen tres roles \citep{schwaber2020}: El propietario del producto (Product Owner) o su representante, que es el responsable de la toma de decisiones que permitirán lograr el máximo valor para el producto; el Scrum Master, un líder y servidor encargado de dirigir las reuniones del equipo y ayudar a sus miembros a mejorar su flujo de trabajo y su organización interna; y finalmente el equipo de desarrollo, que es el responsable, en cada iteración, de implementar incrementos, que implementan de forma progresiva y continua algunas funcionalidades, hasta completar el producto final. En este marco y tomando en cuenta que el equipo de trabajo es pequeño, está formado por cuatro integrantes, se ha definido los siguientes roles:
+La metodología define tres roles \citep{schwaber2020}: el propietario del producto (Product Owner), responsable de las decisiones que permiten lograr el máximo valor para el producto; el Scrum Master, encargado de dirigir las reuniones del equipo y de ayudar a sus miembros a mejorar su flujo de trabajo; y el equipo de desarrollo, que en cada iteración implementa los incrementos hasta completar el producto final. Tomando en cuenta que el equipo de trabajo es pequeño, formado por cuatro integrantes, se han definido los siguientes roles:
 
 \begin{itemize}
 \item
@@ -16,7 +16,7 @@ En la metodología Scrum se definen tres roles \citep{schwaber2020}: El propieta
 \item
   \textbf{Scrum Master}: Mario Diaz, elegido por el equipo por sus habilidades de gestión y dirección.
 \item
-  \textbf{Equipo de Desarrollo}: Los cuatro miembros el equipo: Francisco Camacho, Mario Diaz, Angel Hernández y Guillermo Sais de la Torre. En el caso de Francisco y Mario, que cumplirán un doble rol, dedicarán el 75 \% de su tiempo a las tareas de desarrollo y 25 \% de su tiempo a las tareas de gestión en el rol asignado.
+  \textbf{Equipo de Desarrollo}: Los cuatro miembros del equipo: Francisco Camacho, Mario Diaz, Angel Hernández y Guillermo Sais de la Torre. En el caso de Francisco y Mario, que cumplirán un doble rol, dedicarán el 75 \% de su tiempo a las tareas de desarrollo y 25 \% de su tiempo a las tareas de gestión en el rol asignado.
 \end{itemize}
 
 La siguiente tabla resume los roles y responsabilidades del equipo de trabajo:
@@ -77,28 +77,15 @@ Validación de resultados. \\
 
 \subsubsection{Artefactos}\label{artefactos}
 
-Scrum especifica tres artefactos principales \citep{schwaber2020}: La lista de tareas pendientes (Product Backlog), el registro de tareas que harán en una iteración (Sprint Backlog) y el incremento, una versión previa del producto final, que funciona, el resultado parcial esperado al final de una iteración. Estos artefactos se describen, a continuación, en el marco del proyecto.
+Scrum especifica tres artefactos principales \citep{schwaber2020}: la lista de tareas pendientes del proyecto (Product Backlog), que ordena por prioridad todo lo que se requiere para construir el producto; el registro de tareas de una iteración (Sprint Backlog), que es el plan de trabajo de ese sprint; y el incremento, una versión parcial del producto que ya funciona. Los tres se describen a continuación en el marco del proyecto.
 
 \textbf{Lista de tareas pendientes del proyecto (Product Backlog)}
 
-Es una lista ordenada de todo lo que se requiere para desarrollar el producto, expresada como una lista de historias de usuario que se pueden implementar en una iteración, luego de refinarlas y definirlas a través de elementos más pequeños y precisos, describirlas, asignarles un orden de prioridad y estimar su tamaño o nivel de complejidad \citep{schwaber2020}.
-
-La lista de tareas pendientes del proyecto se gestionará a través de Jira y se presenta a detallade, en el apartado 4.2, donde se expondrán las historias de usuario necesarias para desarrollar el sistema de reabastecimiento predictivo y enrutamiento dinámico propuesto para Cafetalino, cuyos componentes son: Realizar un análisis exploratorio de los datos disponibles, desarrollar un modelo predictivo de reabastecimiento, desarrollar un modelo de enrutamiento dinámico, y desarrollar una interfaz de usuario para interactuar con estos modelos.
-
-A continuación, en la figura se muestra la Lista de tareas pendientes del proyecto (Product Backlog) en Jira, donde se ven algunas de las historias de usuario consideradas.
-
-\begin{figure}[!htbp]
-\centering
-\caption{Lista de tareas pendientes del proyecto (Product Backlog)}\label{fig:lista-de-tareas-pendientes-del}
-\includegraphics[width=0.94\textwidth]{image4.jpeg}
-\fuente{Fuente: Elaboración propia}
-\end{figure}
+La lista de tareas pendientes del proyecto se gestionará a través de Jira, como muestra la Figura \ref{fig:lista-de-tareas-pendientes-del} del \ref{anexo-capturas-de-jira}, y se presenta en detalle en el apartado \ref{backlog-inicial-y-estimaciuxf3n-del-nivel-de-dificultad}. Allí se exponen las historias de usuario necesarias para desarrollar el sistema de reabastecimiento predictivo y enrutamiento dinámico propuesto para Cafetalino, cuyos componentes son: realizar un análisis exploratorio de los datos disponibles, desarrollar un modelo predictivo de reabastecimiento, desarrollar un modelo de enrutamiento dinámico y desarrollar una interfaz de usuario para interactuar con estos modelos. Cada historia se refina en elementos más pequeños y precisos, se describe, se le asigna un orden de prioridad y se estima su nivel de complejidad antes de poder incorporarse a una iteración \citep{schwaber2020}.
 
 \textbf{Sprint Backlog}
 
-Es el plan de trabajo de una iteración o Sprint, realizado por los desarrolladores para guiar su trabajo, define qué, para qué y cómo hacer, especifica el objetivo de la iteración, un subconjunto de historias de usuario de la lista de tareas pendientes del producto, seleccionadas para desarrollarlas en la iteración; y el plan de acción que permitirá completar el incremento \citep{schwaber2020}.
-
-El registro de tareas (Sprint Backlog) de cada iteración se extraerá de la lista de tareas del Proyecto presentada en el apartado 4.2 y se manejará a través de Jira, que permitirá garantizar que cada historia de usuario se ha refinado, se le asignó un orden de prioridad, se estimó su nivel de complejidad y fundamentalmente que se cumplieron las definiciones de Listo del apartado 4.3. En cada iteración se proyectó desarrollar uno de los componentes del sistema.
+El registro de tareas de cada iteración —el plan que los desarrolladores elaboran para guiar su trabajo, con el objetivo del sprint y el subconjunto de historias seleccionadas \citep{schwaber2020}— se extraerá de esa misma lista y se manejará también en Jira, tal como se aprecia en la Figura \ref{fig:registro-de-tareas-de-una}, donde las historias aparecen clasificadas según su estado: pendiente, en ejecución, en revisión y terminada. La herramienta permitirá garantizar que cada historia de usuario se ha refinado, se le ha asignado un orden de prioridad, se ha estimado su nivel de complejidad y, fundamentalmente, que cumple las definiciones de Listo del apartado \ref{definiciones-de-listocompletado-readydone}. En cada iteración se desarrollará uno de los componentes del sistema:
 
 \begin{itemize}
 \item
@@ -111,67 +98,17 @@ El registro de tareas (Sprint Backlog) de cada iteración se extraerá de la lis
   Desarrollar una interfaz web para interactuar con los modelos desarrollados.
 \end{itemize}
 
-La siguiente figura muestra una iteración en ejecución, donde se puede observar las historias de usuario incluidas en ella, clasificadas según si estado, pendiente, en ejecución, en revisión y terminadas.
-
-\begin{figure}[!htbp]
-\centering
-\caption{Registro de tareas de una iteración en ejecución}\label{fig:registro-de-tareas-de-una}
-\includegraphics[width=0.95\textwidth]{image5.jpeg}
-\fuente{Fuente: Elaboración propia}
-\end{figure}
-
 \textbf{Incremento}
 
-Es una versión previa del producto final, que funciona y tiene algunas de las funcionalidades y características del producto final. En cada iteración se puede plantear uno o varios incrementos, cada Incremento es aditivo a los anteriores y se debe verificar a fondo, para garantizar que todos los Incrementos funcionen juntos \citep{schwaber2020}.
-
-En el sistema de reabastecimiento predictivo y enrutamiento dinámico propuesto, cada uno de sus componentes será un incremento, que deberá funcionar según las definiciones de completado definidas en el apartado 4.3 y será integrado a incrementos previamente desarrollados y verificados, además de ser integrado y probado para funcionar en conjunto con ellos.
+Cada incremento es una versión parcial del producto que ya funciona, es aditivo a los anteriores y debe verificarse a fondo para garantizar que todos operen en conjunto \citep{schwaber2020}. En el sistema propuesto, cada uno de los cuatro componentes anteriores será un incremento, que deberá cumplir las definiciones de completado del apartado \ref{definiciones-de-listocompletado-readydone} y ser integrado y probado junto con los incrementos ya desarrollados y verificados.
 
 \subsubsection{Eventos}\label{eventos}
 
-Scrum en su metodología contempla cinco eventos \citep{schwaber2020}: La Iteración o Sprint que hace de contenedor para los otros cuatro eventos, la reunión de planificación de la iteración (Sprint Planning), la reunión diaria de Scrum (Daily Scrum), la reunión de revisión de la iteración (Sprint Review) y la reunión de retrospectiva de la iteración (Sprint Retrospective).
+Scrum contempla cinco eventos \citep{schwaber2020}: la iteración o Sprint, que hace de contenedor para los otros cuatro; la reunión de planificación de la iteración (Sprint Planning); la reunión diaria de Scrum (Daily Scrum), de quince minutos, para revisar avances, resolver atascos y ajustar el plan; la reunión de revisión de la iteración (Sprint Review), donde se examina el resultado y se definen los ajustes necesarios para alcanzar el producto final; y la retrospectiva (Sprint Retrospective), dedicada al desempeño del propio equipo. Todas las reuniones del proyecto se realizarán por Google Meet en horario nocturno, para no interrumpir el trabajo cotidiano de los integrantes, y se mantendrá una comunicación permanente de coordinación por WhatsApp.
 
-En el marco del sistema propuesto se has definido realizar reuniones a través de la plataforma Google Meet, en horario nocturno para no interrumpir el trabajo cotidiano de los miembros del equipo, y utilizar WhatsApp para una comunicación permanente, de coordinación y colaboración. A continuación, se describen estos eventos en el marco del sistema propuesto.
+Para desarrollar el sistema de reabastecimiento predictivo y enrutamiento dinámico se ha establecido que cada iteración dure dos semanas y se han proyectado cuatro iteraciones, es decir ocho semanas efectivas de trabajo entre agosto y septiembre de 2026, tal como se observa en la Figura \ref{fig:iteraciones-del-proyecto} del \ref{anexo-capturas-de-jira}. En una iteración no se harán cambios que pongan en riesgo su objetivo o disminuyan la calidad, aunque el alcance podrá aclararse o renegociarse con el Product Owner conforme se aprenda más sobre el producto \citep{schwaber2020}.
 
-\textbf{Iteración o Sprint}
-
-Es un evento de corta duración, un mes o menos, en el cual el equipo desarrolla un subconjunto de historias de usuario de la lista de tareas pendientes del proyecto. Las iteraciones se desarrollan una después de otra, hasta lograr el producto deseado, permiten dividir un proyecto grande en partes pequeñas, más manejables, que se pueden implementar, probar y modificar rápidamente. En una iteración no se debe hacer cambios que pongan en riesgo el objetivo o disminuyan la calidad, el producto se refina según sea necesario y el alcance se puede aclarar y/o renegociar el con Propietario del Producto (Product Owner) conforme se aprende más sobre él \citep{schwaber2020}.
-
-Para desarrollar le sistema de reabastecimiento predictivo y enrutamiento dinámico, se ha establecido que cada iteración tenga una duración de dos semanas, y se han proyectado cuatro iteraciones que se desarrollaron en 8 semanas efectivas de trabajo, entre agosto y septiembre de 2026.
-
-La siguiente figura muestra una captura de pantalla de Jira con las iteraciones del proyecto.
-
-\begin{figure}[!htbp]
-\centering
-\caption{Iteraciones del Proyecto}\label{fig:iteraciones-del-proyecto}
-\includegraphics[width=0.62\textwidth]{image6.jpeg}
-\fuente{Fuente: Elaboración propia}
-\end{figure}
-
-\textbf{Planificación de la Iteración (Sprint Planning)}
-
-Antes de cada iteración, el equipo trabaja un plan que ejecutaran en ella. El Propietario del Producto (Product Owner) comunica qué considera útil para el producto y el equipo, para que los desarrolladores, tomando en cuenta esto, definan que historias de usuario de la lista de tareas pendientes del proyecto desarrollarán en la iteración. Cada historia de usuario se refina para una mejor comprensión y los desarrolladores programan el trabajo requerido que el incremento cumpla la definición de completado, subdividen cada una en piezas más pequeñas que puedan implementarse, como máximo, en un día \citep{schwaber2020}.
-
-Para desarrollar el proyecto se ha establecido reuniones de planificación al inicio de cada iteración, las mismas que serán dirigidas por Mario Diaz (Scrum Master), los lunes de 19:00 a 20:00, a fin de planificar su trabajo y definir su objetivo, atendiendo los lineamientos de Francisco Camacho (Product Owner).
-
-\textbf{Reunión Diaria de Scrum (Daily Scrum)}
-
-Es una reunión corta, a lo sumo de 15 minutos, para revisar el trabajo realizado, identificar dificultades y cuellos de botella, resolver estas dificultades y atascos en el trabajo, tomar decisiones rápidamente y ajustar el plan de trabajo de la iteración, cuando fuese necesario, y proyectar el trabajo del día \citep{schwaber2020}.
-
-Para el desarrollo de este proyecto se ha programado dos reuniones semanales para programar el trabajo y revisar los avances, las mismas se realizarán los lunes y jueves de 18:30 a 18:45 y serán dirigidas por Mario Diaz (Scrum Master). Los lunes que coincidan con el inicio de una iteración llevaran a cabo a cabo de 20:00 a 20:15, luego de la reunión de planificación.
-
-\textbf{Revisión de la Iteración (Sprint Review)}
-
-Esta reunión tiene la finalidad de revisar el resultado de la iteración, en ella se analiza si existen cambios en el entorno, se define si los ajustes requeridos para alcanzar el producto final, incluyendo cambios en la lista de tareas pendientes del producto para su ajuste a nuevas oportunidades y/o los cambios detectados en el entorno \citep{schwaber2020}.
-
-En el marco del proyecto se ha decidido revisar los resultados de la iteración y definir los ajustes necesarios para alcanzar el objetivo final, al final de cada iteración los sabados de 18:30 a 19:00, siempre bajo la dirección de Mario Diaz (Scrum Master) y atendiendo a los lineamientos de Francisco Camacho (Product Owner).
-
-\textbf{Retrospectiva de la Iteración (Sprint Retrospective)}
-
-El objetivo de esta reunión es analizar el trabajo del equipo, qué hizo bien, qué problemas se presentaron, especialmente en el trabajo colaborativo y coordinado, analizar las soluciones adoptadas a estos e identificar qué cambios realizar para mejorar el rendimiento y eficacia del equipo \citep{schwaber2020}.
-
-En este proyecto se definió realizar esta reunión antes de la reunión de planificación de la siguiente iteración, en ese sentido se realizará al final de una iteración los lunes de 18:30 a 19:00 para analizar el desempeño del equipo en la iteración que termina y considerar los ajustes que requeridos a fin de mejorar el desempeño del equipo, siempre dirigidos por Mario Diaz (Scrum Master).
-
-Un resumen de estos eventos se presenta en la siguiente tabla:
+Las cuatro reuniones serán dirigidas por Mario Diaz (Scrum Master) y atenderán los lineamientos de Francisco Camacho (Product Owner). La planificación abrirá cada iteración definiendo su objetivo y las historias de usuario comprometidas, que se subdividirán en piezas implementables en un día como máximo; las reuniones de Scrum se celebrarán dos veces por semana para revisar el avance y coordinar el trabajo, y los lunes que coincidan con el inicio de una iteración se llevarán a cabo después de la planificación; la revisión cerrará el sprint verificando el cumplimiento de lo comprometido; y la retrospectiva, celebrada antes de la planificación siguiente, analizará qué hizo bien el equipo, qué dificultades aparecieron y qué ajustes mejorarían su rendimiento. La siguiente tabla resume su frecuencia, duración y objetivo.
 
 \captionof{table}{Eventos de Scrum para el Proyecto}\label{tab:eventos-de-scrum-para-el}
 
@@ -214,7 +151,7 @@ Lunes 18:30 - 19:00 & 30 min & Identificar oportunidades de mejora y definir acc
 
 \subsection{Backlog inicial y estimación del nivel de dificultad}\label{backlog-inicial-y-estimaciuxf3n-del-nivel-de-dificultad}
 
-La lista de tareas pendientes del proyecto (Product Backlog) inicial puede observarse en la siguiente tabla, donde se presentan las historias de usuario, sus criterios de aceptación, su prioridad y su estimación del nivel de complejidad, asignandoles puntos de historia (Story Points - SP) utilizando la serie de Fibonacci y en función a la dificultad, incertidumbre y esfuerzo técnico de cada tarea, en consenso con todo el equipo de trabajo.
+La lista de tareas pendientes del proyecto (Product Backlog) inicial puede observarse en la siguiente tabla, donde se presentan las historias de usuario agrupadas por épica, sus criterios de aceptación, su prioridad y la estimación de su nivel de complejidad. Esta última se expresa en puntos de historia (Story Points, SP) siguiendo la serie de Fibonacci, un criterio que obliga a diferenciar tamaños relativos en lugar de intentar precisiones ilusorias. La asignación se realiza en consenso con todo el equipo de trabajo y pondera tres factores: la dificultad técnica de la tarea, la incertidumbre asociada a ella y el esfuerzo que se estima necesario.
 
 \captionof{table}{Backlog inicial, prioridad y nivel de dificultad estimado de historias de usuario}\label{tab:backlog-inicial-prioridad-y-nivel}
 
@@ -401,11 +338,11 @@ La lista de tareas pendientes del proyecto (Product Backlog) inicial puede obser
 
 \subsection{Definiciones de Listo/Completado (Ready/Done)}\label{definiciones-de-listocompletado-readydone}
 
-En la metodológia Scrum, se debe declarar explícitamente: la Definición de Listo (Definition of Ready - DoR) y la Definición de Completado (Definition of Done - DoD), criterios que establecen cuando desarrollar una historia de usuario y cuando está terminada; y son fundamentales para garantizar la calidad del software y minimizar las historias de usuario incompletas o mal implementadas, que llevan a repetirlas y a un trabajo ineficaz \citep{schwaber2020,plaskonka2023}. En este acápite se formalizan las definiciones de Listo y Completado (Definition of Done - DoD), que se utilizaran en el proyecto.
+La metodología Scrum obliga a declarar explícitamente la Definición de Listo (Definition of Ready, DoR) y la Definición de Completado (Definition of Done, DoD): los criterios que establecen cuándo una historia de usuario puede empezar a desarrollarse y cuándo está terminada. Ambas son fundamentales para garantizar la calidad del software y minimizar las historias incompletas o mal implementadas, que obligan a repetir el trabajo \citep{schwaber2020,plaskonka2023}. En este apartado se formalizan las dos definiciones que se utilizarán en el proyecto.
 
 \subsubsection{Definición de Listo (Definition of Ready - DoR)}\label{definiciuxf3n-de-listo-definition-of-ready---dor}
 
-Es el conjunto de requisitos que una historia de usuario, de la lista de tareas pendientes del proyecto (Product Backlog), debe cumplir para ser incluida en el Sprint Backlog \citep{plaskonka2023}. En el contexto del presente proyecto, una historia de usuario será considerada lista para ser incorporada a una iteración cuando cumpla las siguientes condiciones:
+La Definición de Listo reúne los requisitos que una historia de usuario debe cumplir para pasar de la lista de tareas pendientes del proyecto al registro de tareas de una iteración \citep{plaskonka2023}. En el presente proyecto, una historia será considerada lista para incorporarse a una iteración cuando cumpla las siguientes condiciones:
 
 \captionof{table}{Definición de Listo (DoR) para el proyecto}\label{tab:definicion-de-listo-dor-para}
 
@@ -434,7 +371,7 @@ Es el conjunto de requisitos que una historia de usuario, de la lista de tareas 
 
 \subsubsection{Definición de Completado (Definition of Done - DoD)}\label{definiciuxf3n-de-completado-definition-of-done---dod}
 
-Es la descripción formal de cuando se considera que un Incremento cumple los criterios de calidad requeridos para el producto, el conjunto de pruebas que, una historia de usuario o incremento de software, debe pasar obligatoriamente para ser declarado como terminado y listo para su entrega o integración \citep{schwaber2020}. En el contexto de este proyecto, una historia de usuario se considera terminada si cumple las siguientes condiciones:
+La Definición de Completado describe formalmente cuándo un incremento cumple los criterios de calidad exigidos, es decir, el conjunto de verificaciones que una historia de usuario debe superar para declararse terminada y lista para su entrega o integración \citep{schwaber2020}. En este proyecto, una historia de usuario se considerará terminada si cumple las siguientes condiciones:
 
 \captionof{table}{Definición de Completado (DoD) para el proyecto}\label{tab:definicion-de-completado-dod-para}
 
@@ -471,19 +408,19 @@ La metodología LEAN se empleará como complemento de Scrum para validar que el 
 
 \subsubsection{Las etapas del proceso de desarrollo de software LEAN}\label{las-etapas-del-proceso-de-desarrollo-de-software-lean}
 
-La aplicación eficaz de LEAN en el proceso de desarrollo de software incluye cinco actividades: Identificar valor, que beneficios ofrece el producto al cliente; mapear el flujo de valor, analizar si parte del proceso de desarrollo o una función implementada aporta valor o es inútil para el producto; crear flujo, implica optimizar el proceso de desarrollo de software utilizado, conforme a los principios LEAN, de manera que el trabajo no se acumule entre etapas y no existan cuellos de botella, se debe controlar las colas, eliminar obstáculos y lograr un flujo de trabajo continuo; establecer el sistema de tracción, las actividades del equipo de trabajo deben ser reguladas e impulsadas por lo que el cliente valora y según la importancia que él le otorga, no se debe desarrollar nada por si acaso en el futuro se pueda requerir; sin embargo, el producto deberá ser flexible y fácil de adaptar a cualquier requerimiento nuevo; finalmente buscar la perfección, se debe revisar y optimizar continuamente el proceso de desarrollo, ya que nunca es perfecto, el objetivo no es un proceso perfecto, sino la mejora continua del mismo \citep{paladiy2026}. A continuación, se describe la implementación de estas cinco etapas, en el desarrollo del proyecto:
+La aplicación eficaz de LEAN al desarrollo de software comprende cinco actividades \citep{paladiy2026}: identificar el valor que el producto ofrece al cliente; mapear el flujo de valor, distinguiendo qué partes del proceso o qué funciones aportan valor y cuáles no; crear flujo, de modo que el trabajo no se acumule entre etapas ni aparezcan cuellos de botella; establecer el sistema de tracción, para que las actividades del equipo las impulse lo que el cliente valora y no lo que pudiera hacer falta en el futuro; y buscar la perfección mediante la revisión y mejora continua del propio proceso. Como Scrum se apoya en esta misma filosofía, las cinco etapas se materializan en sus eventos, tal como se describe a continuación.
 
 \begin{itemize}
 \item
-  \textbf{Identificar valor}, las historias de usuario incluidas en la lista de tareas pendientes del proyecto, al igual que el orden de prioridad asignado, se originan en los requerimientos expresados por los beneficiarios o usuarios del sistema propuesto: El gerente propietario de Cafetalino, el operador de recarga de la empresa y los clientes, a partir de las entrevistas sostenidas con ellos y las encuestas aplicada; y que Francisco Camacho (Product Owner) capto y transmitió al equipo
+  \textbf{Identificar valor.} Las historias de usuario de la lista de tareas pendientes y el orden de prioridad asignado se originan en los requerimientos de los beneficiarios del sistema —el gerente propietario de Cafetalino, el operador de recarga y los clientes—, recogidos en las entrevistas y la encuesta, y transmitidos al equipo por Francisco Camacho (Product Owner).
 \item
-  \textbf{Mapear el flujo}, en la aplicación de la metodología Scrum, el análisis del flujo de trabajo y los ajustes que se pudieran requerir, a fin de evitar implementar funciones innecesarias en el desarrollo de los incrementos, se realiza en las reuniones diarias de Scrum, en las reuniones de planificación y de revisión de cada iteración, donde se realiza este análisis y ajuste en el contexto de desarrollo del producto final.
+  \textbf{Mapear el flujo.} El análisis del flujo de trabajo y los ajustes necesarios para evitar implementar funciones innecesarias se realizan en las reuniones de Scrum y en las de planificación y revisión de cada iteración, estas últimas en el contexto más amplio del producto final.
 \item
-  \textbf{Crear flujo}, en la metodología Scrum las reuniones diarias de Scrum, también permiten realizar el análisis y los cambios necesarios para evitar cuellos de botella; y en las reuniones de planificación y revisión de cada iteración, en un contexto más grande como es el desarrollo del sistema propuesto. Sin embargo, el evento más importante es la reunión de retrospectiva de cada iteración, que permite hacer un análisis del desempeño del equipo de trabajo y ajuster el proceso de desarrollo.
+  \textbf{Crear flujo.} Las reuniones de Scrum permiten detectar y resolver cuellos de botella en el día a día, pero el evento decisivo es la retrospectiva de cada iteración, que analiza el desempeño del equipo y ajusta el proceso de desarrollo.
 \item
-  \textbf{Establecer el sistema de tracción}, Scrum se basa en la filosofia LEAN, establece el cumplimiento de sus principios y esta etapa, de la metodología LEAN, se manifiesta en las reuniones de planificación de cada iteración, pues la selección y priorización de historias de usuario se realizan en base a los requerimientos de los usuarios del producto, el gerente propietario y el operador de recargas de Cafetalino, los cuales se canalizan a través de las directrices de Francisco (Product Owner).
+  \textbf{Establecer el sistema de tracción.} Se manifiesta en las reuniones de planificación, donde la selección y priorización de historias responden a los requerimientos del gerente propietario y del operador de recargas, canalizados a través de las directrices del Product Owner.
 \item
-  \textbf{Buscar la perfección}, esta etapa de la metodología de desarrollo de software LEAN, en el marco del proceso de desarrollo Scrum, ocurre en las reuniones de planificación y revisión de cada, pues en ellas se busca optimizar la calidad del sistema propuesto, además en las reuniones de retrospectiva de cada iteración, donde el desempeño del equipo de trabajo y el proceso de desarrollo son objeto de análisis y ajuste para su optimización y mejora continua.
+  \textbf{Buscar la perfección.} Ocurre en las reuniones de planificación y de revisión, orientadas a la calidad del sistema, y sobre todo en las retrospectivas, donde el desempeño del equipo y el proceso de desarrollo son objeto de análisis y mejora continua.
 \end{itemize}
 
 \subsubsection{Hipótesis de valor}\label{hipuxf3tesis-de-valor}
@@ -504,7 +441,7 @@ Con base en los hallazgos obtenidos durante las fases de Empatizar y Definir, se
 
 \subsubsection{Métricas}\label{muxe9tricas}
 
-En el proceso de desarrollo de software LEAN, los indicadores de rendimiento ayudan a medir el valor, el tiempo y la eficiencia de los procesos, lo que permite evitar desperdicios \citep{paladiy2026}. Para este proyecto se aplicaron las siguientes métricas:
+En el proceso de desarrollo de software LEAN, los indicadores de rendimiento ayudan a medir el valor, el tiempo y la eficiencia de los procesos, lo que permite evitar desperdicios \citep{paladiy2026}. Para este proyecto se aplicarán las siguientes métricas:
 
 \begin{itemize}
 \item
@@ -514,14 +451,12 @@ En el proceso de desarrollo de software LEAN, los indicadores de rendimiento ayu
 \item
   Porcentaje de incrementos que provocan errores de regresión; es decir cambios que rompen funcionalidades de historias de usuario completadas en anteriores iteraciones.
 \item
-  Para validar las hipótesis planteadas y medir la calidad del sistema desarrollado se utilizarán indicadores cuantificables alineados con los criterios de éxito establecidos en la Tabla 2, en la etapa Definir.
+  Para validar las hipótesis planteadas y medir la calidad del sistema desarrollado se utilizarán indicadores cuantificables alineados con los criterios de éxito de la Tabla \ref{tab:criterios-de-exito}, establecidos en la etapa Definir.
 \end{itemize}
 
-\subsubsection{Estrategia Construir -- Medir -- Aprender.}\label{estrategia-construir-medir-aprender.}
+\subsubsection{Estrategia Construir -- Medir -- Aprender}\label{estrategia-construir-medir-aprender.}
 
-En el desarrollo del sistema propuesto, la aplicación de LEAN se realizará mediante la estrategia cíclica de validación construir-medir-aprender, que es el núcleo de esta metodología y busca transformar una idea en un MVP mediante ciclos rápidos de iteración, evaluando la respuesta del usuario y decidiendo si se deben reorientar la lógica de desarrollo del proyecto o continuar con la línea de trabajo que se está aplicando.
-
-Estas etapas de la estrategia, en el marco del proyecto, se describen a continuación.
+En el desarrollo del sistema propuesto, la aplicación de LEAN se realizará mediante la estrategia cíclica de validación construir-medir-aprender, que es el núcleo de esta metodología y busca transformar una idea en un MVP mediante ciclos rápidos de iteración, evaluando la respuesta del usuario y decidiendo si se debe reorientar la lógica de desarrollo del proyecto o continuar con la línea de trabajo aplicada. Sus tres etapas, en el marco del proyecto, se describen a continuación.
 
 \textbf{Construir}
 
@@ -538,8 +473,10 @@ Desarrollar el producto mínimo viable constituido por:
 
 \textbf{Medir}
 
-Evaluar el desempeño del MVP mediante los indicadores de éxito establecidos en la Tabla 2 de la etapa Definir y comparar los resultados obtenidos contra la línea base actualmente utilizada por Cafetalino.
+Evaluar el desempeño del MVP mediante los indicadores de éxito de la Tabla \ref{tab:criterios-de-exito}, definidos en la etapa Definir, y comparar los resultados obtenidos contra la línea base actualmente utilizada por Cafetalino.
 
 \textbf{Aprender}
 
 Analizar los resultados obtenidos para identificar oportunidades de mejora, ajustar parámetros de los modelos predictivos y refinar la solución antes de una posible implementación operativa.
+
+En conjunto, Scrum aporta la estructura con la que se organizará y verificará el trabajo —roles, artefactos, eventos y las definiciones de Listo y Completado—, mientras que LEAN aporta el criterio con el que se decidirá si lo construido genera valor para Cafetalino, a través de las hipótesis enunciadas y de los indicadores alineados con los criterios de éxito. Ambos marcos convergen en el mismo punto: cada incremento debe poder medirse contra la operación actual de la empresa antes de darse por bueno. El siguiente capítulo describe la implementación de la propuesta, es decir, cómo se construyen los cuatro componentes del sistema bajo esta metodología, con qué tecnologías y con qué estimación de tiempo y coste.
