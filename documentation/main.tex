@@ -15,10 +15,6 @@
 
 \input{preambulo.tex}
 
-% Referencias que aparecen en la lista del documento original
-% aunque no se citan en el texto:
-\nocite{kovalyk2022,atlassianlean2026,drumond2026}
-
 \begin{document}
 
 % ---- Portada -----------------------------------------------------
@@ -29,16 +25,17 @@
 \begin{singlespace}
 \renewcommand{\contentsname}{Índice de contenidos}
 \tableofcontents
-\newpage
 \renewcommand{\listfigurename}{Índice de figuras}
 \listoffigures
-\newpage
 \renewcommand{\listtablename}{Índice de tablas}
 \listoftables
 \end{singlespace}
-\newpage
 
 % ---- Cuerpo ------------------------------------------------------
+% El salto de página lo introduce \sectionbreak (ver preambulo.tex): cada
+% capítulo y cada anexo abren en hoja nueva, así que aquí no hacen falta
+% \newpage adicionales.
+\clearpage
 \pagenumbering{arabic}
 
 \input{capitulos/01-introduccion.tex}
@@ -52,11 +49,9 @@
 % \input{capitulos/07-conclusiones.tex}
 
 % ---- Bibliografía ------------------------------------------------
-\newpage
 \imprimirbibliografia
 
 % ---- Anexos ------------------------------------------------------
-\newpage
 \appendix
 \renewcommand{\thesection}{Anexo \Alph{section}}
 % los anexos necesitan más hueco para su numeración en el índice

@@ -32,9 +32,13 @@
 \titleformat{\section}{\normalfont\Large\bfseries\color{unirazul}}{\thesection.}{0.5em}{}
 \titleformat{\subsection}{\normalfont\large\bfseries\color{unirazul}}{\thesubsection.}{0.5em}{}
 \titleformat{\subsubsection}{\normalfont\normalsize\bfseries\color{unirazul}}{\thesubsubsection.}{0.5em}{}
-\titlespacing*{\section}{0pt}{18pt}{10pt}
+\titlespacing*{\section}{0pt}{0pt}{10pt}
 \titlespacing*{\subsection}{0pt}{14pt}{8pt}
 \titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+
+% Cada capítulo (y cada anexo) empieza en hoja nueva; los subtemas del
+% mismo capítulo siguen en la página disponible.
+\newcommand{\sectionbreak}{\clearpage}
 
 % ---- Índice ----------------------------------------------------
 \usepackage{tocloft}
@@ -56,18 +60,33 @@
 \usepackage{enumitem}
 
 % Pie de tabla/figura fuera de flotante y línea de fuente
-\captionsetup{justification=raggedright,singlelinecheck=false}
+% "Tabla 1." / "Figura 1." con punto, como en plantilla.docx (no "Tabla 1:")
+\captionsetup{justification=raggedright,singlelinecheck=false,labelsep=period}
 \newcommand{\fuente}[1]{{\par\raggedright\footnotesize\itshape #1\par}\medskip}
+
+% longtable reserva un número de tabla al abrirse aunque el título se coloque
+% antes con \captionof, y la numeración acababa saltando de dos en dos
+% (Tabla 1, Tabla 3, Tabla 5...). Se guarda el contador al entrar y se
+% restaura al salir para que la secuencia sea correlativa.
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\xdef\tablanumguardado{\the\value{table}}}
+\AtEndEnvironment{longtable}{\setcounter{table}{\tablanumguardado}}
 \setlist{itemsep=2pt,topsep=4pt}
 
 % ---- Encabezado y pie ------------------------------------------
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyfoot[L]{\footnotesize\color{gray}\autorescorto}
+% instrucciones.pdf: todas las páginas llevan encabezado con el autor y el
+% título del trabajo, y pie con el número de página.
+\fancyhead[L]{\parbox[t]{0.28\textwidth}{\raggedright\footnotesize\color{gray}\autorescorto}}
+\fancyhead[R]{\parbox[t]{0.68\textwidth}{\raggedleft\footnotesize\color{gray}\tituloproyecto}}
 \fancyfoot[R]{\footnotesize\thepage}
-\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{30pt}
+% el encabezado también en la primera página de cada capítulo
+\fancypagestyle{plain}{}
 
 % ---------------------------------------------------------------
 %  BIBLIOGRAFÍA

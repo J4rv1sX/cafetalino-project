@@ -18,5 +18,13 @@ Original sources: `guia.pdf`, `instrucciones.pdf`, `programacion.pdf` and
 `plantilla.md` is only its content in plain text; this repository's report
 reproduces its structure in LaTeX under `documentation/`.
 
+## Feedback received
+
+Not normative documentation but corrections to act on, from the tutor:
+
+| Document | Contents |
+|---|---|
+| [observaciones-primera-entrega.md](observaciones-primera-entrega.md) | Efrén Juárez's review of Entrega 1: submit as PDF, keep only chapters 1–3 (remove 4–8 and leftover template text), contextualize the introduction before presenting Cafetalino, cut section 1.2 to one paragraph, start each chapter on a new page, add a client-side instrument to Empatizar, turn the success criteria into quantified targets, simplify the state-of-the-art table, and complete the bibliography with two-way citation checks. |
+
 Covers, footers and page numbers were left out of the transcriptions; the rest
 of the text is kept verbatim. If anything disagrees, the original wins.
