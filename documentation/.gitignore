@@ -331,6 +331,7 @@ TSWLatexianTemp*
 #*Notes.bib
 
 *.pdf
+*.docx
 
 ## Figuras: los binarios no se versionan, pero sí el script que los regenera.
 ## Ojo: tiene que ser `imagenes/*` y no `imagenes/` — con el patrón de

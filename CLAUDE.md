@@ -84,3 +84,12 @@ Known state, converted from `Proyecto_Cafetalino_-_V02.docx`:
 - Three references (Kovalyk 2022, Atlassian 2026, Drumond 2026) are `\nocite`d in `main.tex` to reproduce the original bibliography — they're uncited in the text and worth revisiting.
 - Survey charts were rebuilt from the .docx's embedded chart XML by `imagenes/regenerar-graficos.py` into `imagenes/grafico1-5.png`; regenerate through that script rather than editing the PNGs.
 - Cross-references to annexes are still literal text ("Anexo A") even though `\label{}`s exist.
+
+`documentation/docs/` holds the course's official UNIR documents — the work guide, the
+document-writing instructions (structure, 20–30 page limit, APA, template formats) and the
+weekly schedule with deliverable deadlines and grade weights, and the mandatory Word template.
+Each original has a faithful Markdown transcription next to it (`guia.md`, `instrucciones.md`,
+`programacion.md`, `plantilla.md`, indexed by `README.md`); read the `.md`, not the PDF/DOCX.
+`plantilla.md` is the one that defines the expected section structure of the report — the
+chapters, their order and what each must contain. Check these before changing the report's
+structure, length or citation style — they are the requirements the report is graded against.
