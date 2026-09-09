@@ -3,15 +3,15 @@
 % ---------------------------------------------------------------
 
 % ---- Idioma y codificación ------------------------------------
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
 \usepackage{csquotes}
 
 % ---- Tipografía -----------------------------------------------
-% El documento original usa Calibri. "carlito" es la fuente libre
-% métricamente compatible; si no está instalada se usa la de por defecto.
-\IfFileExists{carlito.sty}{\usepackage{carlito}\renewcommand{\familydefault}{\sfdefault}}{}
+% Compilación local con LuaLaTeX: fuentes Calibri/Calibri Light reales
+% (vienen con Microsoft Office). fontspec gestiona UTF-8 y encoding automáticamente.
+\usepackage{fontspec}
+\setmainfont{Calibri}
+\newfontfamily\titlefont{Calibri Light}
 \usepackage[protrusion=true,expansion=false]{microtype}
 \usepackage{amssymb}      % casillas del cuestionario ($\square$)
 
@@ -28,10 +28,11 @@
 \definecolor{unirazul}{HTML}{0098CD}
 
 % ---- Títulos numerados y en azul --------------------------------
+% Calibri Light (no negrita): tamaños exactos según instrucciones.md §1.3
 \usepackage{titlesec}
-\titleformat{\section}{\normalfont\Large\bfseries\color{unirazul}}{\thesection.}{0.5em}{}
-\titleformat{\subsection}{\normalfont\large\bfseries\color{unirazul}}{\thesubsection.}{0.5em}{}
-\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\color{unirazul}}{\thesubsubsection.}{0.5em}{}
+\titleformat{\section}{\titlefont\fontsize{18}{22}\selectfont\color{unirazul}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\titlefont\fontsize{14}{17}\selectfont\color{unirazul}}{\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}{\titlefont\fontsize{12}{15}\selectfont\color{unirazul}}{\thesubsubsection.}{0.5em}{}
 \titlespacing*{\section}{0pt}{0pt}{10pt}
 \titlespacing*{\subsection}{0pt}{14pt}{8pt}
 \titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
@@ -89,28 +90,13 @@
 \fancypagestyle{plain}{}
 
 % ---------------------------------------------------------------
-%  BIBLIOGRAFÍA
-%  Deja \overleaftrue para compilar en Overleaf con estilo APA 7
-%  (biblatex-apa + biber). Cambia a \overleaffalse solo si tu
-%  instalación local no tiene biblatex (usa natbib + apalike).
+%  BIBLIOGRAFÍA — Compilación local con biblatex + biber (APA 7)
 % ---------------------------------------------------------------
-\newif\ifoverleaf
-\overleaftrue
-
-\ifoverleaf
-  \usepackage[style=apa,natbib=true,backend=biber,language=spanish]{biblatex}
-  \DeclareLanguageMapping{spanish}{spanish-apa}
-  \addbibresource{bibliografia/referencias.bib}
-  \newcommand{\imprimirbibliografia}{%
-    \printbibliography[title={Referencias bibliográficas},heading=bibnumbered]}
-\else
-  \usepackage{natbib}
-  \bibliographystyle{apalike}
-  \setcitestyle{authoryear,round}
-  \newcommand{\imprimirbibliografia}{%
-    \renewcommand{\bibname}{Referencias bibliográficas}%
-    \bibliography{bibliografia/referencias}}
-\fi
+\usepackage[style=apa,natbib=true,backend=biber,language=spanish]{biblatex}
+\DeclareLanguageMapping{spanish}{spanish-apa}
+\addbibresource{bibliografia/referencias.bib}
+\newcommand{\imprimirbibliografia}{%
+  \printbibliography[title={Referencias bibliográficas},heading=bibnumbered]}
 
 % ---- Hipervínculos (siempre al final del preámbulo) -------------
 \usepackage[hidelinks,breaklinks=true]{hyperref}

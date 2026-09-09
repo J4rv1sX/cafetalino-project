@@ -23,15 +23,22 @@ bibliografia/referencias.bib     → las 27 referencias del documento
 imagenes/                        → logo, figuras del .docx y gráficos de la encuesta
 ```
 
-## Cómo compilar en Overleaf
+## Cómo compilar (compilación local)
 
-1. Sube el .zip completo (*New Project → Upload Project*).
-2. En *Menu → Settings*: **Compiler pdfLaTeX**, **TeX Live 2023 o superior**.
-3. Pulsa *Recompile* dos veces (la secuencia es pdflatex → biber → pdflatex → pdflatex).
+Compilar en tu máquina con **LuaLaTeX** (requiere MiKTeX o TeX Live 2023+):
 
-El preámbulo trae `\overleaftrue`, que activa `biblatex` con estilo **APA 7**
-(biber). Para compilar en una instalación local sin `biblatex-apa`, cambia esa
-línea a `\overleaffalse` y el proyecto usa `natbib` + `apalike`.
+```bash
+cd documentation
+latexmk -lualatex -interaction=nonstopmode main.tex
+```
+
+O desde VS Code: abre `main.tex` y pulsa "Build LaTeX project" 
+(configurado por defecto en `.vscode/settings.json` para usar latexmk + LuaLaTeX).
+
+**Requisitos:**
+- **Motor:** LuaLaTeX (necesario para `fontspec` y acceso a fuentes del sistema)
+- **Fuentes:** Calibri y Calibri Light instaladas (vienen con Microsoft Office)
+- **Paquete:** biblatex-apa (para estilo APA 7; MiKTeX lo instala automáticamente)
 
 Todo lo que genera LaTeX está en `.gitignore`, `main.pdf` incluido: el PDF es
 salida local, no se versiona.
@@ -42,8 +49,8 @@ salida local, no se versiona.
 |---|---|---|
 | Página | A4, márgenes 2,5 / 2,5 / 3 / 2 cm | `geometry`, iguales |
 | Interlineado | 1,5, texto justificado | `\onehalfspacing` |
-| Cuerpo | Calibri 12 pt | `carlito` 12 pt (libre, misma métrica) |
-| Títulos | numerados, azul `#0098CD` | `titlesec` + color `unirazul` |
+| Cuerpo | Calibri 12 pt | Calibri 12 pt real (vía `fontspec` + LuaLaTeX) |
+| Títulos | Calibri Light numerados, azul `#0098CD` (18/14/12 pt) | Calibri Light real (vía `fontspec`) + `titlesec` + color `unirazul` |
 | Capítulos | cada uno en hoja nueva | `\sectionbreak` → `\clearpage` |
 | Encabezado / pie | autor + título / número de página | `fancyhdr` |
 | Tablas | título arriba, «Fuente:» debajo | `\captionof{table}` + `\fuente{}` |

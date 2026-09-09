@@ -50,9 +50,18 @@ Linting is via [Oxlint](https://oxc.rs) (`.oxlintrc.json`), not ESLint. No test 
 
 ### Documentation (`documentation/`, LaTeX)
 
-Built on Overleaf, not locally: upload the folder as a project, set **pdfLaTeX** + **TeX Live 2023 or newer**, and recompile twice (pdflatex → biber → pdflatex → pdflatex). `preambulo.tex` sets `\overleaftrue`, which selects `biblatex` + APA 7 via biber; flipping it to `\overleaffalse` falls back to `natbib` + `apalike` for local installs without `biblatex-apa`.
+Compiled locally with **LuaLaTeX** (via `latexmk`) + **biblatex-apa** (APA 7). Requires MiKTeX or TeX Live 2023+ with Calibri/Calibri Light fonts installed (come with Microsoft Office).
 
-Everything LaTeX generates is gitignored (including `*.pdf`), so `main.pdf`/`vista-previa.pdf` are local build output — don't expect them in the repo or commit them.
+```bash
+cd documentation
+latexmk -lualatex -interaction=nonstopmode main.tex
+```
+
+Or from VS Code: "Build LaTeX project" (configured in `.vscode/settings.json` to run latexmk + LuaLaTeX by default). The magic comment `% !TEX program = lualatex` in `main.tex` tells any LaTeX editor to use the correct engine.
+
+`fontspec` loads the real Calibri/Calibri Light fonts from the system (fidelity to the Word template), avoiding substitutes. `preambulo.tex` has no Overleaf fallback — one compilation path only.
+
+Everything LaTeX generates is gitignored (including `*.pdf`), so `main.pdf` is local build output — don't expect it in the repo or commit it.
 
 ## Architecture
 
