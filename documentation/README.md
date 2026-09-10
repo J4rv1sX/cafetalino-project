@@ -1,8 +1,7 @@
 # Proyecto Cafetalino en LaTeX
 
-Fuente del informe del Trabajo de Innovación (UNIR). Contiene los cuatro
-capítulos redactados hasta la segunda entrega, la bibliografía y los cinco
-anexos.
+Fuente del informe del Trabajo de Innovación (UNIR). Contiene los siete
+capítulos del cuerpo, la bibliografía y los cinco anexos.
 
 ## Estructura
 
@@ -14,12 +13,16 @@ capitulos/01-introduccion.tex
 capitulos/02-objetivos.tex
 capitulos/03-desarrollo-conceptual.tex
 capitulos/04-metodologia.tex
+capitulos/05-implementacion.tex
+capitulos/06-validacion.tex
+capitulos/07-conclusiones.tex
 anexos/a-entrevista-gerente.tex
 anexos/b-entrevista-operador.tex
 anexos/c-encuesta-clientes.tex
 anexos/d-diagramas-de-los-prototipos.tex
 anexos/e-capturas-de-jira.tex
-bibliografia/referencias.bib     → las 27 referencias del documento
+anexos/f-backlog-inicial.tex
+bibliografia/referencias.bib     → las 32 referencias del documento
 imagenes/                        → logo, figuras del .docx y gráficos de la encuesta
 ```
 
@@ -75,6 +78,11 @@ salida local, no se versiona.
   aunque el título se ponga fuera con `\captionof`, y la numeración saltaba de
   dos en dos. El preámbulo guarda y restaura el contador alrededor de cada
   `longtable`.
+- **Backlog en el Anexo F.** La tabla de las 20 historias de usuario ocupaba
+  cinco páginas enteras del capítulo 4 y se trasladó al Anexo F por extensión,
+  no por contenido: los anexos no computan para el límite de páginas. En el
+  capítulo 4 quedan el criterio de estimación y la lectura de los resultados,
+  dentro de «Artefactos», y la subsección 4.2 desapareció como tal.
 - **Erratas corregidas**: "Inicio" → "Inició", "Samart vending" → "Smart
   Vending", "esta limitado" → "está limitado", `N˚` → `N.º`.
 
@@ -106,10 +114,22 @@ exige justamente Scrum y LEAN, es decir el capítulo 4, que se mantiene.
 
 ## Qué queda pendiente
 
-- Los capítulos 5, 6 y 7 (Implementación, Validación y Conclusiones). En
-  `main.tex` hay líneas `\input` comentadas listas para añadirlos.
-- **Extensión.** `docs/instrucciones.md` fija un máximo de 30 páginas sin contar
-  portada, índices ni anexos. Los capítulos 1–4 ocupan hoy 35, así que hay que
-  recortar antes de la entrega final, que además sumará tres capítulos más.
-- Dos párrafos se salen del margen unos 7 pt por la palabra "Mantenimiento" en
-  celdas estrechas de tabla.
+- **Extensión.** Sigue siendo el único pendiente estructural: el documento está
+  completo. `docs/instrucciones.md` fija un máximo de 30 páginas sin contar
+  portada, índices ni anexos —las referencias sí cuentan—, y una primera poda
+  bajó el cuerpo computable de **57 a 48 páginas** (cuerpo 1–45 más tres de
+  referencias): el backlog se movió al Anexo F (−5) y se comprimió la prosa de
+  los capítulos 1, 3 y 4. Reparto actual: cap. 1 → 4 pp., cap. 2 → 1, cap. 3 →
+  13, cap. 4 → 8, cap. 5 → 12, cap. 6 → 4, cap. 7 → 3, referencias → 3. Para
+  llegar a 30 quedan por decidir recortes de fondo: mover a anexos la
+  comparativa de ideas (cap. 3) y las tablas DoR/DoD, el cronograma y el
+  presupuesto (caps. 4 y 5), y condensar el capítulo 5, hoy el segundo más
+  extenso.
+- **Métricas del capítulo 5.** La tabla de desempeño de los modelos omite el
+  coeficiente de determinación de los vasos: el valor registrado en
+  `backend/docs/CONSUMPTION_MODEL.md` coincide exactamente con el del agua
+  embotellada, lo que parece un error de transcripción. Hay que regenerarlo
+  (`load_consumption.py` → `train_consumption.py`, en WSL2) y completar la celda.
+- **Capturas de la aplicación.** El capítulo 5 ganaría con dos o tres capturas
+  de la interfaz y del mapa con la ruta, en un anexo F que no computa para la
+  extensión. Requieren levantar el prototipo con la clave de Google Maps.

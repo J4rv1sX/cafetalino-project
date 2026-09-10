@@ -1,0 +1,49 @@
+\section{Conclusiones y trabajo futuro}\label{conclusiones-y-trabajo-futuro}
+
+El trabajo partió de un problema verificable en la operación de Cafetalino: un esquema de reabastecimiento apoyado en calendarios fijos y en la experiencia del operador, que produce a la vez visitas a máquinas que aún tienen insumos y desabastecimientos en las que se agotan antes de lo previsto. La propuesta lo abordó anticipando el consumo de cada emplazamiento a partir del registro histórico de reposiciones que la empresa ya lleva, convirtiendo esa proyección en una lista de máquinas que requieren atención y ordenando su visita sobre tiempos de conducción reales. Su validez descansa en que no exige instrumentar las máquinas, cuesta al mes menos que las visitas evitables que suprime y deja la decisión final en el operador, a quien informa en lugar de sustituir. Este capítulo contrasta lo alcanzado con los objetivos planteados, delimita la aportación y sus límites, y señala las líneas que el trabajo deja abiertas.
+
+\subsection{Cumplimiento de los objetivos}\label{cumplimiento-de-los-objetivos}
+
+El objetivo general perseguía mejorar la gestión del reabastecimiento reduciendo las visitas innecesarias y los desabastecimientos mediante un sistema de predicción de la demanda y planificación dinámica de rutas. Los cinco objetivos específicos que lo desagregan se contrastan en la Tabla~\ref{tab:cumplimiento-de-los-objetivos}, con el resultado obtenido y el lugar del documento donde reside la evidencia que lo respalda, de modo que el cumplimiento pueda verificarse y no solo afirmarse.
+
+\captionof{table}{Contraste de los objetivos específicos con los resultados obtenidos}\label{tab:cumplimiento-de-los-objetivos}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.26}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.50}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.24}}@{}}
+\toprule\noalign{}
+\textbf{Objetivo específico} & \textbf{Resultado alcanzado} & \textbf{Evidencia} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Caracterizar los patrones históricos de consumo y reabastecimiento. & Alcanzado. Los treinta y seis identificadores de equipo del archivo se consolidaron en diecisiete ubicaciones canónicas por coordenada, y de las lecturas activas quedaron 2.439 observaciones útiles tras descartar las que carecían de historial previo. & Apartado~\ref{origen-y-preparacion-de-los-datos} \\
+Desarrollar un módulo de estimación de reposición sin hardware adicional. & Alcanzado. Cinco modelos independientes, uno por insumo, acompañados de bandas de incertidumbre cuya cobertura empírica se verificó sobre pliegues no vistos en lugar de declararse. & Tabla~\ref{tab:desempeno-de-los-modelos} \\
+Desarrollar un módulo de optimización de recorridos dinámicos. & Alcanzado. El recorrido se construye sobre la matriz de tiempos de conducción reales, parte de la posición del operador y suma el tiempo de servicio de cada máquina. & Apartado~\ref{modulo-de-enrutamiento-dinamico} \\
+Desarrollar una interfaz web de apoyo a la decisión. & Alcanzado. La aplicación organiza la jornada en tres columnas y muestra en cada tarjeta el intervalo además de la estimación puntual, para que el operador reserve su criterio ante bandas anchas. & Apartado~\ref{interfaz-web-de-apoyo-a-la-decision} \\
+Evaluar el desempeño frente al esquema de rutas fijas actual. & Parcialmente alcanzado. La evaluación fuera de línea se ejecutó y sus métricas están reportadas; el contraste operativo contra el esquema vigente quedó diseñado con umbrales decididos de antemano, pero no ejecutado. & Apartado~\ref{criterio-final-de-validacion} \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia}
+
+El quinto objetivo merece discusión explícita por ser el único que no se cierra. Su cumplimiento pleno exige el piloto de ocho semanas comprometido en los criterios de éxito de la Tabla~\ref{tab:criterios-de-exito}, cuyo periodo excede el horizonte del trabajo académico y depende de la disponibilidad del personal de la empresa. Sí quedó resuelta la condición que hace posible esa evaluación: los indicadores tienen ahora definición operativa e instrumento de registro, y la regla de aprobación fija umbrales anteriores a la obtención de los datos, incluido el que refutaría la hipótesis central del trabajo. La diferencia no es menor, porque un criterio establecido de antemano impide que el resultado se acomode después a la interpretación más favorable.
+
+\subsection{Aportaciones y limitaciones}\label{aportaciones-y-limitaciones}
+
+La aportación no reside en los algoritmos empleados, que son estándar, sino en mostrar que un registro administrativo que la empresa ya lleva por obligación contable contiene señal suficiente para decidir la logística de reposición sin instrumentar las máquinas. El estado del arte revisado atiende mayoritariamente a redes que disponen de telemetría, condición que la pequeña y mediana empresa del sector en el contexto local no cumple ni puede costear en el corto plazo, de modo que la brecha cubierta es la de operar con el dato que existe en lugar del que sería deseable. A ello se suma el registro documentado de lo que no funcionó —tres variantes de variables descartadas y la recalibración de unas bandas cuya cobertura nominal no se sostenía empíricamente—, que delimita hasta dónde llega el enfoque y ahorra ese recorrido a quien lo retome.
+
+Las limitaciones deben enunciarse con la misma claridad. El coeficiente de determinación obtenido, entre 0,27 y 0,37, indica que parte sustancial de la variabilidad del consumo permanece sin explicar, por una causa informativa antes que algorítmica: el histórico registra cuándo y cuánto se repuso, pero no la afluencia de personas ni los factores que la determinan. La red es además pequeña, diecisiete ubicaciones, lo que obliga a reportar cualquier contraste de forma descriptiva y limita la generalización de las cifras a redes de otro tamaño. Por último, el recorrido que entrega el optimizador es una construcción de buena calidad y no un óptimo demostrado, decisión deliberada para privilegiar la respuesta inmediata, cuya diferencia práctica es reducida hoy pero dejaría de serlo si la red creciera.
+
+\subsection{Líneas de trabajo futuro}\label{lineas-de-trabajo-futuro}
+
+Los cambios técnicos previstos sobre el sistema construido, la deuda técnica pendiente y el ciclo de vida estimado se detallaron ya en el apartado~\ref{cambios-previstos-y-ciclo-de-vida} y no se reiteran aquí. Las líneas que siguen se sitúan en el plano de las perspectivas que el trabajo abre más allá del caso de Cafetalino, ordenadas por su capacidad de superar las limitaciones recién enunciadas.
+
+La primera es la incorporación de fuentes externas de demanda. Un calendario académico y de feriados, la condición climática y la agenda de eventos de cada zona aportarían la información de afluencia que el histórico no contiene, y son por tanto la vía con mayor recorrido esperado para elevar el techo predictivo identificado. Su efecto no sería solo de exactitud, ya que convertiría un modelo reactivo, que extrapola el comportamiento pasado de cada emplazamiento, en uno capaz de anticipar cambios de régimen como el inicio de un periodo lectivo o un feriado prolongado.
+
+La segunda es una estrategia híbrida de instrumentación selectiva. En lugar de la disyuntiva entre instrumentar toda la red o ninguna máquina, cabe dotar de telemetría solo a los emplazamientos de mayor rotación y emplear su lectura directa para corregir la predicción del resto, que comparte con ellos calendario y patrón de afluencia. Esa vía preserva la ventaja económica que da sentido a la propuesta y permite cuantificar el error real del enfoque sin instrumentación, que hoy solo puede estimarse indirectamente.
+
+La tercera es la transferibilidad. Lo que el sistema aprovecha no es una propiedad de las bebidas calientes sino la estructura del dato —visita, intervalo transcurrido y cantidad repuesta—, común a cualquier operación de reposición periódica que documente sus visitas, de modo que la aportación se proyecta a otras redes de expendio automático y, más ampliamente, a la reposición de puntos de venta menudos, al mantenimiento de equipamiento distribuido o a la lectura de medidores. La cuarta es el escalado logístico: el enrutamiento de varios vehículos con ventanas horarias y restricciones de capacidad, que dejaría de ser una mejora opcional para volverse un requisito si la red crece o si se incorpora un segundo operador en ruta simultánea.
+
+En síntesis, el trabajo deja demostrado que la propuesta es construible con tecnologías de uso libre, por un equipo reducido y con una inversión modesta, y que el histórico disponible contiene señal aprovechable por encima del promedio simple de cada máquina. Queda por demostrar que esa señal basta para mejorar la operación real, cuestión que solo el piloto resuelve y que el criterio del capítulo anterior permite decidir sin ambigüedad. Haber enunciado por anticipado qué resultado obligaría a abandonar el enfoque es lo que convierte la propuesta en una innovación verificable y no en una expectativa.

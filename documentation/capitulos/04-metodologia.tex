@@ -39,43 +39,13 @@ La Tabla~\ref{tab:roles-del-equipo-del-trabajo} resume los roles y responsabilid
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Francisco J. Camacho Dorado & Product Owner.
-
-Equipo de Desarrollo. & Definir prioridades.
-
-Validar entregables.
-
-Asegurar el alineamiento con las necesidades de Cafetalino.
-
-Desarrollo de modelos analíticos.
-
-Documentación técnica. \\
-Mario Alberto Díaz Zetina & Scrum Master.
-
-Equipo de Desarrollo. & Coordinar las actividades del equipo.
-
-Facilitar reuniones.
-
-Gestionar impedimentos.
-
-Investigación.
-
-Análisis de datos.
-
-Validación de resultados. \\
-Ángel Zait Hernández López & Equipo de Desarrollo. & Desarrollo de modelos analíticos.
-
-Documentación técnica. \\
-Guillermo Sais de la Torre & Equipo de Desarrollo. & Investigación.
-
-Análisis de datos.
-
-Validación de resultados. \\
+Francisco J. Camacho Dorado & Product Owner y Equipo de Desarrollo. & Definir prioridades; validar entregables; asegurar el alineamiento con las necesidades de Cafetalino; desarrollo de modelos analíticos; documentación técnica. \\
+Mario Alberto Díaz Zetina & Scrum Master y Equipo de Desarrollo. & Coordinar las actividades del equipo; facilitar reuniones; gestionar impedimentos; investigación; análisis de datos; validación de resultados. \\
+Ángel Zait Hernández López & Equipo de Desarrollo. & Desarrollo de modelos analíticos; documentación técnica. \\
+Guillermo Sais de la Torre & Equipo de Desarrollo. & Investigación; análisis de datos; validación de resultados. \\
 \end{longtable}
 
 \fuente{Fuente: Elaboración propia}
-
-La distribución muestra un equipo reducido en el que los cuatro integrantes asumen simultáneamente el rol de desarrollador, de modo que las responsabilidades de Product Owner y de Scrum Master se suman a la carga de desarrollo en lugar de sustituirla.
 
 \subsubsection{Artefactos}\label{artefactos}
 
@@ -83,22 +53,13 @@ Scrum especifica tres artefactos principales \citep{schwaber2020}: la lista de t
 
 \textbf{Lista de tareas pendientes del proyecto (Product Backlog)}
 
-La lista de tareas pendientes del proyecto se gestionará a través de Jira, como muestra la Figura \ref{fig:lista-de-tareas-pendientes-del} del Anexo~\ref{anexo-capturas-de-jira}, y se presenta en detalle en el apartado \ref{backlog-inicial-y-estimaciuxf3n-del-nivel-de-dificultad}. Allí se exponen las historias de usuario necesarias para desarrollar el sistema de reabastecimiento predictivo y enrutamiento dinámico propuesto para Cafetalino, cuyos componentes son: realizar un análisis exploratorio de los datos disponibles, desarrollar un modelo predictivo de reabastecimiento, desarrollar un modelo de enrutamiento dinámico y desarrollar una interfaz de usuario para interactuar con estos modelos. Cada historia se refina en elementos más pequeños y precisos, se describe, se le asigna un orden de prioridad y se estima su nivel de complejidad antes de poder incorporarse a una iteración \citep{schwaber2020}.
+La lista de tareas pendientes del proyecto se gestionará a través de Jira, como muestra la Figura \ref{fig:lista-de-tareas-pendientes-del} del Anexo~\ref{anexo-capturas-de-jira}, y reúne las historias de usuario necesarias para desarrollar el sistema propuesto para Cafetalino, cuyos componentes son: el análisis exploratorio de los datos disponibles, el modelo predictivo de reabastecimiento, el modelo de enrutamiento dinámico y la interfaz de usuario para interactuar con ambos. Cada historia se refina en elementos más pequeños y precisos, se describe, se le asigna un orden de prioridad y se estima su nivel de complejidad antes de poder incorporarse a una iteración \citep{schwaber2020}.
+
+La lista inicial completa se recoge en la Tabla~\ref{tab:backlog-inicial-prioridad-y-nivel} del Anexo~\ref{anexo-backlog-inicial}, con las historias agrupadas por épica, sus criterios de aceptación, su prioridad y la estimación de su nivel de complejidad. Esta última se expresa en puntos de historia (Story Points, SP) siguiendo la serie de Fibonacci, un criterio que obliga a diferenciar tamaños relativos en lugar de intentar precisiones ilusorias; la asignación se realiza en consenso con todo el equipo y pondera la dificultad técnica de la tarea, la incertidumbre asociada a ella y el esfuerzo estimado. La estimación sitúa el techo de dificultad en dos historias de 8 puntos —la construcción del modelo predictivo y el cálculo de la ruta más corta—, que son las que concentran la incertidumbre técnica del proyecto; el resto se reparte entre 2 y 5 puntos, con los valores más bajos en las historias de presentación, que se apoyan en componentes ya conocidos por el equipo.
 
 \textbf{Sprint Backlog}
 
-El registro de tareas de cada iteración —el plan que los desarrolladores elaboran para guiar su trabajo, con el objetivo del sprint y el subconjunto de historias seleccionadas \citep{schwaber2020}— se extraerá de esa misma lista y se manejará también en Jira, tal como se aprecia en la Figura \ref{fig:registro-de-tareas-de-una}, donde las historias aparecen clasificadas según su estado: pendiente, en ejecución, en revisión y terminada. La herramienta permitirá garantizar que cada historia de usuario se ha refinado, se le ha asignado un orden de prioridad, se ha estimado su nivel de complejidad y, fundamentalmente, que cumple las definiciones de Listo del apartado \ref{definiciones-de-listocompletado-readydone}. En cada iteración se desarrollará uno de los componentes del sistema:
-
-\begin{itemize}
-\item
-  Realizar un análisis exploratorio de datos del historial de recarga de insumos de la red de máquinas dispensadoras de Cafetalino.
-\item
-  Desarrollar un modelo predictivo de reabastecimiento predictivo, utilizando datos históricos, sin la instalación de hardware adicional.
-\item
-  Estructurar un modelo enrutamiento dinámico sobre la base de la predicción de la demanda de reposición de insumos de cada equipo.
-\item
-  Desarrollar una interfaz web para interactuar con los modelos desarrollados.
-\end{itemize}
+El registro de tareas de cada iteración —el plan que los desarrolladores elaboran para guiar su trabajo, con el objetivo del sprint y el subconjunto de historias seleccionadas \citep{schwaber2020}— se extraerá de esa misma lista y se manejará también en Jira, tal como se aprecia en la Figura \ref{fig:registro-de-tareas-de-una}, donde las historias aparecen clasificadas según su estado: pendiente, en ejecución, en revisión y terminada. La herramienta permitirá garantizar que cada historia de usuario se ha refinado, se le ha asignado un orden de prioridad, se ha estimado su nivel de complejidad y, fundamentalmente, que cumple las definiciones de Listo del apartado \ref{definiciones-de-listocompletado-readydone}. Cada iteración se dedicará a uno de los cuatro componentes ya enunciados, en ese mismo orden: el análisis exploratorio del historial de recargas, el modelo predictivo a partir de datos históricos y sin hardware adicional, el modelo de enrutamiento dinámico construido sobre la demanda proyectada y la interfaz web que da acceso a ambos.
 
 \textbf{Incremento}
 
@@ -110,7 +71,7 @@ Scrum contempla cinco eventos \citep{schwaber2020}: la iteración o Sprint, que 
 
 Para desarrollar el sistema de reabastecimiento predictivo y enrutamiento dinámico se ha establecido que cada iteración dure dos semanas y se han proyectado cuatro iteraciones, es decir ocho semanas efectivas de trabajo entre agosto y septiembre de 2026, tal como se observa en la Figura \ref{fig:iteraciones-del-proyecto} del Anexo~\ref{anexo-capturas-de-jira}. En una iteración no se harán cambios que pongan en riesgo su objetivo o disminuyan la calidad, aunque el alcance podrá aclararse o renegociarse con el Product Owner conforme se aprenda más sobre el producto \citep{schwaber2020}.
 
-Las cuatro reuniones serán dirigidas por Mario Diaz (Scrum Master) y atenderán los lineamientos de Francisco Camacho (Product Owner). La planificación abrirá cada iteración definiendo su objetivo y las historias de usuario comprometidas, que se subdividirán en piezas implementables en un día como máximo; las reuniones de Scrum se celebrarán dos veces por semana para revisar el avance y coordinar el trabajo, y los lunes que coincidan con el inicio de una iteración se llevarán a cabo después de la planificación; la revisión cerrará el sprint verificando el cumplimiento de lo comprometido; y la retrospectiva, celebrada antes de la planificación siguiente, analizará qué hizo bien el equipo, qué dificultades aparecieron y qué ajustes mejorarían su rendimiento. La Tabla~\ref{tab:eventos-de-scrum-para-el} resume su frecuencia, duración y objetivo.
+Las cuatro reuniones serán dirigidas por Mario Diaz (Scrum Master) y atenderán los lineamientos de Francisco Camacho (Product Owner). Las historias comprometidas en la planificación se subdividirán en piezas implementables en un día como máximo, y la retrospectiva se celebrará antes de la planificación siguiente, de modo que sus acuerdos se apliquen ya en la iteración que se abre. La Tabla~\ref{tab:eventos-de-scrum-para-el} resume la frecuencia, la duración y el objetivo de cada evento.
 
 \captionof{table}{Eventos de Scrum para el Proyecto}\label{tab:eventos-de-scrum-para-el}
 
@@ -150,195 +111,6 @@ Lunes 18:30 - 19:00 & 30 min & Identificar oportunidades de mejora y definir acc
 \end{longtable}
 
 \fuente{Fuente: Elaboración propia}
-
-\subsection{Backlog inicial y estimación del nivel de dificultad}\label{backlog-inicial-y-estimaciuxf3n-del-nivel-de-dificultad}
-
-La lista de tareas pendientes del proyecto (Product Backlog) inicial puede observarse en la Tabla~\ref{tab:backlog-inicial-prioridad-y-nivel}, donde se presentan las historias de usuario agrupadas por épica, sus criterios de aceptación, su prioridad y la estimación de su nivel de complejidad. Esta última se expresa en puntos de historia (Story Points, SP) siguiendo la serie de Fibonacci, un criterio que obliga a diferenciar tamaños relativos en lugar de intentar precisiones ilusorias. La asignación se realiza en consenso con todo el equipo de trabajo y pondera tres factores: la dificultad técnica de la tarea, la incertidumbre asociada a ella y el esfuerzo que se estima necesario.
-
-\captionof{table}{Backlog inicial, prioridad y nivel de dificultad estimado de historias de usuario}\label{tab:backlog-inicial-prioridad-y-nivel}
-
-{\small\setlength{\tabcolsep}{4pt}
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0571}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3600}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3175}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1300}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1300}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-\textbf{N.º}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\textbf{Épica / Historia de usuario}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\textbf{Criterios de Aceptación}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\textbf{Prioridad}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\textbf{Nivel de dificultad (SP)}
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-& \textbf{Origen de datos de consumo} & & & \\
-\textbf{1} & Como analista de operaciones, quiero que los registros históricos de recargas, en hoja de cálculo, se carguen en una base de datos estructurada, para que los datos de consumo se puedan consultar y modelar de manera confiable en lugar de procesar un CSV cada vez. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  La BD estructurada almacena los registros históricos correctamente.
-\end{itemize}
-
-\begin{itemize}
-\item
-  Consultas optimizadas sin depender de la lectura de un CSV plano.
-\end{itemize}
-\end{minipage} & \textbf{1} & \textbf{5} \\
-\textbf{2} & Como ingeniero de datos, quiero que la capacidad de los depósitos de mezcla y de agua de cada máquina se almacene junto a su ubicación, para que las predicciones puedan reportar el stock restante como un porcentaje de lo que realmente puede contener cada máquina específica. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  El esquema de BD incluye los campos mix\_capacity y water\_capacity vinculados a la ubicación de cada máquina.
-\item
-  Permite cálcular la capacidad máxima por máquina.
-\end{itemize}
-\end{minipage} & \textbf{1} & \textbf{3} \\
-\textbf{3} & Como analista, quiero scripts exploratorios sobre los datos de consumo, para verificar las lecturas antes de su uso para entrenar un modelo. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Scripts ejecutables para análisis exploratorio de datos (EDA).
-\item
-  Verificación de lecturas y limpieza de anomalías previa al entrenamiento.
-\end{itemize}
-\end{minipage} & \textbf{2} & \textbf{3} \\
-\textbf{4} & Como mantenedor, quiero que el script cargador de datos tolere un CSV actualizado, con nuevas filas y nombres de máquinas corregidos, sin trabajo manual, para que la actualización del conjunto de datos no requiera reescribir el origen de datos. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  El script cargador procesa nuevos CSVs sin requerir reescritura de código.
-\item
-  El script soporta corrección automática de nombres de máquinas e inserción de nuevas filas.
-\end{itemize}
-\end{minipage} & \textbf{2} & \textbf{5} \\
-& \textbf{Modelo de predicción de consumo} & & & \\
-\textbf{5} & Como gerente de operaciones, quiero un modelo que prediga cuánto de agua embotellada, vasos, mezcla de café, mezcla de chocolate y mezcla de capuchino necesitará una máquina en su próxima visita, para saber qué reabastecer antes de que el técnico viaje. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Modelo entrenado para predecir la demanda de los 5 insumos clave.
-\item
-  Entrega las estimaciones para la siguiente visita de recarga.
-\end{itemize}
-\end{minipage} & \textbf{3} & \textbf{8} \\
-\textbf{6} & Como científico de datos, quiero que el modelo use el historial de recargas propio de cada máquina: promedios históricos y tasas de consumo diario, para que las predicciones reflejen el patrón de uso real de esa máquina en lugar de un promedio general de la red. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Incorpora variables de promedios históricos y tasa diaria individual por máquina.
-\item
-  Realiza una predicción personalizada basada en el uso histórico específico.
-\end{itemize}
-\end{minipage} & \textbf{3} & \textbf{5} \\
-\textbf{7} & Como científico de datos, quiero que la evaluación del modelo se realice a través de validación cruzada en lugar de una sola división de entrenamiento/prueba, para que las mejoras reportadas sean reales y no producto de una división afortunada. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Validación cruzada (Cross-Validation) implementada en el flujo de evaluación.
-\item
-  Métricas consolidadas sobre múltiples iteraciones.
-\end{itemize}
-\end{minipage} & \textbf{3} & \textbf{3} \\
-\textbf{8} & Como gerente de operaciones, quiero predicciones para \emph{todas} las máquinas a la vez, no de una en una, para poder comparar qué máquinas son más urgentes en una sola vista. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Módulo que genera y retorna la predicción masiva de toda la red de máquinas en una sola llamada.
-\end{itemize}
-\end{minipage} & \textbf{4} & \textbf{5} \\
-& \textbf{Interfaz de usuario} & & & \\
-\textbf{9} & Como usuario boliviano, quiero que las etiquetas de la aplicación: nombres de máquinas, categorías de stock, unidades, entre otros, se muestren en español, para que la herramienta coincida con el idioma con el que trabaja el equipo. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Código backend y UI con soporte para etiquetas español.
-\end{itemize}
-\end{minipage} & \textbf{1} & \textbf{2} \\
-\textbf{10} & Como usuario de la interfaz, quiero elegir una fecha objetivo y obtener las predicciones de consumo para esa fecha y así poder planificar una ruta para un día específico en lugar de solo "hoy". & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Componente de selección de fecha en la UI conectado al parámetro de fecha de la API.
-\item
-  Respuestas adaptadas a fechas futuras solicitadas.
-\end{itemize}
-\end{minipage} & \textbf{4} & \textbf{5} \\
-\textbf{11} & Como operador de recarga, quiero que el stock predicho de cada máquina se muestre como cantidad \emph{restante} y porcentaje, no como consumo predicho bruto, para poder ver de un vistazo qué tan cerca está una máquina de quedarse sin insumos. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  API y UI calculan y presentan la cantidad absoluta restante y el \% de stock disponible por máquina.
-\end{itemize}
-\end{minipage} & \textbf{4} & \textbf{3} \\
-\textbf{12} & Como operador de recarga, quiero un rango de predicción (bajo/alto), no solo un número único, para entender la incertidumbre del modelo y no confiar ciegamente en una estimación puntual. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  El algoritmo entrega rangos o intervalos de confianza (estimación baja/alta).
-\item
-  Despliegue visual del rango de incertidumbre en la pantalla.
-\end{itemize}
-\end{minipage} & \textbf{4} & \textbf{5} \\
-\textbf{13} & Como miembro del personal de operaciones, quiero ver cuántos días han pasado desde la última recarga de la máquina junto a su predicción, para poder juzgar si la predicción se basa en datos recientes o desactualizados. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Despliegue visible de los días transcurridos desde el último reabastecimiento.
-\item
-  Indicador de frescura de los datos.
-\end{itemize}
-\end{minipage} & \textbf{4} & \textbf{2} \\
-\textbf{14} & Como miembro del personal de operaciones, quiero mover una máquina entre una lista de "disponibles" y una lista de "por recargar" arrastrando su tarjeta, para que la creación de la lista de recarga de hoy sea inmediata en lugar de llenar un formulario. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Funcionalidad Drag-and-Drop entre la lista de máquinas disponibles y pendientes de recarga.
-\item
-  Actualización en tiempo real del estado de la tarjeta.
-\end{itemize}
-\end{minipage} & \textbf{5} & \textbf{5} \\
-& \textbf{Modelo de enrutamiento dinámico} & & & \\
-\textbf{15} & Como usuario de la interfaz, quiero que las máquinas que he marcado para recargar se envíen directamente al modelo de enrutamiento dinámico, para pasar de "qué máquinas necesitan stock" a "en qué orden las visito" sin tener que volver a ingresar datos. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Conexión directa del estado de las máquinas "Por recargar" con el módulo de planificación sin reingreso manual de datos.
-\end{itemize}
-\end{minipage} & \textbf{5} & \textbf{3} \\
-\textbf{16} & Como operador de recarga, quiero que la aplicación calcule la ruta más corta entre las máquinas que he seleccionado para recargar, para no tener que ordenar las paradas manualmente. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Algoritmo de optimización de rutas ejecutado sobre el grupo de máquinas seleccionadas.
-\item
-  Genera automáticamente la secuencia de paradas con menor recorrido.
-\end{itemize}
-\end{minipage} & \textbf{5} & \textbf{8} \\
-\textbf{17} & Como técnico de ruta, quiero que el tiempo estimado de la ruta incluya el tiempo de servicio en cada parada, no solo el tiempo de recorrido, para que la hora estimada de llegada (ETA) sea realista. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Suma una estimación de tiempo de atención/servicio técnico por máquina al cálculo del tiempo total y ETA.
-\end{itemize}
-\end{minipage} & \textbf{5} & \textbf{3} \\
-\textbf{18} & Como técnico de ruta, quiero que mi ubicación actual se trate como el punto de inicio de la ruta en lugar de una parada que necesita servicio, para que el plan no me pida "recargar" mi propia posición inicial. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Detección de ubicación GPS actual como punto de partida u origen.
-\item
-  El origen no computa como parada de servicio ni pide recarga.
-\end{itemize}
-\end{minipage} & \textbf{5} & \textbf{3} \\
-& \textbf{Documentación} & & & \\
-\textbf{19} & Como científico de datos, quiero que la elección de características: día de la semana, mes, tendencia, promedios móviles, sean evaluadas y los resultados negativos documentados, no solo los que funcionaron, para que cambios futuros en el modelo no vuelvan a probar enfoques que ya demostraron no ser útiles. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Documentación detallada de experimentos de ablación de variables y resultados descartados.
-\end{itemize}
-\end{minipage} & \textbf{5} & \textbf{3} \\
-\textbf{20} & Como nuevo colaborador, quiero Manuales de Usuario precisos para el backend/frontend y un proceso de modelado documentado, incluidos los intentos fallidos, para poder poner en marcha el proyecto y entender por qué el modelo está construido de esa forma. & \begin{minipage}[t]{\linewidth}\raggedright
-\begin{itemize}
-\item
-  Documentación detallada en Manuales de Usuario de backend y frontend con instrucciones de instalación y decisiones técnicas.
-\end{itemize}
-\end{minipage} & \textbf{6} & \textbf{2} \\
-\end{longtable}}
-
-\fuente{Fuente: Elaboración propia}
-
-La estimación sitúa el techo de dificultad en dos historias de 8 puntos —la construcción del modelo predictivo y el cálculo de la ruta más corta—, que son las que concentran la incertidumbre técnica del proyecto; el resto se reparte entre 2 y 5 puntos, con los valores más bajos en las historias de presentación, que se apoyan en componentes ya conocidos por el equipo.
 
 \subsection{Definiciones de Listo/Completado (Ready/Done)}\label{definiciones-de-listocompletado-readydone}
 
@@ -462,25 +234,6 @@ En el proceso de desarrollo de software LEAN, los indicadores de rendimiento ayu
 
 En el desarrollo del sistema propuesto, la aplicación de LEAN se realizará mediante la estrategia cíclica de validación construir-medir-aprender, que es el núcleo de esta metodología y busca transformar una idea en un MVP mediante ciclos rápidos de iteración, evaluando la respuesta del usuario y decidiendo si se debe reorientar la lógica de desarrollo del proyecto o continuar con la línea de trabajo aplicada. Sus tres etapas, en el marco del proyecto, se describen a continuación.
 
-\textbf{Construir}
+\textbf{Construir} el producto mínimo viable, constituido por el modelo predictivo de demanda, el componente de optimización de rutas y la interfaz de visualización para apoyo a la toma de decisiones. \textbf{Medir} su desempeño mediante los indicadores de éxito de la Tabla \ref{tab:criterios-de-exito}, definidos en la etapa Definir, comparando los resultados obtenidos contra la línea base que hoy utiliza Cafetalino. Y \textbf{aprender} de esos resultados para identificar oportunidades de mejora, ajustar los parámetros de los modelos y refinar la solución antes de una posible implementación operativa.
 
-Desarrollar el producto mínimo viable constituido por:
-
-\begin{itemize}
-\item
-  Modelo predictivo de demanda,
-\item
-  Componente de optimización de rutas,
-\item
-  Interfaz de visualización para apoyo a la toma de decisiones.
-\end{itemize}
-
-\textbf{Medir}
-
-Evaluar el desempeño del MVP mediante los indicadores de éxito de la Tabla \ref{tab:criterios-de-exito}, definidos en la etapa Definir, y comparar los resultados obtenidos contra la línea base actualmente utilizada por Cafetalino.
-
-\textbf{Aprender}
-
-Analizar los resultados obtenidos para identificar oportunidades de mejora, ajustar parámetros de los modelos predictivos y refinar la solución antes de una posible implementación operativa.
-
-En conjunto, Scrum aporta la estructura con la que se organizará y verificará el trabajo —roles, artefactos, eventos y las definiciones de Listo y Completado—, mientras que LEAN aporta el criterio con el que se decidirá si lo construido genera valor para Cafetalino, a través de las hipótesis enunciadas y de los indicadores alineados con los criterios de éxito. Ambos marcos convergen en el mismo punto: cada incremento debe poder medirse contra la operación actual de la empresa antes de darse por bueno. El siguiente capítulo describe la implementación de la propuesta, es decir, cómo se construyen los cuatro componentes del sistema bajo esta metodología, con qué tecnologías y con qué estimación de tiempo y coste.
+En conjunto, Scrum aporta la estructura con la que se organizará y verificará el trabajo —roles, artefactos, eventos y las definiciones de Listo y Completado—, mientras que LEAN aporta el criterio con el que se decidirá si lo construido genera valor para Cafetalino. Ambos marcos convergen en el mismo punto: cada incremento debe poder medirse contra la operación actual de la empresa antes de darse por bueno. El siguiente capítulo describe cómo se construyen los cuatro componentes del sistema bajo esta metodología, con qué tecnologías y con qué estimación de tiempo y coste.

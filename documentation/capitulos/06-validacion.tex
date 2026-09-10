@@ -1,0 +1,56 @@
+\section{Validación y diseño experimental}\label{validacion-y-diseno-experimental}
+
+El capítulo anterior cerró con una pregunta abierta: construido el sistema y previsto su despliegue, falta el criterio con el que se decidirá si genera realmente el valor esperado. Responderla exige convertir los criterios de éxito enunciados en la etapa Definir y las hipótesis de valor formuladas bajo el enfoque LEAN en algo verificable, es decir, en indicadores con una definición operativa precisa, un instrumento de registro y un umbral de aprobación. Este capítulo delimita primero qué se somete a validación y con qué diseño experimental, y establece después la regla con la que se declarará el producto mínimo viable validado, ajustable o refutado.
+
+\subsection{Alcance de la validación y diseño del piloto}\label{alcance-de-la-validacion-y-diseno-del-piloto}
+
+Lo que se valida es el producto mínimo viable definido en el capítulo de metodología —el modelo predictivo de consumo, el módulo de optimización de recorridos y la interfaz de apoyo a la decisión—, operando sobre las diecisiete ubicaciones activas de la red. Queda fuera lo que el alcance excluyó desde el inicio: al no instalarse sensores ni telemetría, el sistema no mide el nivel real de existencias sino que lo infiere del histórico de reposiciones. La distinción es determinante, porque lo que se pone a prueba no es la exactitud de una medición física sino la calidad de una decisión logística tomada sin instrumentar las máquinas, que es precisamente la apuesta del proyecto. La validación fuera de línea, ya ejecutada y reportada en la Tabla~\ref{tab:desempeno-de-los-modelos}, responde a si el modelo aprende algo aprovechable; la validación operativa que aquí se diseña responde a una pregunta más exigente, la de si esa capacidad se traduce en menos visitas inútiles y menos desabastecimientos, y es la que sustenta el criterio final.
+
+El contraste se realiza mediante un piloto de ocho semanas en operación asistida, coherente con el periodo de medición comprometido en la Tabla~\ref{tab:criterios-de-exito} y con la primera fase del ciclo de vida descrito en el capítulo anterior. Durante ese lapso el sistema opera en paralelo con el procedimiento vigente y no lo sustituye: cada jornada emite su recomendación —las máquinas que a su juicio requieren recarga y el recorrido propuesto para atenderlas— mientras el operador ejecuta su esquema habitual de rutas por zonas, y ambas decisiones quedan registradas junto con lo efectivamente repuesto. La comparación en paralelo se prefiere al reemplazo directo porque no arriesga la continuidad del servicio mientras el sistema no ha demostrado su fiabilidad, y porque evita el sesgo de contrastar dos periodos distintos, en los que la afluencia y la composición de la red no son equiparables.
+
+La unidad de análisis es la visita y cada máquina actúa como su propio control, ya que la recomendación y la decisión del operador se emiten sobre la misma máquina el mismo día; la línea base es el procedimiento actual, con las cifras de referencia recogidas en la etapa Definir. Conviene declarar sin rodeos una limitación del diseño: con diecisiete ubicaciones, el contraste se reporta de forma descriptiva, acompañando cada diferencia observada de su intervalo de confianza, sin perseguir una significación estadística formal que con ese tamaño de red sería difícilmente concluyente. El propósito del piloto es sustentar una decisión de gestión con evidencia cuantificada, no establecer un resultado inferencial.
+
+\subsubsection{Definición operativa de los indicadores}\label{definicion-operativa-de-los-indicadores}
+
+Los cuatro criterios de éxito de la Tabla~\ref{tab:criterios-de-exito} enuncian metas pero no dicen cómo se cuenta cada suceso, y sin esa precisión la validación quedaría a merced de la interpretación posterior. La Tabla~\ref{tab:definicion-operativa-de-los-indicadores} cierra esa brecha fijando, para cada indicador, la regla exacta de cómputo y el instrumento con el que se registra durante el piloto, sin repetir las líneas base ni las metas ya establecidas.
+
+\captionof{table}{Definición operativa de los indicadores de validación}\label{tab:definicion-operativa-de-los-indicadores}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.22}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.52}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.26}}@{}}
+\toprule\noalign{}
+\textbf{Indicador} & \textbf{Definición operativa} & \textbf{Instrumento de registro} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Visita innecesaria & Visita en la que ningún insumo requirió una reposición superior al diez por ciento de la capacidad de su depósito. & Parte de recarga, que ya consigna la cantidad repuesta de cada insumo. \\
+Acierto de clasificación & Una máquina requiere recarga si las existencias restantes previstas de algún insumo se agotan antes de la siguiente visita programada; la clasificación emitida se contrasta con lo observado al abrir la máquina. & Comparación entre la recomendación registrada y el parte de recarga de esa visita. \\
+Modificación extraordinaria de ruta & Desvío no planificado del recorrido del día originado por un aviso de desabastecimiento. & Parte diario del operador, con el motivo del desvío. \\
+Incidencia de desabastecimiento & Reclamo o reembolso atribuido a la ausencia de un insumo en la máquina. & Registro de reclamos de la empresa, contrastado con el año anterior. \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia}
+
+La regla de clasificación merece justificación por ser la decisión de mayor incidencia en el resultado. Definir la necesidad de recarga como el agotamiento previsto antes de la próxima visita, y no como un porcentaje fijo de existencias, se corresponde con el horizonte del modelo —que predice el consumo hasta la siguiente visita y no en un plazo fijo de días— y evita penalizar por igual a máquinas de rotación muy distinta. Junto a la exactitud global se vigila por separado la tasa de falsos negativos, esto es, la proporción de máquinas declaradas sin necesidad de recarga que sin embargo se agotan, porque los dos errores no cuestan lo mismo: un falso positivo produce una visita evitable, mientras que un falso negativo produce una máquina vacía, que es justamente el problema que el trabajo pretende resolver.
+
+\subsubsection{Amenazas a la validez}\label{amenazas-a-la-validez}
+
+Cuatro factores condicionan la interpretación de los resultados y conviene enunciarlos antes de obtenerlos. El histórico es desigual entre ubicaciones, de modo que las máquinas incorporadas recientemente tendrán previsiblemente un desempeño inferior y el resultado agregado debe leerse también desagregado por antigüedad. El operador sabe que su trabajo está siendo contrastado, lo que puede alterar su conducta y aproximarla artificialmente a la del sistema. Ocho semanas no cubren el ciclo anual completo, por lo que los indicadores de periodo anual solo admitirán en ese plazo una lectura de tendencia. Y la cobertura empírica de las bandas de predicción se sitúa en torno al ochenta y tres por ciento frente al noventa nominal, según se documentó en el capítulo anterior, de manera que los intervalos deben presentarse al operador como orientación y no como garantía.
+
+\subsection{Criterio final de validación}\label{criterio-final-de-validacion}
+
+Definidos los indicadores y el protocolo, resta establecer la regla con la que se emitirá el veredicto al término del piloto. Se formula como un criterio compuesto y decidido de antemano, de modo que el resultado no dependa de la interpretación posterior de las cifras, y se acompaña de los tres desenlaces que el ciclo Construir--Medir--Aprender contempla.
+
+El producto mínimo viable se declarará validado si, al término de las ocho semanas, se cumplen simultáneamente dos condiciones necesarias y una de no regresión. La primera condición necesaria es que la clasificación de máquinas alcance una exactitud igual o superior al 85 \%, meta ya comprometida en los criterios de éxito, con una tasa de falsos negativos que no supere el 10 \% de las máquinas clasificadas como sin necesidad de recarga. La segunda es que la proporción de visitas innecesarias sobre el conjunto de recomendaciones se sitúe en el 5 \% o por debajo, frente al 10 \% de la línea base. La condición de no regresión exige que ni las modificaciones extraordinarias de ruta ni las incidencias de desabastecimiento se deterioren respecto del mismo periodo del año anterior.
+
+La asimetría entre unas condiciones y otras responde al periodo de medición de cada indicador. La exactitud de clasificación y la tasa de visitas innecesarias se observan en cada visita, de modo que ocho semanas aportan observaciones suficientes para pronunciarse. En cambio, las metas de reducción del 50 \% en modificaciones de ruta y del 30 \% en incidencias están definidas sobre doce meses y frente a bases anuales pequeñas —alrededor de diez eventos al año en el primer caso—, por lo que exigir su cumplimiento en ocho semanas sería estadísticamente ingenuo; durante el piloto operan como salvaguardas frente a un empeoramiento y su verificación plena se pospone a la operación estable.
+
+Del veredicto se siguen tres desenlaces. Perseverar corresponde al cumplimiento de la regla anterior: el sistema pasa a la fase de adopción prevista en el ciclo de vida, sustituyendo progresivamente el esquema de rutas fijas bajo la vigilancia de indicadores descrita en el plan de mantenimiento. Ajustar se activa cuando la exactitud queda entre el 75 \% y el 85 \%, o cuando alcanza la meta pero la tasa de falsos negativos la excede: la propuesta se mantiene y la intervención se dirige a reentrenar el modelo con los datos del propio piloto, revisar el umbral de agotamiento que separa ambas clases y recalibrar las bandas si procede, tras lo cual se ejecuta un segundo ciclo de medición de cuatro semanas.
+
+Pivotar se reserva para el caso en que la exactitud quede por debajo del 75 \%, o en que el sistema no mejore de forma apreciable al método de referencia constituido por el promedio histórico de consumo de cada máquina. Ese resultado no sería un fallo de implementación sino la refutación de la hipótesis central del trabajo: que el registro histórico de reposiciones contiene información suficiente para anticipar la demanda sin instrumentar las máquinas. La propuesta debería entonces reorientarse hacia la captura directa de datos de consumo, aceptando el costo de hardware que el alcance actual excluye deliberadamente. Enunciar ese umbral por anticipado es lo que hace del diseño una validación y no una justificación, porque somete la hipótesis a una prueba que puede reprobar.
+
+Con ello queda establecido el criterio con el que se juzgará la propuesta, cerrando el recorrido que va del problema identificado a la solución construida y de esta a la evidencia con la que se decidirá su adopción. El capítulo siguiente recoge las conclusiones del trabajo, contrastando lo alcanzado con los objetivos planteados al inicio, y señala las líneas de desarrollo que la propuesta deja abiertas.

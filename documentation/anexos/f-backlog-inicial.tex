@@ -1,0 +1,186 @@
+\section{Backlog Inicial del Proyecto}\label{anexo-backlog-inicial}
+
+Se presenta la lista de tareas pendientes del proyecto (Product Backlog) inicial, con las historias de usuario agrupadas por épica, sus criterios de aceptación, su prioridad y la estimación de su nivel de complejidad en puntos de historia. El criterio con el que se elaboró y se estimó esta lista se describe en el apartado \ref{artefactos}.
+
+\captionof{table}{Backlog inicial, prioridad y nivel de dificultad estimado de historias de usuario}\label{tab:backlog-inicial-prioridad-y-nivel}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.0571}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.3175}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1300}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1300}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{N.º}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Épica / Historia de usuario}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Criterios de Aceptación}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Prioridad}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Nivel de dificultad (SP)}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+& \textbf{Origen de datos de consumo} & & & \\
+\textbf{1} & Como analista de operaciones, quiero que los registros históricos de recargas, en hoja de cálculo, se carguen en una base de datos estructurada, para que los datos de consumo se puedan consultar y modelar de manera confiable en lugar de procesar un CSV cada vez. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  La BD estructurada almacena los registros históricos correctamente.
+\end{itemize}
+
+\begin{itemize}
+\item
+  Consultas optimizadas sin depender de la lectura de un CSV plano.
+\end{itemize}
+\end{minipage} & \textbf{1} & \textbf{5} \\
+\textbf{2} & Como ingeniero de datos, quiero que la capacidad de los depósitos de mezcla y de agua de cada máquina se almacene junto a su ubicación, para que las predicciones puedan reportar el stock restante como un porcentaje de lo que realmente puede contener cada máquina específica. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  El esquema de BD incluye los campos mix\_capacity y water\_capacity vinculados a la ubicación de cada máquina.
+\item
+  Permite cálcular la capacidad máxima por máquina.
+\end{itemize}
+\end{minipage} & \textbf{1} & \textbf{3} \\
+\textbf{3} & Como analista, quiero scripts exploratorios sobre los datos de consumo, para verificar las lecturas antes de su uso para entrenar un modelo. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Scripts ejecutables para análisis exploratorio de datos (EDA).
+\item
+  Verificación de lecturas y limpieza de anomalías previa al entrenamiento.
+\end{itemize}
+\end{minipage} & \textbf{2} & \textbf{3} \\
+\textbf{4} & Como mantenedor, quiero que el script cargador de datos tolere un CSV actualizado, con nuevas filas y nombres de máquinas corregidos, sin trabajo manual, para que la actualización del conjunto de datos no requiera reescribir el origen de datos. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  El script cargador procesa nuevos CSVs sin requerir reescritura de código.
+\item
+  El script soporta corrección automática de nombres de máquinas e inserción de nuevas filas.
+\end{itemize}
+\end{minipage} & \textbf{2} & \textbf{5} \\
+& \textbf{Modelo de predicción de consumo} & & & \\
+\textbf{5} & Como gerente de operaciones, quiero un modelo que prediga cuánto de agua embotellada, vasos, mezcla de café, mezcla de chocolate y mezcla de capuchino necesitará una máquina en su próxima visita, para saber qué reabastecer antes de que el técnico viaje. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Modelo entrenado para predecir la demanda de los 5 insumos clave.
+\item
+  Entrega las estimaciones para la siguiente visita de recarga.
+\end{itemize}
+\end{minipage} & \textbf{3} & \textbf{8} \\
+\textbf{6} & Como científico de datos, quiero que el modelo use el historial de recargas propio de cada máquina: promedios históricos y tasas de consumo diario, para que las predicciones reflejen el patrón de uso real de esa máquina en lugar de un promedio general de la red. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Incorpora variables de promedios históricos y tasa diaria individual por máquina.
+\item
+  Realiza una predicción personalizada basada en el uso histórico específico.
+\end{itemize}
+\end{minipage} & \textbf{3} & \textbf{5} \\
+\textbf{7} & Como científico de datos, quiero que la evaluación del modelo se realice a través de validación cruzada en lugar de una sola división de entrenamiento/prueba, para que las mejoras reportadas sean reales y no producto de una división afortunada. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Validación cruzada (Cross-Validation) implementada en el flujo de evaluación.
+\item
+  Métricas consolidadas sobre múltiples iteraciones.
+\end{itemize}
+\end{minipage} & \textbf{3} & \textbf{3} \\
+\textbf{8} & Como gerente de operaciones, quiero predicciones para \emph{todas} las máquinas a la vez, no de una en una, para poder comparar qué máquinas son más urgentes en una sola vista. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Módulo que genera y retorna la predicción masiva de toda la red de máquinas en una sola llamada.
+\end{itemize}
+\end{minipage} & \textbf{4} & \textbf{5} \\
+& \textbf{Interfaz de usuario} & & & \\
+\textbf{9} & Como usuario boliviano, quiero que las etiquetas de la aplicación: nombres de máquinas, categorías de stock, unidades, entre otros, se muestren en español, para que la herramienta coincida con el idioma con el que trabaja el equipo. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Código backend y UI con soporte para etiquetas español.
+\end{itemize}
+\end{minipage} & \textbf{1} & \textbf{2} \\
+\textbf{10} & Como usuario de la interfaz, quiero elegir una fecha objetivo y obtener las predicciones de consumo para esa fecha y así poder planificar una ruta para un día específico en lugar de solo "hoy". & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Componente de selección de fecha en la UI conectado al parámetro de fecha de la API.
+\item
+  Respuestas adaptadas a fechas futuras solicitadas.
+\end{itemize}
+\end{minipage} & \textbf{4} & \textbf{5} \\
+\textbf{11} & Como operador de recarga, quiero que el stock predicho de cada máquina se muestre como cantidad \emph{restante} y porcentaje, no como consumo predicho bruto, para poder ver de un vistazo qué tan cerca está una máquina de quedarse sin insumos. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  API y UI calculan y presentan la cantidad absoluta restante y el \% de stock disponible por máquina.
+\end{itemize}
+\end{minipage} & \textbf{4} & \textbf{3} \\
+\textbf{12} & Como operador de recarga, quiero un rango de predicción (bajo/alto), no solo un número único, para entender la incertidumbre del modelo y no confiar ciegamente en una estimación puntual. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  El algoritmo entrega rangos o intervalos de confianza (estimación baja/alta).
+\item
+  Despliegue visual del rango de incertidumbre en la pantalla.
+\end{itemize}
+\end{minipage} & \textbf{4} & \textbf{5} \\
+\textbf{13} & Como miembro del personal de operaciones, quiero ver cuántos días han pasado desde la última recarga de la máquina junto a su predicción, para poder juzgar si la predicción se basa en datos recientes o desactualizados. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Despliegue visible de los días transcurridos desde el último reabastecimiento.
+\item
+  Indicador de frescura de los datos.
+\end{itemize}
+\end{minipage} & \textbf{4} & \textbf{2} \\
+\textbf{14} & Como miembro del personal de operaciones, quiero mover una máquina entre una lista de "disponibles" y una lista de "por recargar" arrastrando su tarjeta, para que la creación de la lista de recarga de hoy sea inmediata en lugar de llenar un formulario. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Funcionalidad Drag-and-Drop entre la lista de máquinas disponibles y pendientes de recarga.
+\item
+  Actualización en tiempo real del estado de la tarjeta.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{5} \\
+& \textbf{Modelo de enrutamiento dinámico} & & & \\
+\textbf{15} & Como usuario de la interfaz, quiero que las máquinas que he marcado para recargar se envíen directamente al modelo de enrutamiento dinámico, para pasar de "qué máquinas necesitan stock" a "en qué orden las visito" sin tener que volver a ingresar datos. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Conexión directa del estado de las máquinas "Por recargar" con el módulo de planificación sin reingreso manual de datos.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{3} \\
+\textbf{16} & Como operador de recarga, quiero que la aplicación calcule la ruta más corta entre las máquinas que he seleccionado para recargar, para no tener que ordenar las paradas manualmente. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Algoritmo de optimización de rutas ejecutado sobre el grupo de máquinas seleccionadas.
+\item
+  Genera automáticamente la secuencia de paradas con menor recorrido.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{8} \\
+\textbf{17} & Como técnico de ruta, quiero que el tiempo estimado de la ruta incluya el tiempo de servicio en cada parada, no solo el tiempo de recorrido, para que la hora estimada de llegada (ETA) sea realista. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Suma una estimación de tiempo de atención/servicio técnico por máquina al cálculo del tiempo total y ETA.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{3} \\
+\textbf{18} & Como técnico de ruta, quiero que mi ubicación actual se trate como el punto de inicio de la ruta en lugar de una parada que necesita servicio, para que el plan no me pida "recargar" mi propia posición inicial. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Detección de ubicación GPS actual como punto de partida u origen.
+\item
+  El origen no computa como parada de servicio ni pide recarga.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{3} \\
+& \textbf{Documentación} & & & \\
+\textbf{19} & Como científico de datos, quiero que la elección de características: día de la semana, mes, tendencia, promedios móviles, sean evaluadas y los resultados negativos documentados, no solo los que funcionaron, para que cambios futuros en el modelo no vuelvan a probar enfoques que ya demostraron no ser útiles. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Documentación detallada de experimentos de ablación de variables y resultados descartados.
+\end{itemize}
+\end{minipage} & \textbf{5} & \textbf{3} \\
+\textbf{20} & Como nuevo colaborador, quiero Manuales de Usuario precisos para el backend/frontend y un proceso de modelado documentado, incluidos los intentos fallidos, para poder poner en marcha el proyecto y entender por qué el modelo está construido de esa forma. & \begin{minipage}[t]{\linewidth}\raggedright
+\begin{itemize}
+\item
+  Documentación detallada en Manuales de Usuario de backend y frontend con instrucciones de instalación y decisiones técnicas.
+\end{itemize}
+\end{minipage} & \textbf{6} & \textbf{2} \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia}

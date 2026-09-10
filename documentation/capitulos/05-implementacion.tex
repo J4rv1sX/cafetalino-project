@@ -1,0 +1,238 @@
+\section{Implementación de la propuesta}\label{implementacion-de-la-propuesta}
+
+El capítulo anterior se estableció el marco de trabajo con el que se organiza el desarrollo; corresponde ahora describir cómo se lleva a la práctica la propuesta dentro de la operación de Cafetalino. Este capítulo detalla la planificación temporal y económica del proyecto, la construcción de los cuatro componentes del sistema con las tecnologías empleadas y los datos que los alimentan, el plan de puesta en producción y el de mantenimiento posterior. Para sustentar la viabilidad de lo propuesto se construyó un prototipo funcional de esos componentes, de modo que las decisiones técnicas y las cifras de desempeño que siguen no son estimaciones teóricas sino resultados medidos sobre el histórico real de la empresa.
+
+\subsection{Planificación y estimación}\label{planificacion-y-estimacion}
+
+La planificación parte de los elementos fijados en el capítulo de metodología: una lista de tareas pendientes de veinte historias de usuario agrupadas en cinco épicas, estimada en ochenta y un puntos de historia, y cuatro iteraciones de dos semanas ejecutadas por un equipo de cuatro integrantes entre agosto y septiembre de 2026. Este apartado convierte esos elementos en un reparto concreto de trabajo, en un cronograma con hitos verificables y en un presupuesto detallado, distinguiendo el costo de construir el sistema del costo recurrente de operarlo, porque son decisiones de inversión de naturaleza distinta para la empresa.
+
+\subsubsection{Distribución del trabajo y cronograma}\label{distribucion-del-trabajo-y-cronograma}
+
+El reparto de historias entre las cuatro iteraciones respeta las dependencias técnicas antes que la prioridad nominal, de manera que ninguna historia se planifica antes de que exista el insumo que consume: el origen de datos precede al modelo, porque este se entrena sobre la base que aquel construye, y la interfaz precede al enrutamiento, porque es la que produce la selección de máquinas que el optimizador convierte en recorrido. El resultado, que coincide con las cinco épicas de la lista de tareas pendientes, se recoge en la Tabla~\ref{tab:distribucion-del-trabajo-y-cronograma} junto con las fechas y el hito que permite declarar cerrada cada iteración conforme a la Definición de Completado.
+
+\captionof{table}{Distribución del trabajo, cronograma e hitos de verificación}\label{tab:distribucion-del-trabajo-y-cronograma}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.08}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.29}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.10}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.36}}@{}}
+\toprule\noalign{}
+\textbf{Iter.} & \textbf{Fechas (2026)} & \textbf{Incremento entregable} & \textbf{Hist. (SP)} & \textbf{Hito de verificación} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{1} & 3 al 14 de agosto & Base de datos del histórico de recargas y análisis exploratorio. & 1 a 4 (16) & La base se reconstruye por completo desde el archivo de origen y el análisis reporta las anomalías detectadas. \\
+\textbf{2} & 17 al 28 de agosto & Modelos de predicción de los cinco insumos con sus intervalos. & 5 a 8 (21) & Informe de métricas por validación cruzada y cobertura empírica de los intervalos. \\
+\textbf{3} & 31 de agosto al 11 de septiembre & Interfaz web de consulta y selección de máquinas. & 9 a 14 (22) & El operador construye la lista de recarga del día sin asistencia técnica. \\
+\textbf{4} & 14 al 27 de septiembre & Optimizador de recorrido, integración y documentación técnica. & 15 a 20 (22) & Se obtiene un recorrido completo desde la selección de máquinas y se entregan los manuales. \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia}
+
+La carga de la primera iteración es deliberadamente menor, porque es aquella en la que el equipo se enfrenta por primera vez al dato real y afloran las anomalías del histórico; reservar holgura allí evita arrastrar retrasos al resto del calendario. Las tres siguientes se mantienen en un rango estrecho, lo que permite tratar la velocidad de la primera como línea base y ajustar el compromiso de las restantes en cada reunión de planificación. El esfuerzo total se estima a partir de la dedicación declarada de veinte horas semanales por integrante, compatible con la actividad laboral de sus miembros: sobre ocho semanas resultan seiscientas cuarenta horas de equipo, de las cuales ochenta corresponden a las tareas de gestión que asumen el Product Owner y el Scrum Master y quinientas sesenta a construcción efectiva. Esa proporción sitúa el costo unitario en unas siete horas de trabajo por punto de historia, referencia útil para dimensionar ampliaciones futuras del alcance.
+
+\subsubsection{Presupuesto}\label{presupuesto}
+
+El presupuesto distingue la inversión inicial de construcción del gasto recurrente de operación, según detalla la Tabla~\ref{tab:presupuesto-del-proyecto}. El costo de personal valora cada perfil a tarifas de mercado del sector de tecnologías de la información; debe advertirse que se trata de estimaciones propias de referencia y no de remuneraciones efectivamente pagadas, dado que el sistema se desarrolló en el marco de un trabajo académico, y se incluyen porque son el costo que la empresa asumiría para reproducir el proyecto en condiciones de mercado. Las cifras se expresan en bolivianos y en su equivalente en dólares al tipo de cambio oficial de 6,96 bolivianos, dado que los servicios de nube y cartografía se facturan en esa moneda.
+
+\captionof{table}{Presupuesto de construcción y costo mensual de operación}\label{tab:presupuesto-del-proyecto}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.38}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.16}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.17}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.17}}@{}}
+\toprule\noalign{}
+\textbf{Concepto} & \textbf{Horas} & \textbf{Tarifa (Bs/h)} & \textbf{Subtotal (Bs)} & \textbf{Subtotal (USD)} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\multicolumn{5}{@{}l}{\textbf{Inversión inicial de construcción}} \\
+Científico de datos (modelado predictivo) & 160 & 90 & 14.400 & 2.069 \\
+Desarrollador de backend y optimización & 160 & 80 & 12.800 & 1.839 \\
+Desarrollador de frontend & 160 & 75 & 12.000 & 1.724 \\
+Analista de datos y validación & 160 & 70 & 11.200 & 1.609 \\
+Gestión del producto y del proceso & 80 & 85 & 6.800 & 977 \\
+Servicios de nube y cartografía durante el desarrollo & & & 1.400 & 201 \\
+Licencia de gestión del proyecto (4 usuarios, 2 meses) & & & 980 & 141 \\
+\textbf{Total de la inversión inicial} & \textbf{720} & & \textbf{59.580} & \textbf{8.560} \\
+\midrule\noalign{}
+\multicolumn{5}{@{}l}{\textbf{Costo mensual de operación}} \\
+Ejecución en contenedores, con escalado a cero fuera de horario \citep{cloudrun2026} & & & 174 & 25 \\
+Consultas a la matriz de distancias, una por ruta planificada \citep{distancematrix2026} & & & 139 & 20 \\
+Almacenamiento de imágenes, secretos y respaldos & & & 70 & 10 \\
+Dominio y certificado, prorrateo anual & & & 35 & 5 \\
+\textbf{Total mensual} & & & \textbf{418} & \textbf{60} \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia, sobre los tarifarios vigentes de los servicios citados. Tipo de cambio referencial de 6,96 Bs/USD}
+
+El total de horas asciende a setecientas veinte y no a seiscientas cuarenta porque las de gestión se contabilizan en línea propia, separadas de las de desarrollo de los dos integrantes que asumen el doble rol. El gasto recurrente, en cambio, es reducido: se trata de un sistema de uso interno, consultado por unos pocos operadores varias veces al día, cuyo consumo se sitúa cerca de los umbrales gratuitos de los servicios empleados. Puesto en perspectiva, equivale al costo de unas pocas visitas de recarga innecesarias al mes, de modo que la meta de reducirlas a la mitad, fijada entre los criterios de éxito de la Tabla~\ref{tab:criterios-de-exito}, basta por sí sola para sostener la operación del sistema.
+
+\subsection{Implementación}\label{implementacion}
+
+Este apartado describe cómo se construye el sistema: la arquitectura que lo organiza, las tecnologías que lo componen, el tratamiento que reciben los datos de origen y la lógica de cada componente. La exposición sigue el recorrido del dato, desde el registro histórico de recargas hasta el itinerario que finalmente ve el operador en el mapa.
+
+\subsubsection{Arquitectura y pila tecnológica}\label{arquitectura-y-pila-tecnologica}
+
+La solución conserva la arquitectura en cuatro capas definida durante el prototipado y representada en la Figura~\ref{fig:estructura-del-sistema-de-reabastecimiento} del Anexo~\ref{anexo-diagramas-de-los-prototipos}: una capa de datos de origen, una de análisis que transforma el histórico en demanda proyectada, una de decisión logística que convierte esa proyección en un recorrido y una de presentación que la pone ante el operador. La separación es funcional y también física, ya que el análisis y la decisión residen en un servicio de aplicación mientras que la presentación es una aplicación web que se comunica con aquel mediante una interfaz de programación. La Tabla~\ref{tab:tecnologias-empleadas-por-capa} enumera las tecnologías elegidas.
+
+\captionof{table}{Tecnologías empleadas en cada capa del sistema}\label{tab:tecnologias-empleadas-por-capa}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.19}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.25}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.28}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.28}}@{}}
+\toprule\noalign{}
+\textbf{Capa} & \textbf{Componente} & \textbf{Tecnología} & \textbf{Justificación} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Datos de origen & Base de datos del histórico y guiones de carga & SQLite y pandas & Volumen de miles de registros, que no justifica un gestor servidor. \\
+Análisis & Modelos de predicción de los cinco insumos & scikit-learn \citep{pedregosa2011} & Métodos de conjunto sobre árboles, adecuados a un histórico pequeño y tabular. \\
+Decisión logística & Matriz de tiempos y optimizador de recorrido & Google Distance Matrix y OR-Tools \citep{ortools2026} & Tiempos de conducción reales y un resolutor de rutas maduro y de uso libre. \\
+Servicio de aplicación & Interfaz de programación & Python, FastAPI y Pydantic \citep{fastapi2026} & Validación declarativa de los mensajes y documentación automática. \\
+Presentación & Aplicación web de apoyo a la decisión & React, TypeScript y Vite & Interfaz reactiva con verificación de tipos en compilación. \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia}
+
+La pila es deliberadamente conservadora. Todos los componentes son de uso libre y ampliamente adoptados, lo que reduce el riesgo de dependencia de un proveedor único y facilita que la empresa encuentre en el mercado local perfiles capaces de mantener el sistema. La única dependencia comercial es el servicio de cartografía, confinada a un solo módulo, de modo que sustituirla no obligaría a modificar el resto del sistema.
+
+\subsubsection{Origen y preparación de los datos}\label{origen-y-preparacion-de-los-datos}
+
+El insumo del sistema es el registro histórico de recargas descrito en el apartado~\ref{datos-disponibles-y-diseno-de-la-evaluacion}. En su forma original comprende 3.646 filas que abarcan de octubre de 2018 a julio de 2026, de las cuales 2.467 corresponden a máquinas activas; las restantes documentan equipos retirados de servicio y se excluyen porque su comportamiento ya no describe la red actual. Las columnas del archivo están rotuladas en español y se traducen a identificadores en inglés durante la carga, de manera que el idioma sobreviva en los valores pero no en el código.
+
+La decisión de diseño más relevante de esta etapa es la forma de identificar una máquina. El archivo contiene treinta y seis identificadores de equipo y dieciocho denominaciones de ubicación, pero solo diecisiete pares de coordenadas. La discrepancia se explica porque los equipos rotan entre emplazamientos y porque una misma ubicación se escribe de formas distintas según quién registre la visita. Como lo que determina el consumo es el emplazamiento y no el número de serie del equipo instalado en él, las ubicaciones se consolidan agrupando por coordenada geográfica y adoptando como denominación canónica la variante más frecuente en ese punto. Resultan así diecisiete ubicaciones canónicas, cada una con su capacidad de depósito registrada: veinte litros de agua y mil seiscientos gramos de mezcla, salvo dos emplazamientos con depósitos reducidos de novecientos gramos.
+
+De las 2.467 lecturas activas se descartan veintiocho antes del entrenamiento: diecisiete son la primera visita registrada de cada ubicación, que por definición carece de historial previo con el que construir las variables derivadas, y once presentan un intervalo desde la recarga anterior no registrado. Estas filas se eliminan en lugar de imputarse, porque imputar el historial de una máquina equivaldría a inventar el comportamiento que precisamente se quiere predecir. Quedan 2.439 observaciones de entrenamiento.
+
+\subsubsection{Construcción del modelo predictivo}\label{construccion-del-modelo-predictivo}
+
+Cada insumo recibe un modelo independiente, decisión tomada porque las magnitudes difieren en escala y dinámica: obligar a un único modelo a predecir simultáneamente mililitros de agua, unidades de vaso y gramos de tres mezclas lo forzaría a un compromiso que ninguno de los cinco objetivos agradece. Sobre las variables de partida descritas en el capítulo anterior se construyen veinticuatro variables de entrada, que combinan la ubicación, el intervalo desde la recarga previa, el día de la semana y el mes, y para cada insumo su media histórica, su media reciente y ambas expresadas como consumo por día.
+
+La regla que gobierna esas variables derivadas es que ninguna observación puede ver su propio resultado: todas las medias y tasas se calculan desplazando la serie una posición antes de acumular o promediar, de modo que cada fila solo incorpora información de visitas anteriores. Por el mismo motivo se descartaron dos columnas disponibles y a primera vista informativas, el porcentaje de agua restante y el número de vasos, porque ambas se miden durante la misma visita cuyo resultado se pretende anticipar: emplearlas exigiría estar ya frente a la máquina para saber qué necesita, lo que anula el propósito de predecir antes de planificar la ruta.
+
+El modelo seleccionado es una regresión por potenciación del gradiente sobre histogramas, en la variante propuesta por \citet{friedman2001}, elegida tras compararla mediante búsqueda aleatoria de hiperparámetros con un bosque aleatorio, frente al cual resultó superior en los cinco insumos. La búsqueda explora treinta combinaciones evaluadas por validación cruzada de cinco pliegues, el mismo procedimiento con el que se reportan las métricas. Para acompañar cada estimación con una banda de incertidumbre se entrenan además dos modelos de regresión cuantílica \citep{koenker2001} por insumo, correspondientes a los percentiles quinto y nonagésimo quinto. La Tabla~\ref{tab:desempeno-de-los-modelos} presenta el desempeño obtenido.
+
+\captionof{table}{Desempeño de los modelos por insumo, en validación cruzada de cinco pliegues}\label{tab:desempeno-de-los-modelos}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.28}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.14}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.20}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.19}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.19}}@{}}
+\toprule\noalign{}
+\textbf{Insumo} & \textbf{Unidad} & \textbf{Error absoluto medio} & \textbf{Coef. de determinación} & \textbf{Cobertura del intervalo} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Agua embotellada & mililitros & 1.702,78 & 0,371 & 84,2 \% \\
+Vasos & unidades & 9,46 & --- & 84,2 \% \\
+Mezcla de café & gramos & 22,33 & 0,354 & 83,5 \% \\
+Mezcla de chocolate & gramos & 86,40 & 0,274 & 83,8 \% \\
+Mezcla de capuchino & gramos & 90,41 & 0,308 & 83,2 \% \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia. El coeficiente de determinación de los vasos se omite a la espera de su verificación en la próxima ejecución del entrenamiento}
+
+Los coeficientes de determinación, situados entre 0,27 y 0,37, indican que una parte sustancial de la variabilidad del consumo permanece sin explicar. El resultado es genuino y conviene interpretarlo correctamente: el histórico registra cuándo y cuánto se repuso, pero no la afluencia de personas, el clima ni los eventos locales que la determinan, de modo que el techo lo impone la información disponible y no el algoritmo escogido. La comparación pertinente, en todo caso, no es contra un predictor perfecto sino contra la práctica actual, basada en un calendario fijo y en la experiencia del operador, y esa comparación corresponde al diseño de validación.
+
+Merece registrarse la calibración de las bandas de incertidumbre. Inicialmente se emplearon los percentiles décimo y nonagésimo, que nominalmente delimitan un intervalo del ochenta por ciento, pero su cobertura empírica medida sobre pliegues no vistos resultó de apenas el setenta por ciento, una subcobertura conocida de la regresión cuantílica con conjuntos pequeños. En lugar de publicar un intervalo mal etiquetado se ampliaron deliberadamente los percentiles para compensar el sesgo medido, con lo que la cobertura efectiva se situó en torno al ochenta y tres por ciento, cerca del valor pretendido. El intervalo que ve el operador es, por tanto, verificado y no una declaración nominal. Conviene consignar también tres ensayos que no prosperaron, porque delimitan hasta dónde llega el enfoque: sustituir el día de la semana por la proporción de días laborables del intervalo no mejoró ningún insumo; añadir una variable de tendencia a corto plazo empeoró los cinco, presumiblemente por tratarse de un estimador demasiado ruidoso; y agrupar el mes en trimestres degradó el desempeño casi tanto como eliminarlo, lo que indica que la señal estacional relevante opera a granularidad fina. Ninguno de los tres cambios se incorporó.
+
+\subsubsection{De consumo previsto a existencias restantes}\label{de-consumo-previsto-a-existencias-restantes}
+
+Los modelos predicen consumo, pero la decisión que el operador necesita tomar se formula en términos de existencias: no le sirve saber cuántos gramos se consumirán, sino cuánto quedará en el depósito. El sistema realiza esa conversión restando el consumo previsto de la capacidad registrada para esa máquina concreta y acotando el resultado entre cero y la capacidad total, ya que ni un depósito puede quedar en negativo ni contener más de lo que admite. El valor se acompaña de su porcentaje sobre la capacidad real de esa máquina, lo que permite comparar equipos de depósito distinto sin traducir mentalmente las unidades.
+
+La conversión exige invertir los extremos del intervalo, puesto que el escenario de menor existencia restante se corresponde con el de mayor consumo previsto. El sistema aplica esa inversión explícitamente, además de un ajuste que garantiza que el extremo inferior nunca supere a la estimación puntual ni esta al extremo superior, precaución necesaria porque los tres modelos de cada insumo se entrenan por separado y nada les impone formalmente ese orden. Los vasos son la excepción del esquema, ya que no se almacenan en un depósito de capacidad fija y se reportan como consumo previsto sin convertir.
+
+\subsubsection{Módulo de enrutamiento dinámico}\label{modulo-de-enrutamiento-dinamico}
+
+Seleccionadas las máquinas que requieren atención, el problema pasa a ser de orden de visita, y el módulo lo resuelve en dos etapas. Primero solicita al servicio de cartografía la matriz de tiempos de conducción entre todos los puntos implicados, lo que incorpora la red vial real en lugar de distancias en línea recta, diferencia sustancial en una ciudad de topografía irregular. Después plantea el recorrido como un problema del agente viajero de vehículo único con retorno al origen y lo resuelve con la biblioteca OR-Tools \citep{ortools2026}, planteamiento clásico dentro de la familia de problemas de enrutamiento de vehículos \citep{tothvigo2014}.
+
+Dos elementos adaptan ese planteamiento genérico a la operación concreta de Cafetalino. El primero es que el punto de partida no es un almacén sino la ubicación actual del operador, obtenida del dispositivo y corregible manualmente en el mapa, lo que permite replanificar a mitad de jornada desde donde se encuentre. El segundo es que al tiempo de conducción se le suma un tiempo de servicio de veinticinco minutos por máquina visitada, que es lo que toma efectuar la recarga; sin ese término la duración estimada de la jornada resultaría sistemáticamente optimista y perdería utilidad para planificar. Debe señalarse con precisión el alcance de la optimización: el resolutor se configura con una heurística de construcción por arco más económico y no se le añade una fase de mejora posterior, de modo que la solución devuelta es una construcción de buena calidad y no un óptimo demostrado. Para el tamaño del problema, diecisiete máquinas como máximo más el punto de partida, la diferencia práctica es reducida y la respuesta inmediata, lo que privilegia la interacción fluida con el operador.
+
+\subsubsection{Interfaz web de apoyo a la decisión}\label{interfaz-web-de-apoyo-a-la-decision}
+
+La interfaz organiza la jornada del operador en tres columnas que reproducen la secuencia de su decisión: las máquinas disponibles con su pronóstico, las que ha decidido recargar y el mapa con el recorrido resultante. El operador elige una fecha objetivo, que puede ser futura, y el sistema devuelve el pronóstico de las diecisiete ubicaciones ordenadas de manera descendente por días transcurridos desde su última recarga, criterio que sitúa arriba las máquinas más rezagadas. El paso de una lista a otra se realiza arrastrando la tarjeta de la máquina, gesto que sustituye el llenado de un formulario y hace inmediata la construcción de la lista del día.
+
+Cada tarjeta muestra las existencias restantes previstas de agua y de las tres mezclas, en unidad absoluta y en porcentaje, junto con los vasos estimados y los días desde la última recarga como indicador de la vigencia del dato. Una decisión de diseño deliberada es que la tarjeta presenta siempre el intervalo bajo y alto además de la estimación puntual: ocultar la incertidumbre produciría una falsa sensación de precisión en un modelo que, como se ha documentado, deja parte de la variabilidad sin explicar, mientras que mostrarla permite al operador reservar su criterio en los casos de banda ancha, que es el comportamiento deseable en una herramienta de apoyo a la decisión y no de sustitución de ella. Cerrada la selección, la aplicación envía las máquinas elegidas al módulo de enrutamiento y dibuja sobre el mapa el recorrido en el orden que este determina, con la duración total estimada y la lista ordenada de paradas.
+
+\subsubsection{Requisitos de equipamiento}\label{requisitos-de-equipamiento}
+
+Los requisitos de la solución son modestos, coherentes con el criterio, sostenido desde la selección del prototipo, de no depender de instrumentación adicional en las máquinas. El entorno de desarrollo requiere un equipo de escritorio convencional, con ocho gigabytes de memoria suficientes para el entrenamiento, que se completa en menos de diez minutos sobre el conjunto actual. El entorno de producción necesita un contenedor con uno o dos núcleos y dos gigabytes de memoria para el servicio de aplicación, más el almacenamiento de la base de datos y de los modelos entrenados, cuyo tamaño conjunto se mide en decenas de megabytes. Del lado del operador basta un teléfono con navegador y datos móviles, que es el equipamiento del que ya dispone.
+
+Cabe precisar, para evitar una expectativa equivocada, que se evaluó explícitamente el empleo de redes neuronales y se descartó: con algo más de dos mil cuatrocientas observaciones de entrenamiento, un modelo de esa naturaleza no dispone de datos suficientes para superar a los métodos de conjunto sobre árboles y solo añadiría complejidad de infraestructura. El prototipo completo, con el código de los tres componentes y la documentación técnica del proceso de modelado, se conserva en un repositorio privado del equipo, condición impuesta por el acuerdo de confidencialidad bajo el cual la empresa cedió su registro histórico, y queda disponible para revisión bajo solicitud.
+
+\subsection{Despliegue}\label{despliegue}
+
+La puesta en producción persigue que el sistema pueda ser operado por Cafetalino sin asistencia técnica permanente y sin exponer la información cedida por la empresa. Este apartado describe los entornos previstos, la infraestructura y las herramientas de publicación, las medidas de protección de los datos y el plan de contingencia frente a los fallos previsibles.
+
+\subsubsection{Entornos, infraestructura y herramientas}\label{entornos-infraestructura-y-herramientas}
+
+Se contemplan tres entornos con propósitos distintos. El de desarrollo se ejecuta en el equipo de cada integrante, con la base de datos local reconstruible desde el archivo de origen. El de preproducción replica la configuración de producción, recibe cada cambio antes que aquella y es donde se verifican los incrementos frente a la Definición de Completado. El de producción es el que utiliza el personal de Cafetalino. Los tres comparten el código y se diferencian únicamente por configuración externa —la dirección del servicio que consume la interfaz, la clave del servicio de cartografía y la lista de orígenes autorizados—, y ninguna credencial se incorpora al código ni al repositorio.
+
+El despliegue se apoya en servicios administrados de Google Cloud, elección coherente con el uso ya existente del servicio de cartografía y que evita a la empresa la administración de servidores. El servicio de aplicación y la interfaz web se empaquetan en contenedores y se publican en un servicio de ejecución administrada que escala a cero fuera del horario de uso, característica determinante para el costo mensual estimado. Las imágenes se almacenan en un registro de artefactos y las credenciales en un gestor de secretos, del que el servicio las lee en tiempo de ejecución. La publicación se automatiza desde el repositorio: cada integración en la rama principal construye la imagen y despliega una revisión en preproducción, mientras que la promoción a producción requiere aprobación explícita del Product Owner. Como el servicio conserva las revisiones anteriores y permite dirigir el tráfico entre ellas, la publicación puede realizarse de forma progresiva y revertirse de inmediato, propiedad sobre la que se apoya buena parte del plan de contingencia.
+
+\subsubsection{Securización y protección de los datos}\label{securizacion-y-proteccion-de-los-datos}
+
+La información que maneja el sistema es operativa y no personal: registros de reposición de insumos por máquina y ubicación de equipos instalados en espacios públicos o comerciales. La única excepción es la posición del dispositivo del operador, empleada como punto de partida del recorrido, que se utiliza en la sesión y no se almacena. Aun así, el histórico fue cedido bajo acuerdo de confidencialidad y constituye información comercialmente sensible, ya que revela el volumen de negocio de cada emplazamiento, por lo que el repositorio permanece privado y los respaldos se conservan cifrados y con acceso restringido.
+
+Las medidas técnicas previstas son las habituales para un sistema de esta naturaleza. El tráfico se sirve exclusivamente por canal cifrado; la interfaz de programación acepta peticiones únicamente desde los orígenes autorizados; el acceso a la aplicación exige autenticación del personal operativo, con perfiles diferenciados entre consulta y administración; y la clave del servicio de cartografía se restringe tanto por dominio de origen como por interfaz habilitada, de modo que su eventual filtración no permita un uso facturable ajeno. Los respaldos se programan con periodicidad diaria y retención mensual, suficiente dado que el sistema es reconstruible por completo a partir del archivo de origen y de la ejecución de los guiones de carga y entrenamiento.
+
+\subsubsection{Plan de contingencias}\label{plan-de-contingencias}
+
+El plan se concentra en los modos de fallo efectivamente observables en el sistema construido, antes que en una enumeración genérica de riesgos. La Tabla~\ref{tab:plan-de-contingencias} recoge cada uno con su forma de detección y la respuesta prevista, bajo el criterio de que el sistema degrade su servicio de manera controlada en lugar de interrumpirlo, dado que el operador debe poder ejecutar su jornada en cualquier circunstancia.
+
+\captionof{table}{Plan de contingencias del despliegue}\label{tab:plan-de-contingencias}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.30}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.26}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.44}}@{}}
+\toprule\noalign{}
+\textbf{Riesgo} & \textbf{Detección} & \textbf{Respuesta prevista} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Indisponibilidad o agotamiento de cuota del servicio de cartografía & Error en la respuesta o elementos sin resolver en la matriz & Calcular el recorrido sobre distancias geodésicas, advirtiendo al operador de que la duración es aproximada. \\
+Ausencia o corrupción de los modelos entrenados & El servicio no consigue cargar los artefactos al iniciar & Reejecutar el entrenamiento sobre la base vigente y, entretanto, presentar el promedio histórico de cada máquina como estimación de respaldo. \\
+Publicación defectuosa de una versión & Errores en el registro de la aplicación o aviso del personal operativo & Redirigir el tráfico a la revisión anterior, que el servicio conserva, y corregir en preproducción. \\
+Corrupción de la base de datos & Fallo de las verificaciones de integridad de la carga & Restaurar el respaldo diario o reconstruir la base completa desde el archivo de origen. \\
+Pérdida de conectividad del operador en ruta & Sin respuesta desde el dispositivo & Conservar el recorrido calculado en el dispositivo, de modo que la jornada pueda completarse sin nueva consulta. \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia}
+
+\subsection{Mantenimiento}\label{mantenimiento}
+
+El sistema no es un producto que se entregue y se dé por terminado, porque su calidad depende de un modelo que envejece a medida que cambia el comportamiento de la red. El mantenimiento previsto se organiza por ello en tres planos: la vigilancia y actualización del modelo, los cambios anticipados sobre el sistema construido y el horizonte de vida útil estimado.
+
+\subsubsection{Reentrenamiento y vigilancia del modelo}\label{reentrenamiento-y-vigilancia-del-modelo}
+
+El histórico crece de manera sostenida —de cuatrocientas treinta y ocho lecturas activas en 2024 se pasó a setecientas veintiuna en 2025—, de modo que cada mes de operación aporta información que el modelo puede aprovechar. Se prevé un reentrenamiento mensual, viable porque el ciclo completo de reconstrucción de la base y ajuste de los quince modelos, con su búsqueda de hiperparámetros incluida, se completa en menos de diez minutos y puede programarse fuera del horario de uso. Cada ejecución deja un informe fechado con las métricas obtenidas, lo que permite seguir su evolución en el tiempo.
+
+La vigilancia se apoya en tres indicadores. El primero es el error absoluto medio de cada insumo en la validación cruzada, comparado con el de la ejecución anterior y con el del método de referencia; un deterioro sostenido en varias ejecuciones consecutivas indica que el patrón de consumo ha cambiado y exige revisar las variables antes que reentrenar sin más. El segundo es la cobertura empírica de las bandas de predicción, que debe mantenerse próxima al valor declarado y, si se desvía, obliga a recalibrar los percentiles como ya se hizo durante la construcción. El tercero es el contraste periódico entre las existencias predichas y las observadas al llegar a la máquina, que es la verificación que el propio operador puede realizar sin instrumentación alguna.
+
+\subsubsection{Cambios previstos y ciclo de vida}\label{cambios-previstos-y-ciclo-de-vida}
+
+Los cambios anticipados se derivan de las limitaciones identificadas durante la construcción y no de una lista de deseos. En el módulo de enrutamiento, incorporar una fase de mejora local y fraccionar la consulta de la matriz de tiempos son requisitos para que el sistema soporte una red sensiblemente mayor que la actual, y el paso a un enrutamiento de varios vehículos sería necesario si la empresa incorporase un segundo operador en ruta simultánea. En el modelo, añadir un calendario académico y de feriados es la línea con mayor recorrido esperado, dado que varias ubicaciones son hospitalarias o universitarias y su afluencia depende del período lectivo más de lo que el mes por sí solo captura; exige, eso sí, una fuente de datos externa de la que hoy no se dispone. Existe además deuda técnica que conviene saldar antes de la operación continuada: el prototipo carece de un conjunto de pruebas automatizadas, el servicio de aplicación no tiene configurado un analizador estático de código como sí lo tiene la interfaz web, y las estructuras de datos de esta replican manualmente las de aquel, por lo que conviene generarlas de forma automática para que un cambio en una no pueda desincronizarse silenciosamente de la otra.
+
+El ciclo de vida previsto se estima en cuatro a cinco años, plazo tras el cual la evolución de la red y de las herramientas empleadas justificaría una revisión de fondo antes que una nueva corrección. Los dos primeros meses corresponden a un piloto en operación asistida, en paralelo con el esquema actual y contrastando contra la línea base; del tercero al sexto mes se sustituye progresivamente el esquema de rutas fijas, se ajusta la interfaz según el uso real y se salda la deuda técnica; entre el primer y el tercer año el sistema entra en operación estable, con reentrenamiento mensual, vigilancia de indicadores y correcciones menores; del tercero al cuarto se incorporan las mejoras previstas y se adecua el sistema al crecimiento de la red; y hacia el quinto corresponde evaluar de fondo la arquitectura y el enfoque de modelado frente a las alternativas disponibles entonces.
+
+En conjunto, este capítulo ha mostrado que la propuesta es construible con tecnologías de uso libre, por un equipo reducido, en ocho semanas y con una inversión modesta, y que su operación posterior cuesta al mes menos que las visitas innecesarias que pretende evitar. Queda por establecer, sin embargo, el criterio con el que se decidirá si el sistema efectivamente genera el valor esperado para Cafetalino. El siguiente capítulo aborda esa cuestión, definiendo el diseño experimental y los criterios de validación del producto mínimo viable frente a la operación actual de la empresa.
