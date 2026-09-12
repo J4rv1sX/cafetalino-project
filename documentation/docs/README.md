@@ -25,6 +25,7 @@ Not normative documentation but corrections to act on, from the tutor:
 | Document | Contents |
 |---|---|
 | [observaciones-primera-entrega.md](observaciones-primera-entrega.md) | Efrén Juárez's review of Entrega 1: submit as PDF, keep only chapters 1–3 (remove 4–8 and leftover template text), contextualize the introduction before presenting Cafetalino, cut section 1.2 to one paragraph, start each chapter on a new page, add a client-side instrument to Empatizar, turn the success criteria into quantified targets, simplify the state-of-the-art table, and complete the bibliography with two-way citation checks. |
+| [observaciones-segunda-entrega.md](observaciones-segunda-entrega.md) | Efrén Juárez's review of Entrega 2 (worth only 1.5/10 points): overall improvement acknowledged (context, structure, objectives, Empatizar with manager/operator interviews and a 254-customer survey, success criteria, alternatives, layered prototype, Jira evidence). Only two points lost: complete sprint story assignment and available capacity in the planning, and replace the percentage-accuracy metric for the numeric prediction with a defined regression metric plus its reference and success threshold. |
 
 Covers, footers and page numbers were left out of the transcriptions; the rest
 of the text is kept verbatim. If anything disagrees, the original wins.
