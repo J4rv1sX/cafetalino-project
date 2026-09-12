@@ -169,7 +169,7 @@ De las 2.467 lecturas activas se descartan veintiocho antes del entrenamiento: d
 
 \subsubsection{Construcción del modelo predictivo}\label{construccion-del-modelo-predictivo}
 
-Cada insumo recibe un modelo independiente, decisión tomada porque las magnitudes difieren en escala y dinámica: obligar a un único modelo a predecir simultáneamente mililitros de agua, unidades de vaso y gramos de tres mezclas lo forzaría a un compromiso que ninguno de los cinco objetivos agradece. Sobre las variables de partida descritas en el capítulo anterior se construyen veinticuatro variables de entrada, que combinan la ubicación, el intervalo desde la recarga previa, el día de la semana y el mes, y para cada insumo su media histórica, su media reciente y ambas expresadas como consumo por día.
+Cada insumo recibe un modelo independiente, decisión tomada porque las magnitudes difieren en escala y dinámica: obligar a un único modelo a predecir simultáneamente mililitros de agua, unidades de vaso y gramos de tres mezclas lo forzaría a un compromiso que ninguno de los cinco insumos agradece. Sobre las variables de partida descritas en el capítulo anterior se construyen veinticuatro variables de entrada, que combinan la ubicación, el intervalo desde la recarga previa, el día de la semana y el mes, y para cada insumo su media histórica, su media reciente y ambas expresadas como consumo por día.
 
 La regla que gobierna esas variables derivadas es que ninguna observación puede ver su propio resultado: todas las medias y tasas se calculan desplazando la serie una posición antes de acumular o promediar, de modo que cada fila solo incorpora información de visitas anteriores. Por el mismo motivo se descartaron dos columnas disponibles y a primera vista informativas, el porcentaje de agua restante y el número de vasos, porque ambas se miden durante la misma visita cuyo resultado se pretende anticipar: emplearlas exigiría estar ya frente a la máquina para saber qué necesita, lo que anula el propósito de predecir antes de planificar la ruta.
 
@@ -225,7 +225,13 @@ Cada tarjeta muestra las existencias restantes previstas de agua y de las tres m
 
 Los requisitos de la solución son modestos, coherentes con el criterio, sostenido desde la selección del prototipo, de no depender de instrumentación adicional en las máquinas. El entorno de desarrollo requiere un equipo de escritorio convencional, con ocho gigabytes de memoria suficientes para el entrenamiento, que se completa en menos de diez minutos sobre el conjunto actual. El entorno de producción necesita un contenedor con uno o dos núcleos y dos gigabytes de memoria para el servicio de aplicación, más el almacenamiento de la base de datos y de los modelos entrenados, cuyo tamaño conjunto se mide en decenas de megabytes. Del lado del operador basta un teléfono con navegador y datos móviles, que es el equipamiento del que ya dispone.
 
-Cabe precisar, para evitar una expectativa equivocada, que se evaluó explícitamente el empleo de redes neuronales y se descartó: con algo más de dos mil cuatrocientas observaciones de entrenamiento, un modelo de esa naturaleza no dispone de datos suficientes para superar a los métodos de conjunto sobre árboles y solo añadiría complejidad de infraestructura. El prototipo completo, con el código de los tres componentes y la documentación técnica del proceso de modelado, se conserva en un repositorio privado del equipo, condición impuesta por el acuerdo de confidencialidad bajo el cual la empresa cedió su registro histórico, y queda disponible para revisión bajo solicitud.
+Cabe precisar, para evitar una expectativa equivocada, que se evaluó explícitamente el empleo de redes neuronales y se descartó: con algo más de dos mil cuatrocientas observaciones de entrenamiento, un modelo de esa naturaleza no dispone de datos suficientes para superar a los métodos de conjunto sobre árboles y solo añadiría complejidad de infraestructura. El prototipo completo, con el código de los tres componentes y la documentación técnica del proceso de modelado, está disponible en un repositorio público en \url{https://github.com/J4rv1sX/cafetalino-project}.
+% TODO: Confirmar si el repositorio puede mantenerse público o si existe/existirá
+% un acuerdo de confidencialidad con Cafetalino que obligue a mantenerlo privado.
+% Si debe ser privado, reemplazar el párrafo anterior por: "el prototipo completo...
+% se conserva en un repositorio privado del equipo, condición impuesta por el
+% acuerdo de confidencialidad bajo el cual la empresa cedió su registro histórico,
+% y queda disponible para revisión bajo solicitud."
 
 \subsection{Despliegue}\label{despliegue}
 

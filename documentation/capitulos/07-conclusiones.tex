@@ -4,7 +4,7 @@ El trabajo partió de un problema verificable en la operación de Cafetalino: un
 
 \subsection{Cumplimiento de los objetivos}\label{cumplimiento-de-los-objetivos}
 
-El objetivo general perseguía mejorar la gestión del reabastecimiento reduciendo las visitas innecesarias y los desabastecimientos mediante un sistema de predicción de la demanda y planificación dinámica de rutas. Los cinco objetivos específicos que lo desagregan se contrastan en la Tabla~\ref{tab:cumplimiento-de-los-objetivos}, con el resultado obtenido y el lugar del documento donde reside la evidencia que lo respalda, de modo que el cumplimiento pueda verificarse y no solo afirmarse.
+El objetivo general perseguía mejorar la gestión del reabastecimiento reduciendo las visitas innecesarias y los desabastecimientos mediante un sistema de predicción de la demanda y planificación dinámica de rutas. Los cuatro objetivos específicos que lo desagregan se contrastan en la Tabla~\ref{tab:cumplimiento-de-los-objetivos}, con el resultado obtenido y el lugar del documento donde reside la evidencia que lo respalda, de modo que el cumplimiento pueda verificarse y no solo afirmarse.
 
 \captionof{table}{Contraste de los objetivos específicos con los resultados obtenidos}\label{tab:cumplimiento-de-los-objetivos}
 
@@ -23,12 +23,11 @@ Caracterizar los patrones históricos de consumo y reabastecimiento. & Alcanzado
 Desarrollar un módulo de estimación de reposición sin hardware adicional. & Alcanzado. Cinco modelos independientes, uno por insumo, acompañados de bandas de incertidumbre cuya cobertura empírica se verificó sobre pliegues no vistos en lugar de declararse. & Tabla~\ref{tab:desempeno-de-los-modelos} \\
 Desarrollar un módulo de optimización de recorridos dinámicos. & Alcanzado. El recorrido se construye sobre la matriz de tiempos de conducción reales, parte de la posición del operador y suma el tiempo de servicio de cada máquina. & Apartado~\ref{modulo-de-enrutamiento-dinamico} \\
 Desarrollar una interfaz web de apoyo a la decisión. & Alcanzado. La aplicación organiza la jornada en tres columnas y muestra en cada tarjeta el intervalo además de la estimación puntual, para que el operador reserve su criterio ante bandas anchas. & Apartado~\ref{interfaz-web-de-apoyo-a-la-decision} \\
-Evaluar el desempeño frente al esquema de rutas fijas actual. & Parcialmente alcanzado. La evaluación fuera de línea se ejecutó y sus métricas están reportadas; el contraste operativo contra el esquema vigente quedó diseñado con umbrales decididos de antemano, pero no ejecutado. & Apartado~\ref{criterio-final-de-validacion} \\
 \end{longtable}}
 
 \fuente{Fuente: Elaboración propia}
 
-El quinto objetivo merece discusión explícita por ser el único que no se cierra. Su cumplimiento pleno exige el piloto de ocho semanas comprometido en los criterios de éxito de la Tabla~\ref{tab:criterios-de-exito}, cuyo periodo excede el horizonte del trabajo académico y depende de la disponibilidad del personal de la empresa. Sí quedó resuelta la condición que hace posible esa evaluación: los indicadores tienen ahora definición operativa e instrumento de registro, y la regla de aprobación fija umbrales anteriores a la obtención de los datos, incluido el que refutaría la hipótesis central del trabajo. La diferencia no es menor, porque un criterio establecido de antemano impide que el resultado se acomode después a la interpretación más favorable.
+La evaluación operativa del sistema merece atención especial por no haberse ejecutado en el horizonte del trabajo académico. Su diseño se presenta en el apartado~\ref{criterio-final-de-validacion}, que establece el protocolo del piloto de ocho semanas comprometido en los criterios de éxito de la Tabla~\ref{tab:criterios-de-exito}. Aunque la ejecución excede los límites de este trabajo y depende de la disponibilidad del personal de Cafetalino, sí quedó resuelta la condición que hace posible esa evaluación futura: los indicadores tienen ahora definición operativa e instrumento de registro, y la regla de aprobación fija umbrales anteriores a la obtención de los datos, incluido el que refutaría la hipótesis central del trabajo. La diferencia no es menor, porque un criterio establecido de antemano impide que el resultado se acomode después a la interpretación más favorable.
 
 \subsection{Aportaciones y limitaciones}\label{aportaciones-y-limitaciones}
 
