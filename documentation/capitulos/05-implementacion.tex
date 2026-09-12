@@ -33,7 +33,57 @@ El reparto de historias entre las cuatro iteraciones respeta las dependencias t�
 
 \fuente{Fuente: Elaboración propia}
 
+La Tabla~\ref{tab:asignacion-de-historias-por-sprint} detalla, historia por historia, la composición de cada iteración; la descripción completa de cada una, con sus criterios de aceptación, se encuentra en la Tabla~\ref{tab:backlog-inicial-prioridad-y-nivel} del \ref{anexo-backlog-inicial}.
+
+\captionof{table}{Asignación de historias de usuario por sprint}\label{tab:asignacion-de-historias-por-sprint}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.10}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.78}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.12}}@{}}
+\toprule\noalign{}
+\textbf{Sprint} & \textbf{Historias asignadas} & \textbf{Total} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{1} & HU1 Carga del histórico en base de datos (5), HU2 Registro de la capacidad de depósitos por máquina (3), HU3 Análisis exploratorio de los datos de consumo (3), HU4 Tolerancia del cargador a un CSV actualizado (5). & 16 SP \\
+\textbf{2} & HU5 Modelo de predicción de consumo por insumo (8), HU6 Personalización con el historial propio de cada máquina (5), HU7 Evaluación por validación cruzada (3), HU8 Predicciones masivas para todas las máquinas (5). & 21 SP \\
+\textbf{3} & HU9 Interfaz en español (2), HU10 Selección de fecha objetivo (5), HU11 Stock restante en cantidad y porcentaje (3), HU12 Rango de predicción bajo/alto (5), HU13 Días desde la última recarga (2), HU14 Selección de máquinas por arrastre (5). & 22 SP \\
+\textbf{4} & HU15 Envío de la selección al enrutamiento (3), HU16 Cálculo de la ruta más corta (8), HU17 Tiempo de servicio en la ruta (3), HU18 Ubicación actual como punto de partida (3), HU19 Documentación de las variables evaluadas (3), HU20 Manuales de usuario y documentación técnica (2). & 22 SP \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia}
+
 La carga de la primera iteración es deliberadamente menor, porque es aquella en la que el equipo se enfrenta por primera vez al dato real y afloran las anomalías del histórico; reservar holgura allí evita arrastrar retrasos al resto del calendario. Las tres siguientes se mantienen en un rango estrecho, lo que permite tratar la velocidad de la primera como línea base y ajustar el compromiso de las restantes en cada reunión de planificación. El esfuerzo total se estima a partir de la dedicación declarada de veinte horas semanales por integrante, compatible con la actividad laboral de sus miembros: sobre ocho semanas resultan seiscientas cuarenta horas de equipo, de las cuales ochenta corresponden a las tareas de gestión que asumen el Product Owner y el Scrum Master y quinientas sesenta a construcción efectiva. Esa proporción sitúa el costo unitario en unas siete horas de trabajo por punto de historia, referencia útil para dimensionar ampliaciones futuras del alcance.
+
+Para verificar que la carga asignada es sostenible, la Tabla~\ref{tab:capacidad-por-sprint} contrasta la capacidad disponible de cada iteración de dos semanas con los puntos de historia comprometidos. Las seiscientas cuarenta horas de equipo se reparten en partes iguales entre las cuatro iteraciones, ciento sesenta horas cada una, de las cuales veinte corresponden en promedio a la gestión del Product Owner y el Scrum Master, dejando ciento cuarenta horas de construcción efectiva por sprint.
+
+\captionof{table}{Capacidad disponible y velocidad requerida por sprint}\label{tab:capacidad-por-sprint}
+
+{\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.12}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.22}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.22}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.44}}@{}}
+\toprule\noalign{}
+\textbf{Sprint} & \textbf{Capacidad (h)} & \textbf{Carga (SP)} & \textbf{Velocidad requerida} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+1 & 140 & 16 & 8,75 h/SP; holgura frente al promedio, reservada para las anomalías del primer contacto con el dato real. \\
+2 & 140 & 21 & 6,67 h/SP; exige ya la velocidad cercana al promedio del proyecto. \\
+3 & 140 & 22 & 6,36 h/SP; sostenida gracias a los componentes reutilizados de sprints anteriores. \\
+4 & 140 & 22 & 6,36 h/SP; sostenida por la misma razón, sobre la integración final. \\
+\textbf{Total} & \textbf{560} & \textbf{81} & \textbf{6,91 h/SP}, coherente con el costo unitario de siete horas por punto de historia. \\
+\end{longtable}}
+
+\fuente{Fuente: Elaboración propia}
+
+La velocidad requerida decrece de un sprint a otro porque cada iteración reutiliza los artefactos —base de datos, procesos de validación, componentes de interfaz— construidos en las anteriores, lo que reduce el esfuerzo marginal por punto de historia; esta tendencia es consistente con la holgura deliberada de la primera iteración y con el promedio de siete horas por punto de historia ya declarado para el proyecto completo.
 
 \subsubsection{Presupuesto}\label{presupuesto}
 
@@ -82,7 +132,7 @@ Este apartado describe cómo se construye el sistema: la arquitectura que lo org
 
 \subsubsection{Arquitectura y pila tecnológica}\label{arquitectura-y-pila-tecnologica}
 
-La solución conserva la arquitectura en cuatro capas definida durante el prototipado y representada en la Figura~\ref{fig:estructura-del-sistema-de-reabastecimiento} del Anexo~\ref{anexo-diagramas-de-los-prototipos}: una capa de datos de origen, una de análisis que transforma el histórico en demanda proyectada, una de decisión logística que convierte esa proyección en un recorrido y una de presentación que la pone ante el operador. La separación es funcional y también física, ya que el análisis y la decisión residen en un servicio de aplicación mientras que la presentación es una aplicación web que se comunica con aquel mediante una interfaz de programación. La Tabla~\ref{tab:tecnologias-empleadas-por-capa} enumera las tecnologías elegidas.
+La solución conserva la arquitectura en cuatro capas definida durante el prototipado y representada en la Figura~\ref{fig:estructura-del-sistema-de-reabastecimiento} del \ref{anexo-diagramas-de-los-prototipos}: una capa de datos de origen, una de análisis que transforma el histórico en demanda proyectada, una de decisión logística que convierte esa proyección en un recorrido y una de presentación que la pone ante el operador. La separación es funcional y también física, ya que el análisis y la decisión residen en un servicio de aplicación mientras que la presentación es una aplicación web que se comunica con aquel mediante una interfaz de programación. La Tabla~\ref{tab:tecnologias-empleadas-por-capa} enumera las tecnologías elegidas.
 
 \captionof{table}{Tecnologías empleadas en cada capa del sistema}\label{tab:tecnologias-empleadas-por-capa}
 
