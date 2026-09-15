@@ -1,10 +1,14 @@
 # Official course documents (UNIR)
 
 Normative documentation for the Trabajo de Investigación/Innovación of the
-Maestría en Inteligencia Artificial. The `.md` files are **faithful
-transcriptions** of the original documents in this directory, in plain text, so
-they can be read and searched without opening a PDF viewer or Word (and so AI
-tools can consult them). The transcriptions keep the original Spanish.
+Maestría en Inteligencia Artificial. The `.md` files listed in the table below
+are **faithful transcriptions** of the original documents in this directory, in
+plain text, so they can be read and searched without opening a PDF viewer or
+Word (and so AI tools can consult them). The transcriptions keep the original
+Spanish.
+
+Material we wrote ourselves lives in [Presentation material](#presentation-material)
+and is not a transcription of anything.
 
 | Document | Contents |
 |---|---|
@@ -15,9 +19,20 @@ tools can consult them). The transcriptions keep the original Spanish.
 | [rubrica.md](rubrica.md) | The grading rubric: the eight indicators grouped into Estructura (20%), Contenido (50%) and Exposición (30%), with the descriptor of each one at the four levels (Suspenso/Aprobado/Notable/Sobresaliente). |
 
 Original sources: `guia.pdf`, `instrucciones.pdf`, `programacion.pdf`,
-`plantilla.docx` and `rubrica.pdf`. The **Word template is still mandatory for submission** —
-`plantilla.md` is only its content in plain text; this repository's report
-reproduces its structure in LaTeX under `documentation/`.
+`plantilla.docx`, `rubrica.pdf` and `plantilla_video.ppt`. The **Word template is
+still mandatory for submission** — `plantilla.md` is only its content in plain
+text; this repository's report reproduces its structure in LaTeX under
+`documentation/`. `plantilla_video.ppt` is the only original with no `.md`
+transcription of its own: it is a binary PowerPoint file, and the seven sections
+it prescribes are reproduced inside `guion-video.md`.
+
+## Presentation material
+
+Our own drafts, not transcriptions of any official document.
+
+| Document | Contents |
+|---|---|
+| [guion-video.md](guion-video.md) | Draft script for the presentation video: 16 slides developing the seven sections `plantilla_video.ppt` prescribes, each with its on-screen text, the visual it needs, the spoken script and speaker notes. Timed to 9:49 at 160 words per minute against the 10-minute limit. Ends with the list of images, screenshots and the optional demo clip still to be produced. Written in the first person plural so all four of us can reuse it — the document is graded jointly but **the video is recorded individually** (`guia.md:42`). |
 
 ## Feedback received
 

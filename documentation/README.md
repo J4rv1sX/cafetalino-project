@@ -1,7 +1,7 @@
 # Proyecto Cafetalino en LaTeX
 
 Fuente del informe del Trabajo de Innovación (UNIR). Contiene los siete
-capítulos del cuerpo, la bibliografía y los cinco anexos.
+capítulos del cuerpo, la bibliografía y los seis anexos.
 
 ## Estructura
 
@@ -22,7 +22,7 @@ anexos/c-encuesta-clientes.tex
 anexos/d-diagramas-de-los-prototipos.tex
 anexos/e-capturas-de-jira.tex
 anexos/f-backlog-inicial.tex
-bibliografia/referencias.bib     → las 32 referencias del documento
+bibliografia/referencias.bib     → las 34 referencias del documento
 imagenes/                        → logo, figuras del .docx y gráficos de la encuesta
 ```
 
@@ -96,17 +96,17 @@ Estado de cada punto en la versión actual:
 | Contextualizar el sector antes de presentar a Cafetalino | Ya resuelto en la reescritura: la introducción abre con cuatro párrafos de contexto |
 | Aplicar un instrumento a clientes finales | Ya resuelto: encuesta a 254 clientes en 15 máquinas, con el muestreo descrito y los resultados en el Anexo C |
 | Criterios de éxito cuantitativos | Ya resuelto; se añadió además la columna «Periodo de medición» |
-| Reducir 1.2 a un párrafo breve | Reescrita: describe solo los cuatro capítulos existentes |
+| Reducir 1.2 a un párrafo breve | Reescrita como un único párrafo, que hoy recorre los siete capítulos del documento |
 | Cada capítulo en hoja nueva | Aplicado con `\sectionbreak` |
-| Rótulos «Tabla N» / «Figura N» con título y fuente, citados desde el texto | Aplicado: rótulo con punto, título de figura movido debajo de la imagen y las nueve tablas referenciadas con `\ref` |
+| Rótulos «Tabla N» / «Figura N» con título y fuente, citados desde el texto | Aplicado: rótulo con punto, título de figura movido debajo de la imagen y todas las tablas referenciadas con `\ref` desde el texto (hoy 17 en los capítulos) |
 | Simplificar la tabla del estado del arte | Rehecha con columnas técnicas: modelo, datos, horizonte, evaluación y limitación |
 | Explicar datos, horizonte y métricas de los trabajos previos | Ampliados los párrafos de Mehmood, Aguas y Puma |
 | Precisar variables, granularidad, horizonte, baselines y calidad del histórico | Nueva subsección 3.6.1, «Datos disponibles y diseño de la evaluación» |
-| Bibliografía con correspondencia en ambos sentidos | Eliminadas Kovalyk (2022), Atlassian (2026) y Drumond (2026), que no se citaban; quedan 27 y todas están citadas |
+| Bibliografía con correspondencia en ambos sentidos | Se eliminaron entonces Kovalyk (2022), Atlassian (2026) y Drumond (2026), que no se citaban. La correspondencia se ha mantenido al crecer el documento: hoy son 34 referencias, todas citadas en el texto y sin ninguna cita sin entrada |
 | Numeración duplicada | Corregido el salto del contador de `longtable` |
 | Primera persona plural | Queda una sola forma impersonal homogénea en todo el cuerpo |
 | Dividir párrafos de más de diez o doce renglones | Divididos los dos que lo superaban en el capítulo 3 |
-| Entregar en PDF | Procedimiento de entrega; Overleaf produce el PDF |
+| Entregar en PDF | Procedimiento de entrega; el PDF sale de la compilación local con `latexmk` + LuaLaTeX descrita arriba |
 
 **No aplicadas, por corresponder al alcance de la Entrega 1:** «eliminen los
 capítulos 4 a 8» y «el documento tiene 44 páginas». La Actividad 3 del programa

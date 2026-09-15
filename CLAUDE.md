@@ -8,7 +8,7 @@ Working prototype of a "predictive brain + logistics optimization" system for be
 
 - `backend/` — FastAPI app with two endpoints (consumption prediction, route optimization), a scikit-learn model pipeline, and offline data/training scripts.
 - `frontend/` — Vite + React 19 SPA that calls those two endpoints and renders the route on a Google map.
-- `documentation/` — the LaTeX source of the written project report (Spanish, UNIR template). Prose only, no code.
+- `documentation/` — the LaTeX source of the written project report (Spanish, UNIR template), plus the course's official documents and the script for the presentation video under `documentation/docs/`. Prose only, bar one chart-regeneration script.
 
 There is still **no test suite** anywhere, and no linter for the backend.
 
@@ -85,20 +85,28 @@ Modeling is **scikit-learn**, not TensorFlow: five targets (`bottled_water_ml`, 
 
 ### Documentation
 
-`main.tex` is the master document (project metadata + `\input` order); `preambulo.tex` holds packages, margins, title styles and the bibliography switch; `portada.tex` is the UNIR cover. Content lives in `capitulos/01-04` (introduction, objectives, conceptual development, methodology) and `anexos/a-c` (two interviews + the customer survey), with 27 references in `bibliografia/referencias.bib`.
+`main.tex` is the master document (project metadata + `\input` order); `preambulo.tex` holds packages, margins, title styles and the bibliography switch; `portada.tex` is the UNIR cover. Content lives in `capitulos/01-07` (introduction, objectives, conceptual development, methodology, implementation, validation, conclusions) and `anexos/a-f` (two interviews, the customer survey, prototype diagrams, Jira screenshots and the initial backlog), with 34 references in `bibliografia/referencias.bib`.
 
-Known state, converted from `Proyecto_Cafetalino_-_V02.docx`:
+Known state:
 
-- Chapters 5–7 (implementation, validation, conclusions) aren't written yet; commented `\input` lines are waiting in `main.tex`.
-- Three references (Kovalyk 2022, Atlassian 2026, Drumond 2026) are `\nocite`d in `main.tex` to reproduce the original bibliography — they're uncited in the text and worth revisiting.
-- Survey charts were rebuilt from the .docx's embedded chart XML by `imagenes/regenerar-graficos.py` into `imagenes/grafico1-5.png`; regenerate through that script rather than editing the PNGs.
-- Cross-references to annexes are still literal text ("Anexo A") even though `\label{}`s exist.
+- **The report is written end to end** — all seven chapters and six annexes are complete and their `\input` lines active. The remaining structural problem is **length**: `docs/instrucciones.md` caps the countable body at 30 pages and it currently sits at 48. `documentation/README.md` tracks the per-chapter page split and the cuts still under consideration.
+- Chapter 6 *designs* the eight-week operational pilot but does not execute it, and chapter 7 says so explicitly. Don't write as if operational results existed — only the offline cross-validation metrics do.
+- Survey charts were rebuilt from the original .docx's embedded chart XML by `imagenes/regenerar-graficos.py` into `imagenes/grafico1-5.png`; regenerate through that script rather than editing the PNGs.
+- The chapter-5 performance table leaves the cups R² blank on purpose: the value in `backend/docs/CONSUMPTION_MODEL.md` duplicates the bottled-water one, which looks like a transcription error. Filling it in needs a retrain.
 
 `documentation/docs/` holds the course's official UNIR documents — the work guide, the
-document-writing instructions (structure, 20–30 page limit, APA, template formats) and the
-weekly schedule with deliverable deadlines and grade weights, and the mandatory Word template.
-Each original has a faithful Markdown transcription next to it (`guia.md`, `instrucciones.md`,
-`programacion.md`, `plantilla.md`, indexed by `README.md`); read the `.md`, not the PDF/DOCX.
-`plantilla.md` is the one that defines the expected section structure of the report — the
-chapters, their order and what each must contain. Check these before changing the report's
-structure, length or citation style — they are the requirements the report is graded against.
+document-writing instructions (structure, 20–30 page limit, APA, template formats), the
+weekly schedule with deliverable deadlines and grade weights, the grading rubric, and the
+mandatory Word and PowerPoint templates. Each original has a faithful Markdown transcription
+next to it (`guia.md`, `instrucciones.md`, `programacion.md`, `plantilla.md`, `rubrica.md`,
+all indexed by `README.md`); read the `.md`, not the PDF/DOCX. `plantilla.md` defines the
+expected section structure of the report — the chapters, their order and what each must
+contain — and `rubrica.md` is the matrix the work is graded against. Check these before
+changing the report's structure, length or citation style.
+
+The same directory also holds two files that are **not** transcriptions. `observaciones-primera-entrega.md`
+and `observaciones-segunda-entrega.md` are the tutor's feedback on the two interim submissions,
+i.e. corrections to act on. `guion-video.md` is our own draft script for the presentation video:
+16 slides over the seven sections `plantilla_video.ppt` prescribes, timed against the 10-minute
+limit, plus the images and screenshots still to be produced. The final submission is the document
+(40 %) plus a video recorded **individually** by each team member (30 %).
