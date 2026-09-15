@@ -8,7 +8,7 @@ Esta fase está orientada a comprender las necesidades, dificultades y expectati
 
 Para la recopilación de información se empleó una estrategia de investigación cualitativa basada en entrevistas semiestructuradas y encuestas. Para las entrevistas se utilizaron guías previamente definidas que se incluyen en los anexos del presente documento y se seleccionaron dos participantes clave mediante un criterio de relevancia operativa y conocimiento del proceso analizado: el gerente propietario de Cafetalino, responsable de la toma de decisiones estratégicas y de la supervisión general del negocio (\ref{anexo-entrevista-al-gerente-de-cafetalino}), y el operador de reabastecimiento con mayor experiencia dentro de la empresa, responsable directo de la ejecución de las rutas de abastecimiento (\ref{anexo-entrevista-a-un-operador-de-cafetalino}); en tanto que las encuestas se aplicaron a los clientes de Cafetalino (\ref{anexo-encuesta-a-los-clientes-de-cafetalino}), que son la razón de ser de las operaciones de la empresa y los receptores directos de los resultados de dichas operaciones.
 
-Tanto las entrevistas como las encuestas se realizaron entre junio y julio de 2026. Para la aplicación de las encuestas se realizó un muestreo aleatorio estratificado de las maquinas en función al tipo de ubicación: Hospitales, centros de salud, centros educativos, centros comerciales, espacios abiertos hacia la acera, y un muestreo no probabilístico consecutivo a los clientes de Cafetalino que acudieron las ubicaciones seleccionadas en el periodo definido para la encuesta; sin embargo, la participación fue voluntaria y anónima, habiéndose encuestado a un total de 254 clientes que acudieron a 15 máquinas dispensadoras (\ref{anexo-encuesta-a-los-clientes-de-cafetalino}).
+Tanto las entrevistas como las encuestas se realizaron entre junio y julio de 2026. Para la aplicación de las encuestas se realizó un muestreo aleatorio estratificado de las máquinas en función del tipo de ubicación: hospitales, centros de salud, centros educativos, centros comerciales y espacios abiertos hacia la acera, y un muestreo no probabilístico consecutivo a los clientes de Cafetalino que acudieron a las ubicaciones seleccionadas en el periodo definido para la encuesta; sin embargo, la participación fue voluntaria y anónima, habiéndose encuestado a un total de 254 clientes que acudieron a 15 máquinas dispensadoras (\ref{anexo-encuesta-a-los-clientes-de-cafetalino}).
 
 Un resumen de la entrevista realizada al gerente de Cafetalino se detalla a continuación: A la consulta de problemas o procesos que le gustaría solucionar u optimizar, mencionó varias ideas, una que llamo la atención por las posibilidades de implementación con inteligencia artificial es la relacionada a un sistema de gestión de inventarios que permita controlar la cantidad de insumos en las máquinas y pronosticar sus requerimientos de recarga (\ref{anexo-entrevista-al-gerente-de-cafetalino}).
 
@@ -91,17 +91,18 @@ Para evaluar el desempeño de la propuesta se establecen los criterios cuantific
 \textbf{Modificaciones extraordinarias de rutas.} & Aproximadamente 10 eventos por año. & Reducirlas al menos en 50 \% respecto de la tasa anual actual. & Doce meses, comparados contra el año previo. \\
 \textbf{Desempeño de la predicción numérica de consumo.} & Error del método de referencia: el promedio histórico de consumo de cada máquina, evaluado con el mismo procedimiento de validación cruzada de cinco pliegues que el modelo propuesto. & Coeficiente de determinación (R\textsuperscript{2}) igual o superior a 0,30 y error absoluto medio inferior al de la línea base, en cada uno de los cinco insumos predichos. & Validación cruzada sobre el histórico durante el desarrollo, con confirmación en las ocho semanas de operación piloto. \\
 \textbf{Incidencias relacionadas con desabastecimiento.} & Registro histórico de reclamos y reembolsos de la empresa. & Reducirlas en al menos 30 \%. & Doce meses, comparados contra el año previo. \\
+\textbf{Acierto de la decisión de recarga.} & Criterio actual del operador, basado en el calendario de rutas fijas y en su experiencia. & Exactitud igual o superior al 85 \% en la clasificación de cada máquina como «requiere recarga» o «no requiere recarga», con una tasa de falsos negativos no superior al 10 \%. & Ocho semanas de operación asistida por el sistema. \\
 \end{longtable}}
 
 \fuente{Fuente: Elaboración propia}
 
 La línea base utilizada corresponde al procedimiento actual de reabastecimiento empleado por Cafetalino, el cual se fundamenta en rutas predefinidas y decisiones operativas apoyadas principalmente en la experiencia del personal. La validación del proyecto consistirá en comparar los resultados obtenidos por el sistema propuesto contra este escenario de referencia.
 
-Conviene distinguir dos indicadores relacionados pero distintos. El desempeño de la predicción numérica, recién definido, mide la capacidad técnica del modelo de regresión para anticipar el consumo continuo de cada insumo (mililitros, gramos o unidades), frente al promedio histórico como referente, y se reporta con detalle en la Tabla~\ref{tab:desempeno-de-los-modelos}. A partir de esa predicción se deriva una decisión binaria de negocio —si la máquina «requiere recarga» o «no requiere recarga» antes de la siguiente visita—, cuyo propio umbral de acierto (85 \%) y tasa admisible de falsos negativos se definen y validan por separado en el capítulo de Validación. Ambos indicadores son necesarios: el primero valida el modelo de aprendizaje automático en sí mismo, y el segundo, construido sobre aquel, valida la utilidad operativa de la decisión que el sistema entrega al operador.
+Conviene distinguir dos indicadores relacionados pero distintos. El desempeño de la predicción numérica, recién definido, mide la capacidad técnica del modelo de regresión para anticipar el consumo continuo de cada insumo (mililitros, gramos o unidades), frente al promedio histórico como referente, y se reporta con detalle en la Tabla~\ref{tab:desempeno-de-los-modelos}. A partir de esa predicción se deriva una decisión binaria de negocio —si la máquina «requiere recarga» o «no requiere recarga» antes de la siguiente visita—, que la última fila de la tabla recoge con su propio umbral de acierto y su tasa admisible de falsos negativos; la regla exacta con la que se cuenta cada acierto y cada error se detalla en el capítulo de Validación. Ambos indicadores son necesarios: el primero valida el modelo de aprendizaje automático en sí mismo, y el segundo, construido sobre aquel, valida la utilidad operativa de la decisión que el sistema entrega al operador.
 
 \subsection{Investigación de Antecedentes}\label{investigaciuxf3n-de-antecedentes}
 
-En esta fase se debe realizar una revisión documental para construir el fundamento teórico y determinar el estado del arte relacionados al proyecto
+Delimitado el problema, esta fase reúne el conocimiento previo necesario para abordarlo con criterio. Se realizó para ello una revisión documental con dos propósitos distintos, que ordenan los dos apartados siguientes. El primero establece el fundamento teórico, es decir, los conceptos de aprendizaje automático, regresión y planificación automática sobre los que se apoya la solución y que conviene precisar antes de aplicarlos. El segundo recoge el estado del arte, los trabajos e implementaciones que ya han abordado la predicción de demanda y la optimización logística en máquinas expendedoras, cuyo contraste permite situar la brecha que esta propuesta pretende cubrir.
 
 \subsubsection{Fundamento Teórico}\label{fundamento-teuxf3rico}
 
@@ -109,7 +110,7 @@ El marco conceptual que incluye el conocimiento teórico que sustenta el proyect
 
 \textbf{Aprendizaje automático (Machine learning)} \citep{bergmann2026,universidadeuropea2025,mayorga2019}.
 
-El aprendizaje automático es un área de la inteligencia artificial (IA), que se enfoca en algoritmos capaces de aprender patrones de un conjunto de datos de entrenamiento y, posteriormente, realizar inferencias precisas sobre nuevos datos. Esta capacidad de reconocer patrones permite a los modelos de aprendizaje automático tomar decisiones o hacer predicciones sin instrucciones explícitas predefinidas. Su principal premisa es que si se optimiza el rendimiento de un modelo con un conjunto de datos de tareas semejantes a los problemas del mundo real para los que se utilizará (entrenamiento), el modelo puede predicciones precisas con datos nuevos relacionados a su caso de uso final, donde el entrenamiento es sólo el medio para lograr un fin: la generalización, traducir un buen rendimiento en los datos de entrenamiento a resultados útiles en escenarios del mundo real. En esencia, un modelo entrenado aplica los patrones aprendidos a partir de los datos de entrenamiento para inferir el resultado correcto para una tarea del mundo real, la inferencia.
+El aprendizaje automático es un área de la inteligencia artificial (IA), que se enfoca en algoritmos capaces de aprender patrones de un conjunto de datos de entrenamiento y, posteriormente, realizar inferencias precisas sobre nuevos datos. Esta capacidad de reconocer patrones permite a los modelos de aprendizaje automático tomar decisiones o hacer predicciones sin instrucciones explícitas predefinidas. Su principal premisa es que si se optimiza el rendimiento de un modelo con un conjunto de datos de tareas semejantes a los problemas del mundo real para los que se utilizará (entrenamiento), el modelo puede realizar predicciones precisas con datos nuevos relacionados a su caso de uso final, donde el entrenamiento es sólo el medio para lograr un fin: la generalización, traducir un buen rendimiento en los datos de entrenamiento a resultados útiles en escenarios del mundo real. En esencia, un modelo entrenado aplica los patrones aprendidos a partir de los datos de entrenamiento para inferir el resultado correcto para una tarea del mundo real, la inferencia.
 
 El aprendizaje automático funciona mediante lógica matemática, por tanto, las características relevantes o rasgos de cada dato se deben expresar numéricamente, para que un dato, un vector de características, se pueda introducir a un algoritmo matemático que aprenda a relacionar cada entrada con una salida.
 
@@ -124,7 +125,7 @@ Los métodos de aprendizaje automático se clasifican, según sus objetivos de e
   \textbf{El aprendizaje por refuerzo (RL)} entrena un modelo para evaluar su entorno y tomar la acción que le reporte una recompensa mayor. Los escenarios de RL no implican la existencia de una única verdad fundamental, pero sí la existencia de acciones buenas y malas, o en ocasiones acciones neutrales.
 \end{itemize}
 
-El entrenamiento de extremo a extremo para un modelo dado puede, y a menudo lo hace, involucrar enfoques híbridos que aprovechan más de un paradigma. Por ejemplo, el aprendizaje no supervisado se usa frecuentemente para preprocesar datos que serán usados en el aprendizaje supervisado o por refuerzo. Los modelos de lenguaje a gran escala (LLM) suelen someterse a un entrenamiento inicial (pre-entrenamiento) y luego ser ajustados ajuste, afinar su entrenamiento a través de variantes de aprendizaje supervisado, seguido de un ajuste más fino a través de técnicas de aprendizaje por refuerzo (RL) a partir de retroalimentación humana (RLHF).
+El entrenamiento de extremo a extremo para un modelo dado puede, y a menudo lo hace, involucrar enfoques híbridos que aprovechan más de un paradigma. Por ejemplo, el aprendizaje no supervisado se usa frecuentemente para preprocesar datos que serán usados en el aprendizaje supervisado o por refuerzo. Los modelos de lenguaje a gran escala (LLM) suelen someterse a un entrenamiento inicial (pre-entrenamiento) y ser afinados después mediante variantes de aprendizaje supervisado, seguidas de un ajuste más fino a través de técnicas de aprendizaje por refuerzo (RL) a partir de retroalimentación humana (RLHF).
 
 \textbf{Regresión} \citep{lee2026,opit2023}
 
@@ -153,7 +154,7 @@ Existen diversos tipos de regresiones, entre ellos:
   \textbf{Modelos autorregresivos (AR)}, son modelos de series temporales en los que el valor actual se predice como una combinación lineal de sus valores anteriores.
 \end{itemize}
 
-La regresión comparte una familia de potentes algoritmos de aprendizaje supervisado con la y clasificación, se pueden adaptarse a ambos contextos; sin embargo, la elección del modelo y su configuración, dependen del tipo de resultado: Continuo para regresión o categórico para clasificación. Algunos de estos algoritmos son:
+La regresión comparte con la clasificación una familia de potentes algoritmos de aprendizaje supervisado, que pueden adaptarse a ambos contextos; sin embargo, la elección del modelo y su configuración, dependen del tipo de resultado: Continuo para regresión o categórico para clasificación. Algunos de estos algoritmos son:
 
 \begin{itemize}
 \item
@@ -161,7 +162,7 @@ La regresión comparte una familia de potentes algoritmos de aprendizaje supervi
 \item
   \textbf{Bosques aleatorios}, consisten de un conjunto de árboles de decisión, cada uno entrenado con un subconjunto de datos obtenido mediante re-muestreo (bootstrap) y con selección aleatoria de características en cada división, las predicciones finales se realizan promediando entre los árboles. Los bosques aleatorios reducen la varianza al promediar diversos modelos, cada árbol es un experto ruidoso, y su agregación da como resultado un predictor robusto, donde la selección aleatoria de características garantiza la diversidad entre los árboles.
 \item
-  \textbf{K vecinos muy cercanos (KNN - K-nearest neighbors)}, es un método no paramétrico basado en instancias que almacena todo el conjunto de entrenamiento; es decir que, a diferencia de la regresión lineal, no presupone ninguna distribución subyacente de los datos y no requiere la estimación de parámetros, no presupone nada sobre la función subyacente, lo que lo hace flexible pero computacionalmente costoso. Para realizar una predicción a partir de una nueva entrada, encuentra los k ejemplos de entrenamiento más cercanos, calcula el promedio de sus valores y predice basándose en la similitud local, bajo la premisa: ``eres como tus vecinos más cercanas''.
+  \textbf{K vecinos más cercanos (KNN - K-nearest neighbors)}, es un método no paramétrico basado en instancias que almacena todo el conjunto de entrenamiento; es decir que, a diferencia de la regresión lineal, no presupone ninguna distribución subyacente de los datos y no requiere la estimación de parámetros, no presupone nada sobre la función subyacente, lo que lo hace flexible pero computacionalmente costoso. Para realizar una predicción a partir de una nueva entrada, encuentra los k ejemplos de entrenamiento más cercanos, calcula el promedio de sus valores y predice basándose en la similitud local, bajo la premisa: ``eres como tus vecinos más cercanos''.
 \item
   \textbf{Máquinas de vectores de soporte (SVM - Support vector machines)}, son modelos que encuentran el hiperplano, un límite de decisión que ajusta un margen alrededor de los datos, con margen máximo o desviación mínima, se enfocan en los puntos de datos más difíciles de clasificar, aquellos cercanos al límite de decisión, ignoran los puntos más sencillos e intentan encontrar el separador más robusto.
 \end{itemize}
@@ -225,9 +226,7 @@ La brecha identificada, que constituye la novedad del sistema propuesto, es por 
 
 \subsection{Idear}\label{idear}
 
-La finalidad de esta fase es generar varias opciones de solución al problema. Para ello el equipo de trabajo ha presentado las siguientes ideas de solución al problema planteado:
-
-El equipo de trabajo ha presentado las siguientes ideas de solución al problema planteado:
+Definido el problema y revisados los antecedentes, esta fase abrió el abanico de soluciones posibles antes de comprometerse con ninguna. El equipo trabajó sobre los tres retos de diseño formulados en la fase anterior y, sin descartar nada en el momento de proponerlo, llegó a cuatro alternativas que atacan el problema desde ángulos distintos: dos actúan sobre la experiencia del cliente y dos sobre la anticipación de la demanda. Las cuatro se enuncian a continuación:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi})}
@@ -387,7 +386,7 @@ La tercera capa es la interfaz con el usuario final, que toma los datos actualiz
 
 \subsubsection{Prototipo de la Tercera Idea: Sistema de reabastecimiento predictivo y enrutamiento dinámico}\label{prototipo-de-la-tercera-idea-sistema-de-reabastecimiento-predictivo-y-enrutamiento-dinuxe1mico}
 
-El Sistema de reabastecimiento predictivo y enrutamiento dinámico se ejecuta en cuatro capas consecutivas, representadas en la Figura~\ref{fig:estructura-del-sistema-de-reabastecimiento} del \ref{anexo-diagramas-de-los-prototipos}.
+El Sistema de reabastecimiento predictivo y enrutamiento dinámico se ejecuta en cuatro capas consecutivas. Por tratarse de la alternativa finalmente seleccionada, su diagrama de arquitectura se presenta en la Figura~\ref{fig:estructura-del-sistema-de-reabastecimiento} del apartado~\ref{arquitectura-y-pila-tecnologica}, junto con las tecnologías que materializan cada capa.
 
 La primera capa, que corresponde a las fuentes de datos, almacena la información base sin procesar, que se alimenta de dos orígenes de información: El historial de Ventas, una base de datos que contiene los registros históricos de las operaciones de la empresa desde el año 2018 hasta el presente, y el Stock Actual, un repositorio con el estado del inventario de los insumos en las máquinas dispensadoras.
 
@@ -399,7 +398,7 @@ La cuarta capa es la interfaz de usuario, que toma los resultados de la capa ant
 
 \subsection{Selección del Prototipo}\label{selecciuxf3n-del-prototipo}
 
-La finalidad de esta fase es escoger la versión de prototipo que se desarrollará y validará, en función a su viabilidad técnica y a la respuesta que da al problema.
+De esta última fase del proceso resultó la elección del prototipo que se desarrollaría y validaría, decidida en función de su viabilidad técnica y de la respuesta que cada alternativa da al problema. El contraste no se limitó a la puntuación obtenida en la fase de ideación, sino que incorporó las restricciones concretas del entorno de Cafetalino que el prototipado puso de manifiesto.
 
 Sobre la base de la Tabla~\ref{tab:analisis-comparativo-de-las-ideas} que compara las ideas generadas y el análisis de los prototipos de las ideas más prometedoras, la solución más recomendable para desarrollar y validar es el Sistema de reabastecimiento predictivo y enrutamiento dinámico. Adicionalmente, se realizó el siguiente análisis:
 

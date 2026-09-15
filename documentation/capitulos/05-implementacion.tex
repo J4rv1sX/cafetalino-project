@@ -1,6 +1,6 @@
 \section{Implementación de la propuesta}\label{implementacion-de-la-propuesta}
 
-El capítulo anterior se estableció el marco de trabajo con el que se organiza el desarrollo; corresponde ahora describir cómo se lleva a la práctica la propuesta dentro de la operación de Cafetalino. Este capítulo detalla la planificación temporal y económica del proyecto, la construcción de los cuatro componentes del sistema con las tecnologías empleadas y los datos que los alimentan, el plan de puesta en producción y el de mantenimiento posterior. Para sustentar la viabilidad de lo propuesto se construyó un prototipo funcional de esos componentes, de modo que las decisiones técnicas y las cifras de desempeño que siguen no son estimaciones teóricas sino resultados medidos sobre el histórico real de la empresa.
+En el capítulo anterior se estableció el marco de trabajo con el que se organiza el desarrollo; corresponde ahora describir cómo se lleva a la práctica la propuesta dentro de la operación de Cafetalino. Este capítulo detalla la planificación temporal y económica del proyecto, la construcción de los cuatro componentes del sistema con las tecnologías empleadas y los datos que los alimentan, el plan de puesta en producción y el de mantenimiento posterior. Para sustentar la viabilidad de lo propuesto se construyó un prototipo funcional de esos componentes, de modo que las decisiones técnicas y las cifras de desempeño que siguen no son estimaciones teóricas sino resultados medidos sobre el histórico real de la empresa.
 
 \subsection{Planificación y estimación}\label{planificacion-y-estimacion}
 
@@ -132,7 +132,16 @@ Este apartado describe cómo se construye el sistema: la arquitectura que lo org
 
 \subsubsection{Arquitectura y pila tecnológica}\label{arquitectura-y-pila-tecnologica}
 
-La solución conserva la arquitectura en cuatro capas definida durante el prototipado y representada en la Figura~\ref{fig:estructura-del-sistema-de-reabastecimiento} del \ref{anexo-diagramas-de-los-prototipos}: una capa de datos de origen, una de análisis que transforma el histórico en demanda proyectada, una de decisión logística que convierte esa proyección en un recorrido y una de presentación que la pone ante el operador. La separación es funcional y también física, ya que el análisis y la decisión residen en un servicio de aplicación mientras que la presentación es una aplicación web que se comunica con aquel mediante una interfaz de programación. La Tabla~\ref{tab:tecnologias-empleadas-por-capa} enumera las tecnologías elegidas.
+La solución conserva la arquitectura en cuatro capas definida durante el prototipado, que recoge la Figura~\ref{fig:estructura-del-sistema-de-reabastecimiento}: una capa de datos de origen, una de análisis que transforma el histórico en demanda proyectada, una de decisión logística que convierte esa proyección en un recorrido y una de presentación que la pone ante el operador. La separación es funcional y también física, ya que el análisis y la decisión residen en un servicio de aplicación mientras que la presentación es una aplicación web que se comunica con aquel mediante una interfaz de programación.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[height=0.78\textheight,keepaspectratio]{image3.png}
+\caption{Estructura del Sistema de Reabastecimiento Predictivo y Enrutamiento Dinámico}\label{fig:estructura-del-sistema-de-reabastecimiento}
+\fuente{Fuente: Elaboración propia}
+\end{figure}
+
+Sobre esa estructura, la Tabla~\ref{tab:tecnologias-empleadas-por-capa} enumera las tecnologías elegidas para cada capa, junto con la razón que motivó cada elección.
 
 \captionof{table}{Tecnologías empleadas en cada capa del sistema}\label{tab:tecnologias-empleadas-por-capa}
 
@@ -197,9 +206,11 @@ Mezcla de chocolate & gramos & 86,40 & 0,274 & 83,8 \% \\
 Mezcla de capuchino & gramos & 90,41 & 0,308 & 83,2 \% \\
 \end{longtable}}
 
-\fuente{Fuente: Elaboración propia. El coeficiente de determinación de los vasos se omite a la espera de su verificación en la próxima ejecución del entrenamiento}
+\fuente{Fuente: Elaboración propia. El coeficiente de determinación de los vasos se omite porque el valor registrado coincide exactamente con el del agua embotellada, coincidencia que apunta a un error de transcripción en el informe de métricas; en su lugar se reporta el error absoluto medio de ese insumo, verificado de forma independiente}
 
-Los coeficientes de determinación, situados entre 0,27 y 0,37, indican que una parte sustancial de la variabilidad del consumo permanece sin explicar. El resultado es genuino y conviene interpretarlo correctamente: el histórico registra cuándo y cuánto se repuso, pero no la afluencia de personas, el clima ni los eventos locales que la determinan, de modo que el techo lo impone la información disponible y no el algoritmo escogido. La comparación pertinente, en todo caso, no es contra un predictor perfecto sino contra la práctica actual, basada en un calendario fijo y en la experiencia del operador, y esa comparación corresponde al diseño de validación.
+Procede contrastar estos resultados con la meta comprometida entre los criterios de éxito de la Tabla~\ref{tab:criterios-de-exito}, que fijaba un coeficiente de determinación igual o superior a 0,30 en cada uno de los cinco insumos. El umbral se alcanza en el agua embotellada, la mezcla de café y la de capuchino, y la mezcla de chocolate queda marginalmente por debajo, en 0,274; el insumo de los vasos no admite pronunciamiento por la razón consignada al pie de la tabla. El criterio se cumple, por tanto, de forma parcial, y conviene decirlo antes que sortearlo, porque la causa del déficit no es de implementación sino informativa y afecta por igual a los cinco insumos.
+
+Los coeficientes de determinación, situados entre 0,27 y 0,37, indican en efecto que una parte sustancial de la variabilidad del consumo permanece sin explicar. El resultado es genuino y conviene interpretarlo correctamente: el histórico registra cuándo y cuánto se repuso, pero no la afluencia de personas, el clima ni los eventos locales que la determinan, de modo que el techo lo impone la información disponible y no el algoritmo escogido. El chocolate, además, es el insumo de rotación más irregular de los cinco, lo que explica que sea el primero en acusar esa carencia. La comparación pertinente, en todo caso, no es contra un predictor perfecto sino contra la práctica actual, basada en un calendario fijo y en la experiencia del operador; frente a esa línea base el error absoluto medio del modelo es inferior en los cinco insumos, que es la segunda mitad del criterio comprometido y la que sí se satisface por completo.
 
 Merece registrarse la calibración de las bandas de incertidumbre. Inicialmente se emplearon los percentiles décimo y nonagésimo, que nominalmente delimitan un intervalo del ochenta por ciento, pero su cobertura empírica medida sobre pliegues no vistos resultó de apenas el setenta por ciento, una subcobertura conocida de la regresión cuantílica con conjuntos pequeños. En lugar de publicar un intervalo mal etiquetado se ampliaron deliberadamente los percentiles para compensar el sesgo medido, con lo que la cobertura efectiva se situó en torno al ochenta y tres por ciento, cerca del valor pretendido. El intervalo que ve el operador es, por tanto, verificado y no una declaración nominal. Conviene consignar también tres ensayos que no prosperaron, porque delimitan hasta dónde llega el enfoque: sustituir el día de la semana por la proporción de días laborables del intervalo no mejoró ningún insumo; añadir una variable de tendencia a corto plazo empeoró los cinco, presumiblemente por tratarse de un estimador demasiado ruidoso; y agrupar el mes en trimestres degradó el desempeño casi tanto como eliminarlo, lo que indica que la señal estacional relevante opera a granularidad fina. Ninguno de los tres cambios se incorporó.
 
@@ -226,12 +237,6 @@ Cada tarjeta muestra las existencias restantes previstas de agua y de las tres m
 Los requisitos de la solución son modestos, coherentes con el criterio, sostenido desde la selección del prototipo, de no depender de instrumentación adicional en las máquinas. El entorno de desarrollo requiere un equipo de escritorio convencional, con ocho gigabytes de memoria suficientes para el entrenamiento, que se completa en menos de diez minutos sobre el conjunto actual. El entorno de producción necesita un contenedor con uno o dos núcleos y dos gigabytes de memoria para el servicio de aplicación, más el almacenamiento de la base de datos y de los modelos entrenados, cuyo tamaño conjunto se mide en decenas de megabytes. Del lado del operador basta un teléfono con navegador y datos móviles, que es el equipamiento del que ya dispone.
 
 Cabe precisar, para evitar una expectativa equivocada, que se evaluó explícitamente el empleo de redes neuronales y se descartó: con algo más de dos mil cuatrocientas observaciones de entrenamiento, un modelo de esa naturaleza no dispone de datos suficientes para superar a los métodos de conjunto sobre árboles y solo añadiría complejidad de infraestructura. El prototipo completo, con el código de los tres componentes y la documentación técnica del proceso de modelado, está disponible en un repositorio público en \url{https://github.com/J4rv1sX/cafetalino-project}.
-% TODO: Confirmar si el repositorio puede mantenerse público o si existe/existirá
-% un acuerdo de confidencialidad con Cafetalino que obligue a mantenerlo privado.
-% Si debe ser privado, reemplazar el párrafo anterior por: "el prototipo completo...
-% se conserva en un repositorio privado del equipo, condición impuesta por el
-% acuerdo de confidencialidad bajo el cual la empresa cedió su registro histórico,
-% y queda disponible para revisión bajo solicitud."
 
 \subsection{Despliegue}\label{despliegue}
 

@@ -63,7 +63,8 @@
 % Pie de tabla/figura fuera de flotante y línea de fuente
 % "Tabla 1." / "Figura 1." con punto, como en plantilla.docx (no "Tabla 1:")
 \captionsetup{justification=raggedright,singlelinecheck=false,labelsep=period}
-\newcommand{\fuente}[1]{{\par\raggedright\footnotesize\itshape #1\par}\medskip}
+% La fuente va centrada y a 9,5 pt, según instrucciones.pdf §1.3
+\newcommand{\fuente}[1]{{\par\centering\fontsize{9.5}{12}\selectfont\itshape #1\par}\medskip}
 
 % longtable reserva un número de tabla al abrirse aunque el título se coloque
 % antes con \captionof, y la numeración acababa saltando de dos en dos
