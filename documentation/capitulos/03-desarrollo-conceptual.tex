@@ -41,6 +41,7 @@ Posteriormente, las respuestas obtenidas fueron revisadas y clasificadas en cate
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{3}{@{}p{\linewidth}@{}}{\fuente{Fuente: Elaboración propia}}\\
 \endlastfoot
 \textbf{Existen visitas de reabastecimiento que no generan valor} & Aproximadamente una de cada diez visitas se realiza a máquinas que no requieren reposición. & Incremento de tiempo operativo y costos logísticos. \\
 \textbf{Se producen modificaciones extraordinarias de ruta} & Se reportan aproximadamente diez eventos de modificación de recorridos por año. & Ineficiencia en la planificación logística. \\
@@ -48,8 +49,6 @@ Posteriormente, las respuestas obtenidas fueron revisadas y clasificadas en cate
 \textbf{Existen registros históricos disponibles desde 2018} & Información proporcionada por la dirección de la empresa. & Viabilidad para desarrollar modelos predictivos. \\
 \textbf{Intentos previos basados en sensores no fueron exitosos} & Problemas de conectividad y costos de implementación. & Necesidad de una solución basada en datos históricos. \\
 \end{longtable}
-
-\fuente{Fuente: Elaboración propia}
 
 Como resultado de las encuestas (\ref{anexo-encuesta-a-los-clientes-de-cafetalino}) se observa que el 89.4 \% de los clientes son asiduos, pues utilizan el servicio al menos una vez por semana, y el 82.7 \% califica el servicio como bueno o muy bueno frente a un 9.5 \% que lo considera malo o muy malo. Los fallos son poco frecuentes: el 90.2 \% nunca tuvo un problema, pero el 6.3 \% declara que en alguna ocasión pagó sin recibir el servicio, el desenlace típico de una máquina sin insumos.
 
@@ -86,6 +85,7 @@ Para evaluar el desempeño de la propuesta se establecen los criterios cuantific
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{4}{@{}p{\linewidth}@{}}{\fuente{Fuente: Elaboración propia}}\\
 \endlastfoot
 \textbf{Visitas de reabastecimiento innecesarias.} & Aproximadamente 10 \% de las visitas realizadas (1 de cada 10 visitas), según el registro histórico y la entrevista al operador. & Reducirlas a un máximo de 5 \% de las visitas. & Ocho semanas de operación asistida por el sistema. \\
 \textbf{Modificaciones extraordinarias de rutas.} & Aproximadamente 10 eventos por año. & Reducirlas al menos en 50 \% respecto de la tasa anual actual. & Doce meses, comparados contra el año previo. \\
@@ -93,8 +93,6 @@ Para evaluar el desempeño de la propuesta se establecen los criterios cuantific
 \textbf{Incidencias relacionadas con desabastecimiento.} & Registro histórico de reclamos y reembolsos de la empresa. & Reducirlas en al menos 30 \%. & Doce meses, comparados contra el año previo. \\
 \textbf{Acierto de la decisión de recarga.} & Criterio actual del operador, basado en el calendario de rutas fijas y en su experiencia. & Exactitud igual o superior al 85 \% en la clasificación de cada máquina como «requiere recarga» o «no requiere recarga», con una tasa de falsos negativos no superior al 10 \%. & Ocho semanas de operación asistida por el sistema. \\
 \end{longtable}}
-
-\fuente{Fuente: Elaboración propia}
 
 La línea base utilizada corresponde al procedimiento actual de reabastecimiento empleado por Cafetalino, el cual se fundamenta en rutas predefinidas y decisiones operativas apoyadas principalmente en la experiencia del personal. La validación del proyecto consistirá en comparar los resultados obtenidos por el sistema propuesto contra este escenario de referencia.
 
@@ -208,6 +206,7 @@ La Tabla~\ref{tab:matriz-comparativa-de-trabajos-previos} sintetiza los elemento
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{6}{@{}p{\linewidth}@{}}{\fuente{Fuente: Elaboración propia}}\\
 \endlastfoot
 \citet{mehmood2023} & Comparación de algoritmos de aprendizaje supervisado; gana XGBoost & Histórico de ventas de máquinas expendedoras & Demanda del siguiente periodo de reposición & Comparación entre algoritmos sobre el mismo conjunto; XGBoost como mejor rendimiento & Se detiene en la predicción; no se acopla al despacho logístico \\
 \citet{aguas2025} & Redes neuronales y bosques aleatorios & Registros de inventario y de quiebres de stock & Anticipación de la siguiente reposición & Contraste del modelo supervisado frente al registro observado & Trata el inventario al margen del enrutamiento \\
@@ -217,8 +216,6 @@ Sensify \citep{hostelvending2025} & Analítica predictiva comercial sobre teleme
 Azkoyen \citep{hostelvending2024} & Aprendizaje continuo sobre eventos del equipo & Procesos, eventos de la máquina e interacción con el usuario & Mantenimiento anticipado del equipo & No reportada (producto comercial) & Centrada en el mantenimiento, no en la cadena de suministro \\
 \textbf{Propuesta Cafetalino} & Regresión por potenciación de gradiente por histograma con bandas de predicción, más enrutamiento con solucionador de rutas & Histórico propio de recargas 2018--2026: ubicación, días desde la recarga previa, estacionalidad y medias históricas y recientes de cada insumo & La siguiente visita de reabastecimiento de cada máquina & Validación cruzada de 5 pliegues (MAE, RMSE, R\textsuperscript{2} y cobertura del intervalo) frente al promedio histórico; ruta comparada contra la ruta fija actual & Solo datos históricos asíncronos, sin lectura en tiempo real del estado de la máquina \\
 \end{longtable}}
-
-\fuente{Fuente: Elaboración propia}
 
 El estado del arte muestra, en suma, que la Inteligencia Artificial se utiliza con éxito para predecir la demanda y optimizar la cadena de suministro en máquinas expendedoras, tanto en la investigación académica como en productos comerciales, pero que estas soluciones comparten dos debilidades: abordan la gestión predictiva de inventarios y la planificación de rutas como problemas aislados, y la mayoría depende de telemetría, sensores físicos (IoT) y conectividad permanente, dependencia que constituye un obstáculo para Cafetalino, empresa que ya exploró ese camino sin éxito.
 
@@ -262,6 +259,7 @@ La siguiente tabla muestra un análisis comparativo de las ideas generadas, incl
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\multicolumn{4}{@{}p{\linewidth}@{}}{\fuente{Fuente: Elaboración propia}}\\
 \endlastfoot
 \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
@@ -367,8 +365,6 @@ La siguiente tabla muestra un análisis comparativo de las ideas generadas, incl
 
 \textbf{2/10} \\
 \end{longtable}
-
-\fuente{Fuente: Elaboración propia}
 
 La tabla muestra que las ideas más prometedoras son la segunda y la tercera, la primera y la cuarta no atacan el problema principal, lo que lleva a descartarlas.
 
