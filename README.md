@@ -23,3 +23,4 @@ LaTeX Workshop **does not bundle a TeX distribution**. Read its requirements bef
 On Windows, [**MiKTeX**](https://miktex.org/) is what's in use here — install it, let it fetch missing packages on the fly, and make sure `pdflatex`/`biber` are on your `PATH`. TeX Live works too; on WSL/Linux use TeX Live (`texlive-full`, or a smaller scheme plus `babel-spanish` and `biblatex-apa`).
 
 If you'd rather not install anything locally, skip all of this and compile on Overleaf — see [`documentation/README.md`](documentation/README.md) for the settings and the compile sequence.
+
